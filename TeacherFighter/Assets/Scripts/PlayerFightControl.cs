@@ -13,10 +13,13 @@ namespace UnityStandardAssets._2D
         private bool m_Jump;
         private bool m_Dodge;
 
+        private Vector3 startPosition;
 
+        
         private void Awake()
         {
             m_Character = GetComponent<PlatformerCharacter2D>();
+            startPosition = transform.position;
         }
 
 
@@ -38,6 +41,9 @@ namespace UnityStandardAssets._2D
 
         private void FixedUpdate()
         {
+            if(Input.GetKey("o")){
+                transform.position = startPosition;
+            }
             // Read the inputs.
             bool crouch = Input.GetKey(KeyCode.LeftControl);
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
@@ -58,4 +64,5 @@ namespace UnityStandardAssets._2D
             m_Dodge = false;
         }
     }
+        
 }
