@@ -403,6 +403,35 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2842220579077722051, guid: 174b5db10f82a0a458f4410a6b1281ce,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695637347, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2394598230562451157, guid: 174b5db10f82a0a458f4410a6b1281ce,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2394598230562451157, guid: 174b5db10f82a0a458f4410a6b1281ce,
+        type: 3}
+      propertyPath: m_WhatIsGround.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2394598230562451157, guid: 174b5db10f82a0a458f4410a6b1281ce,
+        type: 3}
+      propertyPath: m_AirControl
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2394598230562451157, guid: 174b5db10f82a0a458f4410a6b1281ce,
+        type: 3}
+      propertyPath: m_JumpForce
+      value: 800
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
 --- !u!1001 &1064150354
