@@ -54,6 +54,7 @@ namespace UnityStandardAssets._2D
             m_Character.Move(h, crouch, m_Jump);
             m_Jump = false;
             m_Dodge = false;
+            
         }
     }
 }
