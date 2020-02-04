@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\Respawn.cs" />
      <Compile Include="Assets\Scripts\Taylor\TaylorCharacter.cs" />
      <Compile Include="Assets\Scripts\Taylor\TaylorFightControl.cs" />
+     <Compile Include="Assets\Scripts\VonDerEhe\VonDerEheFightControl.cs" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/SeniorProject/TeacherFighter/TeacherFighter/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
