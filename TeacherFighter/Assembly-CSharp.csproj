@@ -61,6 +61,7 @@
      <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
+     <Compile Include="Assets\Scripts\FireBall.cs" />
      <Compile Include="Assets\Scripts\PlayerFightControl.cs" />
      <Compile Include="Assets\Scripts\Respawn.cs" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />

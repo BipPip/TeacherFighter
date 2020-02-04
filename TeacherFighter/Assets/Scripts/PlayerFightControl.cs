@@ -15,6 +15,9 @@ namespace UnityStandardAssets._2D
 
         private Vector3 startPosition;
 
+        [SerializeField] private GameObject fireBall;
+        [SerializeField] private Transform throwPoint;
+
         
         private void Awake()
         {
@@ -35,6 +38,10 @@ namespace UnityStandardAssets._2D
                 // Read the dodge input in Update so button presses aren't missed.
                 m_Dodge = CrossPlatformInputManager.GetButtonDown("Dodge");
             }
+
+            if(Input.GetKey("e")){
+                Instantiate(fireBall, throwPoint.position, throwPoint.rotation);
+            }
             
         }
 
@@ -44,10 +51,13 @@ namespace UnityStandardAssets._2D
             if(Input.GetKey("o")){
                 transform.position = startPosition;
             }
+
+            
+
             // Read the inputs.
             bool crouch = Input.GetKey(KeyCode.LeftControl);
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
-            Debug.Log(h);
+            //Debug.Log(h);
             //Debug.Log(m_Character.transform.);
             if(m_Dodge) {
                 if(h > 0) {
@@ -62,6 +72,9 @@ namespace UnityStandardAssets._2D
             m_Character.Move(h, crouch, m_Jump);
             m_Jump = false;
             m_Dodge = false;
+
+            
+
         }
     }
         
