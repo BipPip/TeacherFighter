@@ -7,7 +7,7 @@ using UnityStandardAssets.CrossPlatformInput;
 namespace UnityStandardAssets._2D
 {
     [RequireComponent(typeof (PlatformerCharacter2D))]
-    public class PlayerFightControl : MonoBehaviour
+    public class TaylorFightControl : MonoBehaviour
     {
         private PlatformerCharacter2D m_Character;
         private bool m_Jump;
@@ -47,7 +47,7 @@ namespace UnityStandardAssets._2D
             // Read the inputs.
             bool crouch = Input.GetKey(KeyCode.LeftControl);
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
-            Debug.Log(h);
+            //Debug.Log(h);
             //Debug.Log(m_Character.transform.);
             if(m_Dodge) {
                 if(h > 0) {
@@ -62,6 +62,7 @@ namespace UnityStandardAssets._2D
             m_Character.Move(h, crouch, m_Jump);
             m_Jump = false;
             m_Dodge = false;
+            
         }
     }
         
