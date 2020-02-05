@@ -2,32 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireBall : MonoBehaviour
+public class fireBall : MonoBehaviour
 {
 
-    public float ballSpeed;
-
-    private Rigidbody2D theRB;
-
-    public GameObject FireBallEffect;
+    public float speed = 20f;
+    public Rigidbody2D rb;
+    public GameObject impactEffect;
 
     // Start is called before the first frame update
     void Start()
     {
-        theRB = GetComponent<Rigidbody2D>();
+        rb.velocity = transform.right * speed;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D col)
     {
-        theRB.velocity = new Vector2(ballSpeed * transform.localScale.x, 0f);
-
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Instantiate(FireBallEffect, transform.position, transform.rotation);
-
         Destroy(gameObject);
+
+        Instantiate(impactEffect, transform.position, transform.rotation);
     }
+
 }

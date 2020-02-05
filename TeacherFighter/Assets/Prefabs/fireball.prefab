@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1644653278769019812
+--- !u!1 &6573316913842527118
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1644653278769019807}
-  - component: {fileID: 1644653278769019808}
-  - component: {fileID: 1644653278769019809}
-  - component: {fileID: 1644653278769019810}
-  - component: {fileID: 1644653278769019811}
+  - component: {fileID: 6573316913842527116}
+  - component: {fileID: 6573316913842527117}
+  - component: {fileID: 9030786749872357377}
+  - component: {fileID: 9128903182764540566}
+  - component: {fileID: 6225671657845832367}
   m_Layer: 0
-  m_Name: fireball
+  m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1644653278769019807
+--- !u!4 &6573316913842527116
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644653278769019812}
+  m_GameObject: {fileID: 6573316913842527118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.23, y: -0.04, z: 0}
+  m_LocalPosition: {x: -4.84, y: 0.48, z: -2.5842214}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1644653278769019808
+--- !u!212 &6573316913842527117
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644653278769019812}
+  m_GameObject: {fileID: 6573316913842527118}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -83,30 +83,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1644653278769019809
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644653278769019812}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.57
---- !u!50 &1644653278769019810
+--- !u!50 &9030786749872357377
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644653278769019812}
+  m_GameObject: {fileID: 6573316913842527118}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -118,20 +102,37 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &1644653278769019811
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!58 &9128903182764540566
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6573316913842527118}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.05
+--- !u!114 &6225671657845832367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644653278769019812}
+  m_GameObject: {fileID: 6573316913842527118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d82389ba58313234e9521cd9d840b54a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5040b642a507eb247923d9c728db1804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballSpeed: 15
-  FireBallEffect: {fileID: 5122632677733798419, guid: a11eed50212d06947980496893cdb91d,
+  speed: 20
+  rb: {fileID: 9030786749872357377}
+  impactEffect: {fileID: 5122632677733798419, guid: a11eed50212d06947980496893cdb91d,
     type: 3}
