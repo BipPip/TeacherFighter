@@ -122,10 +122,10 @@ TextureImporter:
       name: Vonder_Idle_1
       rect:
         serializedVersion: 2
-        x: 204
+        x: 203
         y: 6
         width: 156
-        height: 186
+        height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
