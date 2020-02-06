@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1bc3364b88d7edd4da9050623964af7c
+guid: 62a0065d6684a884897ce9714d49c348
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -94,6 +94,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -101,18 +113,18 @@ TextureImporter:
       name: Vonder_Lariat_0
       rect:
         serializedVersion: 2
-        x: 44
-        y: 51
-        width: 104
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 107
+        y: 125
+        width: 255
+        height: 194
+      alignment: 9
+      pivot: {x: 0.5, y: 0.47}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d5346189b2a53a4d81cbf1a23de4713
+      spriteID: 336c49e6c8b83fc4b8e7a47c6042c1c6
       internalID: 466607694776276657
       vertices: []
       indices: 
@@ -122,18 +134,18 @@ TextureImporter:
       name: Vonder_Lariat_1
       rect:
         serializedVersion: 2
-        x: 261
-        y: 51
-        width: 69
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 635
+        y: 125
+        width: 170
+        height: 194
+      alignment: 9
+      pivot: {x: 0.5, y: 0.47}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c39156a518d220c4ba2c964100fd6ece
+      spriteID: e29ecb3b2762141428ecf0bf5af353fe
       internalID: 574533419724131095
       vertices: []
       indices: 
@@ -143,18 +155,18 @@ TextureImporter:
       name: Vonder_Lariat_2
       rect:
         serializedVersion: 2
-        x: 428
-        y: 51
-        width: 104
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1043
+        y: 125
+        width: 254
+        height: 194
+      alignment: 9
+      pivot: {x: 0.5, y: 0.47}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6fef5d37566b16e4893b74d33b54ecae
+      spriteID: 1fa4ba0a088796a49b58a6f52ad4a039
       internalID: -2694924521680515841
       vertices: []
       indices: 
@@ -164,18 +176,18 @@ TextureImporter:
       name: Vonder_Lariat_3
       rect:
         serializedVersion: 2
-        x: 652
-        y: 51
-        width: 50
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1589
+        y: 125
+        width: 122
+        height: 194
+      alignment: 9
+      pivot: {x: 0.5, y: 0.47}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57e5fb627f594364e8447be776c3f4ac
+      spriteID: ebfe72b6e5c8343479338d2c6b64fd6d
       internalID: 5124079831263604644
       vertices: []
       indices: 
