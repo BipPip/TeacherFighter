@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fireBall : MonoBehaviour
+public class FireBall : MonoBehaviour
 {
 
     public float speed = 20f;

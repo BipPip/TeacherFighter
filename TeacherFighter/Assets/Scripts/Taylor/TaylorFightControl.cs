@@ -17,8 +17,6 @@ namespace UnityStandardAssets._2D
 
         private Vector3 startPosition;
 
-        [SerializeField] private GameObject fireBall;
-        [SerializeField] private Transform throwPoint;
 
         
         private void Awake()
@@ -41,10 +39,6 @@ namespace UnityStandardAssets._2D
                 m_Dodge = CrossPlatformInputManager.GetButtonDown("Dodge");
             }
 
-            if(Input.GetKey("e")){
-               GameObject fireBallClone = (GameObject)Instantiate(fireBall, throwPoint.position, throwPoint.rotation);
-               //fireBallClone.transform.localScale.x = transform.localScale.x;
-            }
             
         }
 
