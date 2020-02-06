@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6573316913842527117}
   - component: {fileID: 9030786749872357377}
   - component: {fileID: 9128903182764540566}
-  - component: {fileID: 6225671657845832367}
+  - component: {fileID: 2200336226852582378}
   m_Layer: 0
-  m_Name: FireBall
+  m_Name: fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.05
---- !u!114 &6225671657845832367
+--- !u!114 &2200336226852582378
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,5 +134,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   rb: {fileID: 9030786749872357377}
-  impactEffect: {fileID: 5122632677733798419, guid: a11eed50212d06947980496893cdb91d,
-    type: 3}
+  impactEffect: {fileID: 0}
