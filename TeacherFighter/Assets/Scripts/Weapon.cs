@@ -6,6 +6,13 @@ public class Weapon : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject fireBallPrefab;
+    Animator anim;
+
+
+    private void Start()
+    {
+        anim = gameObject.GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -19,6 +26,8 @@ public class Weapon : MonoBehaviour
     void Shoot()
     {
         Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
+
+        anim.SetTrigger("Jumping");
     }
 
 }

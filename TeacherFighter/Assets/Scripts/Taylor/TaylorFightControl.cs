@@ -16,6 +16,7 @@ namespace UnityStandardAssets._2D
         private bool m_FacingRight = true;
 
         private Vector3 startPosition;
+        private Animator anim;
 
 
         
@@ -23,6 +24,7 @@ namespace UnityStandardAssets._2D
         {
             m_Character = GetComponent<PlatformerCharacter2D>();
             startPosition = transform.position;
+            anim = gameObject.GetComponent<Animator>();
         }
 
 
@@ -46,7 +48,7 @@ namespace UnityStandardAssets._2D
         private void FixedUpdate()
         {
             if(Input.GetKey("o")){
-                transform.position = startPosition;
+                anim.SetTrigger("PencilFire");
             }
 
             
