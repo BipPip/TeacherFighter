@@ -856,7 +856,12 @@ PrefabInstance:
     - target: {fileID: 470290850103634018, guid: 174b5db10f82a0a458f4410a6b1281ce,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.08
+      value: 0.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 470290850103634018, guid: 174b5db10f82a0a458f4410a6b1281ce,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5142884622489952156, guid: 174b5db10f82a0a458f4410a6b1281ce,
         type: 3}
@@ -974,10 +979,19 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1695637347, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
+      propertyPath: fireBall
+      value: 
+      objectReference: {fileID: 1644653278769019812, guid: d6ca7ddfdb005f94391428b9e2e93443,
+        type: 3}
+    - target: {fileID: 1695637347, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
+      propertyPath: throwPoint
+      value: 
+      objectReference: {fileID: 474423635}
     - target: {fileID: 2394598230562451157, guid: 174b5db10f82a0a458f4410a6b1281ce,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2394598230562451157, guid: 174b5db10f82a0a458f4410a6b1281ce,
         type: 3}
@@ -994,7 +1008,13 @@ PrefabInstance:
       propertyPath: m_JumpForce
       value: 800
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2394598230562451157, guid: 174b5db10f82a0a458f4410a6b1281ce,
+        type: 3}
+      propertyPath: throwPoint
+      value: 
+      objectReference: {fileID: 474423635}
+    m_RemovedComponents:
+    - {fileID: 2394598230562451157, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
 --- !u!1 &813775049 stripped
 GameObject:
