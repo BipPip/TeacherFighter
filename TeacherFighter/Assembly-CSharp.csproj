@@ -65,10 +65,12 @@
      <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
-     <Compile Include="Assets\Scripts\FireBall.cs" />
+     <Compile Include="Assets\Scripts\DestroyObject.cs" />
+     <Compile Include="Assets\Scripts\fireBall.cs" />
      <Compile Include="Assets\Scripts\Respawn.cs" />
      <Compile Include="Assets\Scripts\Taylor\TaylorCharacter.cs" />
      <Compile Include="Assets\Scripts\Taylor\TaylorFightControl.cs" />
+     <Compile Include="Assets\Scripts\Weapon.cs" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Senior Project/TeacherFighter/TeacherFighter/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

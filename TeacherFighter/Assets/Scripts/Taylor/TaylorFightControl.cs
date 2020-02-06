@@ -13,6 +13,8 @@ namespace UnityStandardAssets._2D
         private bool m_Jump;
         private bool m_Dodge;
 
+        private bool m_FacingRight = true;
+
         private Vector3 startPosition;
 
         [SerializeField] private GameObject fireBall;
@@ -40,7 +42,8 @@ namespace UnityStandardAssets._2D
             }
 
             if(Input.GetKey("e")){
-                Instantiate(fireBall, throwPoint.position, throwPoint.rotation);
+               GameObject fireBallClone = (GameObject)Instantiate(fireBall, throwPoint.position, throwPoint.rotation);
+               //fireBallClone.transform.localScale.x = transform.localScale.x;
             }
             
         }
@@ -72,8 +75,17 @@ namespace UnityStandardAssets._2D
             m_Character.Move(h, crouch, m_Jump);
             m_Jump = false;
             m_Dodge = false;
+
             
         }
+
+        private void Flip()
+        {
+            m_FacingRight = !m_FacingRight;
+
+            transform.Rotate(0f, 180f, 0f);
+        }
+
     }
         
 }
