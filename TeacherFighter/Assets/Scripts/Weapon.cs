@@ -20,14 +20,16 @@ public class Weapon : MonoBehaviour
         if(Input.GetButtonDown("Fire1"))
         {
             Shoot();
+
         }
     }
 
     void Shoot()
     {
-        Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
+        GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
+        ballClone.transform.localScale = transform.localScale;
 
-        anim.SetTrigger("Jumping");
+        anim.SetTrigger("Attack");
     }
 
 }

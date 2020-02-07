@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\Respawn.cs" />
      <Compile Include="Assets\Scripts\Taylor\TaylorCharacter.cs" />
      <Compile Include="Assets\Scripts\Taylor\TaylorFightControl.cs" />
+     <Compile Include="Assets\Scripts\VonDerEhe\VonDerCombat.cs" />
      <Compile Include="Assets\Scripts\VonDerEhe\VonDerEheFightControl.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />

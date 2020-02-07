@@ -48,7 +48,6 @@ namespace UnityStandardAssets._2D
         private void FixedUpdate()
         {
             if(Input.GetKey("o")){
-                anim.SetTrigger("PencilFire");
             }
 
             

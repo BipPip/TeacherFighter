@@ -12,7 +12,7 @@ public class FireBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.right * speed;
+        rb.velocity = new Vector2(speed * transform.localScale.x, 0);
     }
 
     void OnTriggerEnter2D(Collider2D col)

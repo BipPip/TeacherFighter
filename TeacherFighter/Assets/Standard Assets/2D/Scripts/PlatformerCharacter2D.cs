@@ -61,7 +61,7 @@ namespace UnityStandardAssets._2D
                     crouch = true;
                 }
             }
-            Debug.Log(crouch);
+            //Debug.Log(crouch);
             // Set whether or not the character is crouching in the animator
             m_Anim.SetBool("Crouch", crouch);
 
