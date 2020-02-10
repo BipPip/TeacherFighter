@@ -6,6 +6,13 @@ public class Weapon : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject fireBallPrefab;
+    Animator anim;
+
+
+    private void Start()
+    {
+        anim = gameObject.GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -13,12 +20,16 @@ public class Weapon : MonoBehaviour
         if(Input.GetButtonDown("Fire1"))
         {
             Shoot();
+
         }
     }
 
     void Shoot()
     {
-        Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
+        GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
+        ballClone.transform.localScale = transform.localScale;
+
+        anim.SetTrigger("Attack");
     }
 
 }
