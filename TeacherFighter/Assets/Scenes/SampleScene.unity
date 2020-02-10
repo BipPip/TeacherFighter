@@ -434,6 +434,11 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2842220579077722051, guid: 3e00a333e4dd97a4c80a9d8f2164302c,
+        type: 3}
+      propertyPath: healthBarObject
+      value: 
+      objectReference: {fileID: 143398149}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e00a333e4dd97a4c80a9d8f2164302c, type: 3}
 --- !u!1 &438786841
@@ -858,6 +863,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBarLeft
       objectReference: {fileID: 0}
+    - target: {fileID: 198710, guid: 34017cf12560c804bb2f669f00c7af91, type: 3}
+      propertyPath: m_Name
+      value: healthBarLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 198710, guid: 34017cf12560c804bb2f669f00c7af91, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 22486214, guid: 34017cf12560c804bb2f669f00c7af91, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -941,14 +954,6 @@ PrefabInstance:
     - target: {fileID: 22486214, guid: 34017cf12560c804bb2f669f00c7af91, type: 3}
       propertyPath: m_Pivot.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198710, guid: 34017cf12560c804bb2f669f00c7af91, type: 3}
-      propertyPath: m_Name
-      value: healthBarLeft
-      objectReference: {fileID: 0}
-    - target: {fileID: 198710, guid: 34017cf12560c804bb2f669f00c7af91, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11467028, guid: 34017cf12560c804bb2f669f00c7af91, type: 3}
       propertyPath: m_FillAmount
@@ -1095,6 +1100,11 @@ PrefabInstance:
       propertyPath: m_AirControl
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2842220579077722051, guid: 174b5db10f82a0a458f4410a6b1281ce,
+        type: 3}
+      propertyPath: healthBarObject
+      value: 
+      objectReference: {fileID: 996837585}
     - target: {fileID: 1695637347, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1623,7 +1633,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 119886, guid: 34017cf12560c804bb2f669f00c7af91, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198710, guid: 34017cf12560c804bb2f669f00c7af91, type: 3}
+      propertyPath: m_Name
+      value: healthBarRight
       objectReference: {fileID: 0}
     - target: {fileID: 22486214, guid: 34017cf12560c804bb2f669f00c7af91, type: 3}
       propertyPath: m_LocalPosition.x

@@ -18,7 +18,6 @@ namespace UnityStandardAssets._2D
         private Vector3 startPosition;
         private Animator anim;
 
-        public GameObject healthBarObject;
 
       
      
@@ -45,6 +44,9 @@ namespace UnityStandardAssets._2D
             }
             //Canvas.healthBarLeft.UpdateBar((Canvas.healthBarLeft.GetCurrentFraction * 100) - 10, 100);
             //Debug.Log(Canvas.healthBarLeft.GetCurrentFraction * 100);
+            if (gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction <= 0) {
+                Debug.Log("EE RERER");
+            }
         }
 
 
