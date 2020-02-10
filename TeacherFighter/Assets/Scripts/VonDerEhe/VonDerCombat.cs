@@ -28,6 +28,7 @@ public class VonDerCombat : MonoBehaviour
        foreach(Collider2D enemy in hitEnemies)
        {
            Debug.Log("Hit enemy" + enemy.name );
+           Debug.Log(enemy.gameObject);
        }
     }
 

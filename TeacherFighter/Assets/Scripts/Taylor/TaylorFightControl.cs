@@ -18,13 +18,16 @@ namespace UnityStandardAssets._2D
         private Vector3 startPosition;
         private Animator anim;
 
+        public GameObject healthBarObject;
 
-        
+      
+     
         private void Awake()
         {
             m_Character = GetComponent<PlatformerCharacter2D>();
             startPosition = transform.position;
             anim = gameObject.GetComponent<Animator>();
+            
         }
 
 
@@ -40,8 +43,8 @@ namespace UnityStandardAssets._2D
                 // Read the dodge input in Update so button presses aren't missed.
                 m_Dodge = CrossPlatformInputManager.GetButtonDown("Dodge");
             }
-
-            
+            //Canvas.healthBarLeft.UpdateBar((Canvas.healthBarLeft.GetCurrentFraction * 100) - 10, 100);
+            //Debug.Log(Canvas.healthBarLeft.GetCurrentFraction * 100);
         }
 
 
@@ -64,6 +67,7 @@ namespace UnityStandardAssets._2D
                 else if (h < 0) {
                     h = (-5);
                 }
+                Canvas.healthBarLeft.UpdateBar((Canvas.healthBarLeft.GetCurrentFraction * 100) - 10, 100);
             }
 
             // Pass all parameters to the character control script.
