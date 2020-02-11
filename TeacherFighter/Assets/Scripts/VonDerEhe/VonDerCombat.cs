@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets._2D;
 
 public class VonDerCombat : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class VonDerCombat : MonoBehaviour
        foreach(Collider2D enemy in hitEnemies)
        {
            Debug.Log("Hit enemy" + enemy.name );
+           enemy.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().UpdateBar((Canvas.healthBarLeft.GetCurrentFraction * 100) - 10, 100);
        }
     }
 

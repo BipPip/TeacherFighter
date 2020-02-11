@@ -20,6 +20,9 @@ namespace UnityStandardAssets._2D
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
+        //public SimpleHealthBar healthBar;
+        public GameObject healthBarObject;
+
         private void Awake()
         {
             // Setting up references.
@@ -27,6 +30,7 @@ namespace UnityStandardAssets._2D
             m_CeilingCheck = transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
+            //healthBar = healthBarObject.GetComponent<SimpleHealthBar>();
         }
 
 
