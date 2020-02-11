@@ -18,7 +18,7 @@ namespace UnityStandardAssets._2D
         private Vector3 startPosition;
         private Animator anim;
 
-
+        public SimpleHealthBar playerHealthBar;
       
      
         private void Awake()
@@ -32,6 +32,8 @@ namespace UnityStandardAssets._2D
 
         private void Update()
         {
+            playerHealthBar = gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>();
+
             if (!m_Jump)
             {
                 // Read the jump input in Update so button presses aren't missed.
@@ -44,8 +46,10 @@ namespace UnityStandardAssets._2D
             }
             //Canvas.healthBarLeft.UpdateBar((Canvas.healthBarLeft.GetCurrentFraction * 100) - 10, 100);
             //Debug.Log(Canvas.healthBarLeft.GetCurrentFraction * 100);
-            if (gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction <= 0) {
-                Debug.Log("EE RERER");
+            
+            if (playerHealthBar.GetCurrentFraction <= 0) {
+                //Debug.Log("EE RERER");
+                Destroy(gameObject);
             }
         }
 
@@ -69,7 +73,7 @@ namespace UnityStandardAssets._2D
                 else if (h < 0) {
                     h = (-5);
                 }
-                Canvas.healthBarLeft.UpdateBar((Canvas.healthBarLeft.GetCurrentFraction * 100) - 10, 100);
+                //Canvas.healthBarLeft.UpdateBar((Canvas.healthBarLeft.GetCurrentFraction * 100) - 10, 100);
             }
 
             // Pass all parameters to the character control script.
