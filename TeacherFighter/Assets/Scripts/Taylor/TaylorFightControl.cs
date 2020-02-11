@@ -17,8 +17,18 @@ namespace UnityStandardAssets._2D
 
         private Vector3 startPosition;
         private Animator anim;
+        public Transform firePoint;
+        public GameObject fireBallPrefab;
 
+        public float speed = 20f;
+         public Rigidbody2D rb;
+        public GameObject impactEffect;
+         public LayerMask enemyLayers;
 
+        private void Start()
+         {
+           anim = gameObject.GetComponent<Animator>();
+        }
       
      
         private void Awake()
@@ -47,13 +57,16 @@ namespace UnityStandardAssets._2D
             if (gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction <= 0) {
                 Debug.Log("EE RERER");
             }
+
+            Input.GetButtonDown("Fire1"){
+                Shoot();
+            }
         }
 
 
         private void FixedUpdate()
         {
-            if(Input.GetKey("o")){
-            }
+            
 
             
 
@@ -86,7 +99,15 @@ namespace UnityStandardAssets._2D
 
             transform.Rotate(0f, 180f, 0f);
         }
-
+     void Shoot()
+    {
+        GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
+        ballClone.transform.localScale = transform.localScale;
+        anim.SetTrigger("Attack");
     }
+    }
+
+
+    
         
 }
