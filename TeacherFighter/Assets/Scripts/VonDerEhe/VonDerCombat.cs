@@ -14,7 +14,7 @@ public class VonDerCombat : MonoBehaviour
     // Lariat Timer
 
     public bool lariatActive;                 //Is this timer active?
-    public float lariatCooldown = 0.5;              //How often this cooldown may be used
+    public float lariatCooldown = 0.5f;              //How often this cooldown may be used
     public float lariatTimer;                 //Time left on timer, can be used at 0
 
     // Update is called once per frame
