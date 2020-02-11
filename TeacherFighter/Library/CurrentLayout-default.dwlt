@@ -304,14 +304,14 @@ MonoBehaviour:
     - {fileID: 110700000, guid: f98acc17fed274e47a55d409ec351a50, type: 2}
     - {fileID: 110700000, guid: f67688f08ab6cbd40b1fcdb7b57fa892, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.7204969
+    - e00: 0.78571427
       e01: 0
       e02: 0
-      e03: 352.19257
+      e03: 382.7143
       e10: 0
-      e11: 0.7204969
+      e11: 0.78571427
       e12: 0
-      e13: 370.19254
+      e13: 361.35715
       e20: 0
       e21: 0
       e22: 1
@@ -418,11 +418,11 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Taylor
+    - Assets/Animations/Taylor
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Taylor
+  - Assets/Animations/Taylor
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\TeacherTHing\TeacherFighter\TeacherFighter
   m_LockTracker:
