@@ -20,7 +20,8 @@ namespace UnityStandardAssets._2D
         public Transform firePoint;
         public GameObject fireBallPrefab;
 
-        public SimpleHealthBar playerHealthBar;
+        private SimpleHealthBar playerHealthBar;
+        private SimpleHealthBar staminaBar;
         public float speed = 20f;
          public LayerMask enemyLayers;
 
@@ -35,13 +36,15 @@ namespace UnityStandardAssets._2D
             m_Character = GetComponent<PlatformerCharacter2D>();
             startPosition = transform.position;
             anim = gameObject.GetComponent<Animator>();
+            playerHealthBar = gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>();
+            staminaBar = gameObject.GetComponent<PlatformerCharacter2D>().staminaBarObject.GetComponent<SimpleHealthBar>();
             
         }
 
 
         private void Update()
         {
-            playerHealthBar = gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>();
+            
 
             if (!m_Jump)
             {
@@ -63,7 +66,9 @@ namespace UnityStandardAssets._2D
             }
 
             if(Input.GetButtonDown("Fire1")){
-                Shoot();
+                if ((staminaBar.GetCurrentFraction * 100) >= 5f) {
+                    Shoot();
+                }
             }
         }
 
@@ -108,6 +113,7 @@ namespace UnityStandardAssets._2D
         GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
         ballClone.transform.localScale = transform.localScale;
         anim.SetTrigger("Attack");
+        staminaBar.UpdateBar((staminaBar.GetCurrentFraction * 100) - 5, 100);
     }
     }
 
