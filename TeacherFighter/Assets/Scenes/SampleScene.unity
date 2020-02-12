@@ -389,7 +389,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &441668399 stripped
 Transform:
@@ -875,6 +875,24 @@ PrefabInstance:
       propertyPath: healthBarObject
       value: 
       objectReference: {fileID: 996837585}
+    - target: {fileID: 1695637347, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
+      propertyPath: enemyLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695637347, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 474423635}
+    - target: {fileID: 1695637347, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
+      propertyPath: fireBallPrefab
+      value: 
+      objectReference: {fileID: 8140991650851786002, guid: 2cf1f88ddff5dac44a9f427a486019f1,
+        type: 3}
+    - target: {fileID: 1695637347, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
+      propertyPath: impactEffect
+      value: 
+      objectReference: {fileID: 1029092191434466626, guid: 2589ceb9849d73a40a86f294d73f24b9,
+        type: 3}
     - target: {fileID: 2394598230562451157, guid: 174b5db10f82a0a458f4410a6b1281ce,
         type: 3}
       propertyPath: m_Enabled
@@ -903,6 +921,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2394598230562451157, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
     - {fileID: 0}
+    - {fileID: 3075465347370896844, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
 --- !u!1 &813775049 stripped
 GameObject:
@@ -1372,7 +1391,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1767711727
 PrefabInstance:

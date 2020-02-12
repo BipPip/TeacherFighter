@@ -17,8 +17,17 @@ namespace UnityStandardAssets._2D
 
         private Vector3 startPosition;
         private Animator anim;
+        public Transform firePoint;
+        public GameObject fireBallPrefab;
 
         public SimpleHealthBar playerHealthBar;
+        public float speed = 20f;
+         public LayerMask enemyLayers;
+
+        private void Start()
+         {
+           anim = gameObject.GetComponent<Animator>();
+        }
       
      
         private void Awake()
@@ -52,13 +61,16 @@ namespace UnityStandardAssets._2D
                 anim.SetTrigger("Die");
                 //Destroy(gameObject);
             }
+
+            if(Input.GetButtonDown("Fire1")){
+                Shoot();
+            }
         }
 
 
         private void FixedUpdate()
         {
-            if(Input.GetKey("o")){
-            }
+            
 
             
 
@@ -91,7 +103,15 @@ namespace UnityStandardAssets._2D
 
             transform.Rotate(0f, 180f, 0f);
         }
-
+     void Shoot()
+    {
+        GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
+        ballClone.transform.localScale = transform.localScale;
+        anim.SetTrigger("Attack");
     }
+    }
+
+
+    
         
 }
