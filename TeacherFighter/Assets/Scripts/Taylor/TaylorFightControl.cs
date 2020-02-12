@@ -49,7 +49,8 @@ namespace UnityStandardAssets._2D
             
             if (playerHealthBar.GetCurrentFraction <= 0) {
                 //Debug.Log("EE RERER");
-                Destroy(gameObject);
+                anim.SetTrigger("Die");
+                //Destroy(gameObject);
             }
         }
 
