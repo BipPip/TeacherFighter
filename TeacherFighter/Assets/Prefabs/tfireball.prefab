@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8417990858851171328}
   - component: {fileID: 1327226795653447884}
   - component: {fileID: 6995216726053880078}
-  - component: {fileID: 2268371522029620374}
+  - component: {fileID: 1229953048419245450}
   m_Layer: 0
   m_Name: tfireball
   m_TagString: Untagged
@@ -120,7 +120,7 @@ CircleCollider2D:
   m_Offset: {x: -0.34, y: -0.25}
   serializedVersion: 2
   m_Radius: 0.24
---- !u!114 &2268371522029620374
+--- !u!114 &1229953048419245450
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8140991650851786002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5040b642a507eb247923d9c728db1804, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ba7f44d26126541a7a1bc6a0db17d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20

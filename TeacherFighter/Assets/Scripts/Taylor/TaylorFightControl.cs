@@ -21,8 +21,6 @@ namespace UnityStandardAssets._2D
         public GameObject fireBallPrefab;
 
         public float speed = 20f;
-         public Rigidbody2D rb;
-        public GameObject impactEffect;
          public LayerMask enemyLayers;
 
         private void Start()
@@ -58,7 +56,7 @@ namespace UnityStandardAssets._2D
                 Debug.Log("EE RERER");
             }
 
-            Input.GetButtonDown("Fire1"){
+            if(Input.GetButtonDown("Fire1")){
                 Shoot();
             }
         }

@@ -63,12 +63,11 @@
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
      <Compile Include="Assets\Scripts\Canvas.cs" />
      <Compile Include="Assets\Scripts\DestroyObject.cs" />
-     <Compile Include="Assets\Scripts\FireBall.cs" />
      <Compile Include="Assets\Scripts\Respawn.cs" />
+     <Compile Include="Assets\Scripts\Taylor\FireBall.cs" />
      <Compile Include="Assets\Scripts\Taylor\TaylorFightControl.cs" />
      <Compile Include="Assets\Scripts\VonDerEhe\VonDerCombat.cs" />
      <Compile Include="Assets\Scripts\VonDerEhe\VonDerEheFightControl.cs" />
-     <Compile Include="Assets\Scripts\Weapon.cs" />
      <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\GameManager.cs" />
      <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\HealthPickupController.cs" />

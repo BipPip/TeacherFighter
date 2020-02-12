@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets._2D;
 
 public class FireBall : MonoBehaviour
 {
@@ -22,15 +23,12 @@ public class FireBall : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-         
 
-        
-       
+        if(col.gameObject.tag == "Player"){
+            col.gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().UpdateBar((Canvas.healthBarRight.GetCurrentFraction * 100) - 10, 100);
 
-        //Debug.Log(col.tag + ", " + col.name );
+        }
         Destroy(gameObject);
-
-        
         Instantiate(impactEffect, transform.position, transform.rotation);
     }
 
