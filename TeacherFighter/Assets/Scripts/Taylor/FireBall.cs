@@ -25,7 +25,7 @@ public class FireBall : MonoBehaviour
     {
 
         if(col.gameObject.tag == "Player"){
-            col.gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().UpdateBar((Canvas.healthBarRight.GetCurrentFraction * 100) - 10, 100);
+            col.gameObject.GetComponent<Damage>().doDamage(5f, 0.5f);
 
         }
         Destroy(gameObject);

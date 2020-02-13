@@ -10,12 +10,21 @@ public class VonDerCombat : MonoBehaviour
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
+    private SimpleHealthBar staminaBar;
+    private Stamina stamina;
 
     // Lariat Timer
 
     public bool lariatActive;                 //Is this timer active?
     public float lariatCooldown = 0.5f;              //How often this cooldown may be used
     public float lariatTimer;                 //Time left on timer, can be used at 0
+
+
+    void Awake() {
+        staminaBar = gameObject.GetComponent<PlatformerCharacter2D>().staminaBarObject.GetComponent<SimpleHealthBar>();
+        stamina = gameObject.GetComponent<Stamina>();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -30,26 +39,30 @@ public class VonDerCombat : MonoBehaviour
 
         if(Input.GetButtonDown("Fire2"))
             {
+                if (stamina.getStamina() >= 45f) {
                 if(!lariatActive) {
                     LariatAttack();
                     lariatActive = true;
                     lariatTimer = lariatCooldown;
                 }
             }
+        }
     }
 
     void LariatAttack()
     {
         
         anim.SetTrigger("LariatAttack");
+        stamina.startCountdown(1f);
+        stamina.staminaDecrease(45f);
 
        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
        foreach(Collider2D enemy in hitEnemies)
        {
-           Debug.Log("Hit enemy" + enemy.name );
-           SimpleHealthBar enemyHealth = enemy.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>();
-           enemyHealth.UpdateBar((enemyHealth.GetCurrentFraction * 100) - 10, 100);
+           //Debug.Log("Hit enemy" + enemy.name );
+           enemy.GetComponent<Damage>().doDamage(20f, 0.5f);
+
        }
     }
 
