@@ -78,4 +78,8 @@ public class Stamina : MonoBehaviour
         this.regen = 0.5f;
         this.regenInc = 5;
     }
+
+    public void staminaDecrease(float decrease) {
+        this.staminaBar.UpdateBar(getStamina() - decrease, 100);
+    }
 }

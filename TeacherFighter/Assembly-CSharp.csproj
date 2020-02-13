@@ -62,6 +62,7 @@
      <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
      <Compile Include="Assets\Scripts\Canvas.cs" />
+     <Compile Include="Assets\Scripts\Damage.cs" />
      <Compile Include="Assets\Scripts\DestroyObject.cs" />
      <Compile Include="Assets\Scripts\Respawn.cs" />
      <Compile Include="Assets\Scripts\Stamina.cs" />

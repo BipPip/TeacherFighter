@@ -116,7 +116,7 @@ namespace UnityStandardAssets._2D
         GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
         ballClone.transform.localScale = transform.localScale;
         anim.SetTrigger("Attack");
-        staminaBar.UpdateBar((staminaBar.GetCurrentFraction * 100) - 20, 100);
+        stamina.staminaDecrease(20f);
     }
     }
 

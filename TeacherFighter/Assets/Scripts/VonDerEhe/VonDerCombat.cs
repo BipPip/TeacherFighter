@@ -54,15 +54,15 @@ public class VonDerCombat : MonoBehaviour
         
         anim.SetTrigger("LariatAttack");
         stamina.startCountdown(1f);
-        staminaBar.UpdateBar(stamina.getStamina() - 45, 100);
+        stamina.staminaDecrease(45f);
 
        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
        foreach(Collider2D enemy in hitEnemies)
        {
-           Debug.Log("Hit enemy" + enemy.name );
-           SimpleHealthBar enemyHealth = enemy.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>();
-           enemyHealth.UpdateBar((enemyHealth.GetCurrentFraction * 100) - 20, 100);
+           //Debug.Log("Hit enemy" + enemy.name );
+           enemy.GetComponent<Damage>().doDamage(20f, 0.5f);
+
        }
     }
 
