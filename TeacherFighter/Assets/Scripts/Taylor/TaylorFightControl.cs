@@ -61,11 +61,12 @@ namespace UnityStandardAssets._2D
             //Canvas.healthBarLeft.UpdateBar((Canvas.healthBarLeft.GetCurrentFraction * 100) - 10, 100);
             //Debug.Log(Canvas.healthBarLeft.GetCurrentFraction * 100);
             
-            if (playerHealthBar.GetCurrentFraction <= 0) {
-                //Debug.Log("EE RERER");
-                anim.SetTrigger("Die");
-                //Destroy(gameObject);
-            }
+            // if (playerHealthBar.GetCurrentFraction <= 0) {
+            //     //Debug.Log("EE RERER");
+            //     gameObject.GetComponent<Damage>();
+            //     anim.SetTrigger("Die");
+            //     //Destroy(gameObject);
+            // }
 
             if(Input.GetButtonDown("Fire1")){
                 if (stamina.getStamina() >= 20f) {

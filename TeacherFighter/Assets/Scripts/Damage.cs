@@ -26,6 +26,13 @@ public class Damage : MonoBehaviour
         else {
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         }
+
+        // Checks if player is dead
+        if (playerHealthBar.GetCurrentFraction <= 0) {
+            
+                anim.SetTrigger("Die");
+                //Destroy(gameObject);
+            }
     }
 
     public void doDamage(float damage, float knockback) {
@@ -37,5 +44,7 @@ public class Damage : MonoBehaviour
         gameObject.transform.position += new Vector3(knockback, 0, 0);
         
     }
+
+    
 
 }
