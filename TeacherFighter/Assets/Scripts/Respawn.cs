@@ -5,19 +5,22 @@ using UnityEngine;
 public class Respawn : MonoBehaviour
 {
 
-    public float timer = 5.0f;
 
     public Transform respawnPoint;
-
+    
 
 
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.transform.CompareTag("Player")){
             
-                
             col.transform.position = respawnPoint.position;
+           
+           
+            
             
         }
     }
+
+    
 }

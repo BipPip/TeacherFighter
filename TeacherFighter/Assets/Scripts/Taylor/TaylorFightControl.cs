@@ -18,6 +18,7 @@ namespace UnityStandardAssets._2D
         private Vector3 startPosition;
         private Animator anim;
         public Transform firePoint;
+         public Transform respawnPoint;
         public GameObject fireBallPrefab;
 
         private SimpleHealthBar playerHealthBar;
@@ -64,7 +65,6 @@ namespace UnityStandardAssets._2D
             if (playerHealthBar.GetCurrentFraction <= 0) {
                 //Debug.Log("EE RERER");
                 anim.SetTrigger("Die");
-                //Destroy(gameObject);
             }
 
             if(Input.GetButtonDown("Fire1")){
@@ -114,7 +114,7 @@ namespace UnityStandardAssets._2D
      void Shoot()
     {
         GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
-        ballClone.transform.localScale = transform.localScale;
+        //ballClone.transform.localScale = transform.localScale;
         anim.SetTrigger("Attack");
         stamina.staminaDecrease(20f);
     }

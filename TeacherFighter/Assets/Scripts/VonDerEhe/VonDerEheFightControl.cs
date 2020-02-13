@@ -42,7 +42,7 @@ namespace UnityStandardAssets._2D
         private void FixedUpdate()
         {
             if(Input.GetKey("o")){
-                transform.position = startPosition;
+                Debug.Log("wow you found a secret thats so cool");
             }
             // Read the inputs.
             bool crouch = Input.GetKey(KeyCode.RightControl);
