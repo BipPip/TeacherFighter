@@ -22,12 +22,14 @@ namespace UnityStandardAssets._2D
 
         private SimpleHealthBar playerHealthBar;
         private SimpleHealthBar staminaBar;
+        private Stamina stamina;
         public float speed = 20f;
          public LayerMask enemyLayers;
 
         private void Start()
          {
            anim = gameObject.GetComponent<Animator>();
+           stamina = gameObject.GetComponent<Stamina>();
         }
       
      
@@ -66,8 +68,9 @@ namespace UnityStandardAssets._2D
             }
 
             if(Input.GetButtonDown("Fire1")){
-                if ((staminaBar.GetCurrentFraction * 100) >= 5f) {
+                if (stamina.getStamina() >= 20f) {
                     Shoot();
+                    stamina.startCountdown(1f);
                 }
             }
         }
@@ -113,7 +116,7 @@ namespace UnityStandardAssets._2D
         GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
         ballClone.transform.localScale = transform.localScale;
         anim.SetTrigger("Attack");
-        staminaBar.UpdateBar((staminaBar.GetCurrentFraction * 100) - 5, 100);
+        staminaBar.UpdateBar((staminaBar.GetCurrentFraction * 100) - 20, 100);
     }
     }
 
