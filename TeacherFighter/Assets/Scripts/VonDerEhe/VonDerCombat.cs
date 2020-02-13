@@ -39,7 +39,7 @@ public class VonDerCombat : MonoBehaviour
 
 
         // Lariat Attack input
-        if(Input.GetButtonDown("Fire2"))
+        if(Input.GetButtonDown("Vonder_Lariat"))
             {
                 if (stamina.getStamina() >= 45f && gameObject.GetComponent<PlatformerCharacter2D>().m_Grounded) {
                 if(!lariatActive) {

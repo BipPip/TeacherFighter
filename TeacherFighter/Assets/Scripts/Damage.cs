@@ -20,12 +20,15 @@ public class Damage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")){
+        if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")){
+            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            
+        }
+        else if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Walk") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Run") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Crouch") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("CrouchingWalk") 
+        || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Jumping") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-        else {
-            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-        }
+      
 
         // Checks if player is dead
         if (playerHealthBar.GetCurrentFraction <= 0) {

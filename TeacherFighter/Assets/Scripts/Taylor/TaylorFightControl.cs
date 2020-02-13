@@ -56,7 +56,7 @@ namespace UnityStandardAssets._2D
             if (!m_Dodge)
             {
                 // Read the dodge input in Update so button presses aren't missed.
-                m_Dodge = CrossPlatformInputManager.GetButtonDown("Dodge");
+                m_Dodge = CrossPlatformInputManager.GetButtonDown("Taylor_Dodge");
             }
             //Canvas.healthBarLeft.UpdateBar((Canvas.healthBarLeft.GetCurrentFraction * 100) - 10, 100);
             //Debug.Log(Canvas.healthBarLeft.GetCurrentFraction * 100);
@@ -68,12 +68,22 @@ namespace UnityStandardAssets._2D
             //     //Destroy(gameObject);
             // }
 
-            if(Input.GetButtonDown("Fire1")){
+            if(Input.GetButtonDown("Taylor_Fire")){
                 if (stamina.getStamina() >= 20f) {
                     Shoot();
                     stamina.startCountdown(1f);
                 }
             }
+            else if (Input.GetButtonDown("Taylor_Light")) {
+                Light();
+                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            }
+
+
+
+            // UnFreeze constraints after doing basic moves
+
+
         }
 
 
@@ -116,9 +126,15 @@ namespace UnityStandardAssets._2D
     {
         GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
         ballClone.transform.localScale = transform.localScale;
-        anim.SetTrigger("Attack");
+        anim.SetTrigger("Fire");
         stamina.staminaDecrease(20f);
     }
+
+    void Light() 
+    {
+        anim.SetTrigger("Light");
+    }
+
     }
 
 
