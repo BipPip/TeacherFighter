@@ -24,7 +24,9 @@ namespace UnityStandardAssets._2D
         private SimpleHealthBar staminaBar;
         private Stamina stamina;
         public float speed = 20f;
-         public LayerMask enemyLayers;
+        public Transform basicAttackPoint;
+        public float basicAttackRange = 0.5f;
+        public LayerMask enemyLayers;
 
         private void Start()
          {
@@ -135,9 +137,15 @@ namespace UnityStandardAssets._2D
         anim.SetTrigger("Light");
     }
 
+    void OnDrawGizmosSelected()
+    {
+
+        if(basicAttackPoint == null)
+        return;
+        Gizmos.DrawWireSphere(basicAttackPoint.position, basicAttackRange);
     }
-
-
     
+    
+}   
         
 }
