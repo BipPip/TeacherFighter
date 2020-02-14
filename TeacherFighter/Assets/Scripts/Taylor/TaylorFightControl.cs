@@ -78,12 +78,17 @@ namespace UnityStandardAssets._2D
             }
             else if (Input.GetButtonDown("Taylor_Light")) {
                 Light();
-                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                
             }
 
 
 
-            // UnFreeze constraints after doing basic moves
+
+            // Freeze constraints after doing basic moves
+
+            if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Light")) {
+                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            }
 
 
         }
