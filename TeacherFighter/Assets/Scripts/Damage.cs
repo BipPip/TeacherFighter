@@ -26,7 +26,7 @@ public class Damage : MonoBehaviour
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
         if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")){
-                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
                 
             }
 
@@ -40,12 +40,13 @@ public class Damage : MonoBehaviour
 
     public void doDamage(float damage, float knockback) {
         this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * 100) - damage, 100);
-        anim.SetTrigger("Hit");
-        if (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
-            knockback = knockback * -1;
+        if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
+            anim.SetTrigger("Hit");
+            if (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
+                knockback = knockback * -1;
+            }
+            gameObject.transform.position += new Vector3(knockback, 0, 0);
         }
-        gameObject.transform.position += new Vector3(knockback, 0, 0);
-        
     }
 
     

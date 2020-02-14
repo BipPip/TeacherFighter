@@ -15,6 +15,8 @@ MonoBehaviour:
   firePoint: {fileID: 0}
   fireBallPrefab: {fileID: 0}
   speed: 20
+  basicAttackPoint: {fileID: 0}
+  basicAttackRange: 0.5
   enemyLayers:
     serializedVersion: 2
     m_Bits: 0

@@ -20,6 +20,10 @@ namespace UnityStandardAssets._2D
         public Transform firePoint;
         public GameObject fireBallPrefab;
 
+        private Cooldown fireCooldown;
+        private Cooldown lightCooldown;
+        private Cooldown mediumCooldown;
+
         private SimpleHealthBar playerHealthBar;
         private SimpleHealthBar staminaBar;
         private Stamina stamina;
@@ -42,6 +46,11 @@ namespace UnityStandardAssets._2D
             anim = gameObject.GetComponent<Animator>();
             playerHealthBar = gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>();
             staminaBar = gameObject.GetComponent<PlatformerCharacter2D>().staminaBarObject.GetComponent<SimpleHealthBar>();
+            //cooldown  = new Cooldown();
+            mediumCooldown = gameObject.AddComponent<Cooldown>();
+            lightCooldown = gameObject.AddComponent<Cooldown>();
+            fireCooldown = gameObject.AddComponent<Cooldown>();
+            
             
         }
 
@@ -70,15 +79,26 @@ namespace UnityStandardAssets._2D
             //     //Destroy(gameObject);
             // }
 
-            if(Input.GetButtonDown("Taylor_Fire")){
+            if(Input.GetButtonDown("Taylor_Fire") || Input.GetAxis("Axis 10") != 0){
                 if (stamina.getStamina() >= 20f) {
-                    Shoot();
-                    stamina.startCountdown(1f);
+                    if (!fireCooldown.active()) {
+                        Shoot();
+                        stamina.startCountdown(1f);
+                        fireCooldown.startCooldown(0.2f);
+                    }
                 }
             }
             else if (Input.GetButtonDown("Taylor_Light")) {
-                Light();
-                
+                if (!lightCooldown.active()) {
+                    Light();
+                    lightCooldown.startCooldown(0.2f);
+                }
+            }
+            else if (Input.GetButtonDown("Taylor_Medium")) {
+                if (!mediumCooldown.active()) {
+                    Medium();
+                    mediumCooldown.startCooldown(0.5f);
+                }
             }
 
 
@@ -86,8 +106,8 @@ namespace UnityStandardAssets._2D
 
             // Freeze constraints after doing basic moves
 
-            if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Light")) {
-                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Medium")) {
+                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             }
 
 
@@ -140,6 +160,28 @@ namespace UnityStandardAssets._2D
     void Light() 
     {
         anim.SetTrigger("Light");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Damage>().doDamage(1.5f, 0.5f);
+
+        }
+    }
+
+    void Medium() 
+    {
+        
+        anim.SetTrigger("Medium");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Damage>().doDamage(4f, 0.5f);
+
+        }
     }
 
     void OnDrawGizmosSelected()
