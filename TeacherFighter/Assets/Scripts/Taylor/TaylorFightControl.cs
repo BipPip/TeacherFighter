@@ -84,8 +84,15 @@ namespace UnityStandardAssets._2D
             //     //Destroy(gameObject);
             // }
             
+            // Detect current active attack
 
             
+            heavyActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy");
+    
+            mediumActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Medium");
+                
+           
+
             // Handle Inputs
 
             if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
@@ -113,20 +120,20 @@ namespace UnityStandardAssets._2D
             }
             else if (Input.GetButtonDown("Taylor_Heavy")) {
                 if (!heavyCooldown.active()) {
+                    Debug.Log("TEST");
                     Heavy();
                     heavyCooldown.startCooldown(0.8f);
+                    while (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy")) {
+                        heavyActive = true;
+                    }
+                     Debug.Log(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy"));
                 }
             }
         }
 
 
-            // Detect current active attack
-            heavyActive = false;
-            mediumActive = false;
-            if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy"))
-                heavyActive = true;
-            if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Medium"))
-                mediumActive = true;
+            
+            
            
             // Updates Cooldown UI
             cooldownUI = m_Character.cooldownUI;
@@ -230,7 +237,9 @@ namespace UnityStandardAssets._2D
     void Heavy() 
     {
         if(damageWait.isInitial()) {
+            Debug.Log("TEST2");
             anim.SetTrigger("Heavy");
+            Debug.Log("TEST3");
             damageWait.startCooldown(Heavy, 0.5f);
         }
       
