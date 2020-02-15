@@ -23,6 +23,7 @@ namespace UnityStandardAssets._2D
         //public SimpleHealthBar healthBar;
         public GameObject healthBarObject;
         public GameObject staminaBarObject;
+        public GameObject cooldownUI;
 
         private void Awake()
         {
