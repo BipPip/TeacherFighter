@@ -24,6 +24,7 @@ namespace UnityStandardAssets._2D
         private Cooldown lightCooldown;
         private Cooldown mediumCooldown;
         private Cooldown heavyCooldown;
+        private Cooldown moveActive; // Used because there is a slight delay between anim.trigger and the actual animation returning active
         private Cooldown damageWait;
         private bool mediumActive, heavyActive;
         
@@ -56,6 +57,7 @@ namespace UnityStandardAssets._2D
             lightCooldown = gameObject.AddComponent<Cooldown>();
             fireCooldown = gameObject.AddComponent<Cooldown>();
             damageWait = gameObject.AddComponent<Cooldown>();
+            moveActive = gameObject.AddComponent<Cooldown>();
             
         }
 
@@ -95,7 +97,7 @@ namespace UnityStandardAssets._2D
 
             // Handle Inputs
 
-            if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
+            if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !moveActive.active()) {
 
             if(Input.GetButtonDown("Taylor_Fire") || Input.GetAxis("Axis 10") != 0 && !heavyActive){
                 if (stamina.getStamina() >= 20f) {
@@ -123,9 +125,7 @@ namespace UnityStandardAssets._2D
                     Debug.Log("TEST");
                     Heavy();
                     heavyCooldown.startCooldown(0.8f);
-                    while (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy")) {
-                        heavyActive = true;
-                    }
+                    moveActive.startCooldown(0.2f);
                      Debug.Log(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy"));
                 }
             }
@@ -236,10 +236,9 @@ namespace UnityStandardAssets._2D
 
     void Heavy() 
     {
+        
         if(damageWait.isInitial()) {
-            Debug.Log("TEST2");
             anim.SetTrigger("Heavy");
-            Debug.Log("TEST3");
             damageWait.startCooldown(Heavy, 0.5f);
         }
       
