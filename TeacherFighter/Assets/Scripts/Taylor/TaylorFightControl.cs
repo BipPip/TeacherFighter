@@ -88,6 +88,8 @@ namespace UnityStandardAssets._2D
             
             // Handle Inputs
 
+            if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
+
             if(Input.GetButtonDown("Taylor_Fire") || Input.GetAxis("Axis 10") != 0 && !heavyActive){
                 if (stamina.getStamina() >= 20f) {
                     if (!fireCooldown.active()) {
@@ -115,7 +117,7 @@ namespace UnityStandardAssets._2D
                     heavyCooldown.startCooldown(0.8f);
                 }
             }
-
+        }
 
             // Detect current active attack
             heavyActive = false;
