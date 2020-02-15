@@ -26,7 +26,7 @@ namespace UnityStandardAssets._2D
         private Cooldown heavyCooldown;
         private Cooldown damageWait;
         private bool mediumActive, heavyActive;
-
+        
         private SimpleHealthBar playerHealthBar;
         private SimpleHealthBar staminaBar;
         private Stamina stamina;
@@ -119,6 +119,7 @@ namespace UnityStandardAssets._2D
             }
         }
 
+
             // Detect current active attack
             heavyActive = false;
             mediumActive = false;
@@ -147,7 +148,7 @@ namespace UnityStandardAssets._2D
             // Freeze constraints after doing basic moves
 
             if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Medium") 
-            || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy")) {
+            || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Fire")) {
                 gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             }
 
