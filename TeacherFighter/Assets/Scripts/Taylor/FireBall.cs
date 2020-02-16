@@ -11,14 +11,22 @@ public class FireBall : MonoBehaviour
     public GameObject impactEffect;
     public LayerMask enemyLayers;
 
-    private AudioSource audioData;
+    private AudioSource[] audioData;
+    private Component[] audioArray;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        audioData = gameObject.GetComponent<AudioSource>();
-        // audioData.Play();
+        audioArray = gameObject.GetComponents(typeof(AudioSource));
+        audioData = new AudioSource[audioArray.Length];
+        
+        for(int i = 0; i < audioArray.Length; i++) {
+            audioData[i] = (AudioSource) audioArray[i];
+        }
+
+        AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
     }
 
     void Update(){
@@ -34,7 +42,7 @@ public class FireBall : MonoBehaviour
             col.gameObject.GetComponent<Damage>().doDamage(5f, 0.5f);
             
         }
-        AudioSource.PlayClipAtPoint(audioData.clip, gameObject.transform.position);
+        AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
         Destroy(gameObject);
         Instantiate(impactEffect, transform.position, transform.rotation);
     }
