@@ -26,7 +26,7 @@ namespace UnityStandardAssets._2D
         private Cooldown heavyCooldown;
         private Cooldown moveActive; // Used because there is a slight delay between anim.trigger and the actual animation returning active
         private Cooldown damageWait;
-        private bool mediumActive, heavyActive;
+        private bool mediumActive, heavyActive, jumpActive;
         
         private SimpleHealthBar playerHealthBar;
         private SimpleHealthBar staminaBar;
@@ -36,6 +36,10 @@ namespace UnityStandardAssets._2D
         public Transform basicAttackPoint;
         public float basicAttackRange = 0.5f;
         public LayerMask enemyLayers;
+
+        private AudioSource[] audioData;
+        private Component[] audioArray;
+
 
         private void Start()
          {
@@ -51,7 +55,14 @@ namespace UnityStandardAssets._2D
             anim = gameObject.GetComponent<Animator>();
             playerHealthBar = gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>();
             staminaBar = gameObject.GetComponent<PlatformerCharacter2D>().staminaBarObject.GetComponent<SimpleHealthBar>();
-            //cooldown  = new Cooldown();
+            
+            audioArray = gameObject.GetComponents(typeof(AudioSource));
+            audioData = new AudioSource[audioArray.Length];
+            
+            for(int i = 0; i < audioArray.Length; i++) {
+                audioData[i] = (AudioSource) audioArray[i];
+            }
+
             heavyCooldown = gameObject.AddComponent<Cooldown>();
             mediumCooldown = gameObject.AddComponent<Cooldown>();
             lightCooldown = gameObject.AddComponent<Cooldown>();
@@ -75,6 +86,13 @@ namespace UnityStandardAssets._2D
             {
                 // Read the dodge input in Update so button presses aren't missed.
                 m_Dodge = CrossPlatformInputManager.GetButtonDown("Taylor_Dodge");
+            }
+
+            if (m_Character.m_Grounded) {
+                jumpActive = false;
+            }
+            else {
+                jumpActive = true;
             }
             //Canvas.healthBarLeft.UpdateBar((Canvas.healthBarLeft.GetCurrentFraction * 100) - 10, 100);
             //Debug.Log(Canvas.healthBarLeft.GetCurrentFraction * 100);
@@ -158,6 +176,8 @@ namespace UnityStandardAssets._2D
                 gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             }
 
+           
+       
 
         }
 
@@ -185,6 +205,8 @@ namespace UnityStandardAssets._2D
 
             // Pass all parameters to the character control script.
             m_Character.Move(h, crouch, m_Jump);
+            if(m_Jump && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Jumping") && !audioData[3].isPlaying && !jumpActive)
+                audioData[3].Play();
             m_Jump = false;
             m_Dodge = false;
 
@@ -197,6 +219,8 @@ namespace UnityStandardAssets._2D
 
             transform.Rotate(0f, 180f, 0f);
         }
+
+ 
      void Shoot()
     {
         GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
@@ -208,11 +232,12 @@ namespace UnityStandardAssets._2D
     void Light() 
     {
         anim.SetTrigger("Light");
-
+        
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
 
         foreach(Collider2D enemy in hitEnemies)
         {
+            AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
             enemy.GetComponent<Damage>().doDamage(1.5f, 0.5f);
 
         }
@@ -221,15 +246,19 @@ namespace UnityStandardAssets._2D
 
     void Medium() 
     {
-        
-        anim.SetTrigger("Medium");
+        if(damageWait.isInitial()) {
+         anim.SetTrigger("Medium");
+         damageWait.startCooldown(Medium, 0.2f);
+        }
+        if(!damageWait.isInitial()) {
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+            foreach(Collider2D enemy in hitEnemies)
+            {
+                AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
+                enemy.GetComponent<Damage>().doDamage(4f, 0.5f);
 
-        foreach(Collider2D enemy in hitEnemies)
-        {
-            enemy.GetComponent<Damage>().doDamage(4f, 0.5f);
-
+            }
         }
     }
 
@@ -238,7 +267,7 @@ namespace UnityStandardAssets._2D
         
         if(damageWait.isInitial()) {
             anim.SetTrigger("Heavy");
-            damageWait.startCooldown(Heavy, 0.5f);
+            damageWait.startCooldown(Heavy, 0.2f);
         }
       
         if(!damageWait.isInitial()) {
@@ -246,6 +275,7 @@ namespace UnityStandardAssets._2D
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
             foreach(Collider2D enemy in hitEnemies)
             {   
+                AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
                 enemy.GetComponent<Damage>().doDamage(8f, 0.5f);
 
             }
