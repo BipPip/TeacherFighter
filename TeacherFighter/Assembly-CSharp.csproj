@@ -78,6 +78,7 @@
      <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Simple Health Bar\Scripts\SimpleHealthBar.cs" />
+     <Compile Include="Assets\Zero Rare\Retro Sound Effects\Demo\Demo.cs" />
      <None Include="Assets\Simple Health Bar\README.txt" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
  <Reference Include="Unity.Timeline.Editor">

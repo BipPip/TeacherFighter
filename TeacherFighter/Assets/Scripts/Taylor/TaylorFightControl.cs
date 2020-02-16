@@ -118,15 +118,14 @@ namespace UnityStandardAssets._2D
                 if (!mediumCooldown.active()) {
                     Medium();
                     mediumCooldown.startCooldown(0.5f);
+                    moveActive.startCooldown(0.2f);
                 }
             }
             else if (Input.GetButtonDown("Taylor_Heavy")) {
                 if (!heavyCooldown.active()) {
-                    Debug.Log("TEST");
                     Heavy();
                     heavyCooldown.startCooldown(0.8f);
-                    moveActive.startCooldown(0.2f);
-                     Debug.Log(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy"));
+                    moveActive.startCooldown(0.5f);
                 }
             }
         }
