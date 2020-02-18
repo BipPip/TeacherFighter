@@ -21,11 +21,26 @@ namespace UnityStandardAssets._2D
          public Transform respawnPoint;
         public GameObject fireBallPrefab;
 
+        private Cooldown fireCooldown;
+        private Cooldown lightCooldown;
+        private Cooldown mediumCooldown;
+        private Cooldown heavyCooldown;
+        private Cooldown moveActive; // Used because there is a slight delay between anim.trigger and the actual animation returning active
+        private Cooldown damageWait;
+        private bool mediumActive, heavyActive, jumpActive;
+        
         private SimpleHealthBar playerHealthBar;
         private SimpleHealthBar staminaBar;
         private Stamina stamina;
+        private GameObject cooldownUI;
         public float speed = 20f;
-         public LayerMask enemyLayers;
+        public Transform basicAttackPoint;
+        public float basicAttackRange = 0.5f;
+        public LayerMask enemyLayers;
+
+        private AudioSource[] audioData;
+        private Component[] audioArray;
+
 
         private void Start()
          {
@@ -42,6 +57,20 @@ namespace UnityStandardAssets._2D
             playerHealthBar = gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>();
             staminaBar = gameObject.GetComponent<PlatformerCharacter2D>().staminaBarObject.GetComponent<SimpleHealthBar>();
             
+            audioArray = gameObject.GetComponents(typeof(AudioSource));
+            audioData = new AudioSource[audioArray.Length];
+            
+            for(int i = 0; i < audioArray.Length; i++) {
+                audioData[i] = (AudioSource) audioArray[i];
+            }
+
+            heavyCooldown = gameObject.AddComponent<Cooldown>();
+            mediumCooldown = gameObject.AddComponent<Cooldown>();
+            lightCooldown = gameObject.AddComponent<Cooldown>();
+            fireCooldown = gameObject.AddComponent<Cooldown>();
+            damageWait = gameObject.AddComponent<Cooldown>();
+            moveActive = gameObject.AddComponent<Cooldown>();
+            
         }
 
 
@@ -57,22 +86,100 @@ namespace UnityStandardAssets._2D
             if (!m_Dodge)
             {
                 // Read the dodge input in Update so button presses aren't missed.
-                m_Dodge = CrossPlatformInputManager.GetButtonDown("Dodge");
+                m_Dodge = CrossPlatformInputManager.GetButtonDown("Taylor_Dodge");
+            }
+
+            if (m_Character.m_Grounded) {
+                jumpActive = false;
+            }
+            else {
+                jumpActive = true;
             }
             //Canvas.healthBarLeft.UpdateBar((Canvas.healthBarLeft.GetCurrentFraction * 100) - 10, 100);
             //Debug.Log(Canvas.healthBarLeft.GetCurrentFraction * 100);
             
-            if (playerHealthBar.GetCurrentFraction <= 0) {
-                //Debug.Log("EE RERER");
-                anim.SetTrigger("Die");
-            }
+            // if (playerHealthBar.GetCurrentFraction <= 0) {
+            //     //Debug.Log("EE RERER");
+            //     gameObject.GetComponent<Damage>();
+            //     anim.SetTrigger("Die");
+            //     //Destroy(gameObject);
+            // }
+            
+            // Detect current active attack
 
-            if(Input.GetButtonDown("Fire1")){
+            
+            heavyActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy");
+    
+            mediumActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Medium");
+                
+           
+
+            // Handle Inputs
+
+            if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !moveActive.active()) {
+
+            if(Input.GetButtonDown("Taylor_Fire") || Input.GetAxis("Axis 10") != 0 && !heavyActive){
                 if (stamina.getStamina() >= 20f) {
-                    Shoot();
-                    stamina.startCountdown(1f);
+                    if (!fireCooldown.active()) {
+                        Shoot();
+                        stamina.startCountdown(1f);
+                        fireCooldown.startCooldown(0.2f);
+                    }
                 }
             }
+            else if (Input.GetButtonDown("Taylor_Light") && !heavyActive) {
+                if (!lightCooldown.active()) {
+                    Light();
+                    lightCooldown.startCooldown(0.2f);
+                }
+            }
+            else if (Input.GetButtonDown("Taylor_Medium") && !heavyActive) {
+                if (!mediumCooldown.active()) {
+                    Medium();
+                    mediumCooldown.startCooldown(0.5f);
+                    moveActive.startCooldown(0.2f);
+                }
+            }
+            else if (Input.GetButtonDown("Taylor_Heavy")) {
+                if (!heavyCooldown.active()) {
+                    Heavy();
+                    heavyCooldown.startCooldown(0.8f);
+                    moveActive.startCooldown(0.5f);
+                }
+            }
+        }
+
+
+            
+            
+           
+            // Updates Cooldown UI
+            cooldownUI = m_Character.cooldownUI;
+
+           
+            // Light
+            cooldownUI.transform.GetChild(0).gameObject.transform.GetChild(0)
+            .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(lightCooldown.getCurrentTime(), 0.2f);
+            // Medium
+            cooldownUI.transform.GetChild(1).gameObject.transform.GetChild(0)
+            .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(mediumCooldown.getCurrentTime(), 0.5f);
+            // Heavy
+            cooldownUI.transform.GetChild(2).gameObject.transform.GetChild(0)
+            .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(heavyCooldown.getCurrentTime(), 0.8f);
+            // Special
+            cooldownUI.transform.GetChild(3).gameObject.transform.GetChild(0)
+            .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(fireCooldown.getCurrentTime(), 0.2f);
+
+            // Freeze constraints after doing basic moves
+
+            if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Medium") 
+            || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Fire")) {
+                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            }
+
+           
+       
+
         }
 
 
@@ -99,6 +206,8 @@ namespace UnityStandardAssets._2D
 
             // Pass all parameters to the character control script.
             m_Character.Move(h, crouch, m_Jump);
+            if(m_Jump && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Jumping") && !audioData[3].isPlaying && !jumpActive)
+                audioData[3].Play();
             m_Jump = false;
             m_Dodge = false;
 
@@ -111,16 +220,79 @@ namespace UnityStandardAssets._2D
 
             transform.Rotate(0f, 180f, 0f);
         }
+
+ 
      void Shoot()
     {
         GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
-        //ballClone.transform.localScale = transform.localScale;
-        anim.SetTrigger("Attack");
+        ballClone.transform.localScale = transform.localScale;
+        anim.SetTrigger("Fire");
         stamina.staminaDecrease(20f);
     }
+
+    void Light() 
+    {
+        anim.SetTrigger("Light");
+        
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
+            enemy.GetComponent<Damage>().doDamage(1.5f, 0.5f);
+
+        }
+    }
+    
+
+    void Medium() 
+    {
+        if(damageWait.isInitial()) {
+         anim.SetTrigger("Medium");
+         damageWait.startCooldown(Medium, 0.2f);
+        }
+        if(!damageWait.isInitial()) {
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+
+            foreach(Collider2D enemy in hitEnemies)
+            {
+                AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
+                enemy.GetComponent<Damage>().doDamage(4f, 0.5f);
+
+            }
+        }
     }
 
+    void Heavy() 
+    {
+        
+        if(damageWait.isInitial()) {
+            anim.SetTrigger("Heavy");
+            damageWait.startCooldown(Heavy, 0.2f);
+        }
+      
+        if(!damageWait.isInitial()) {
+            
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+            foreach(Collider2D enemy in hitEnemies)
+            {   
+                AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
+                enemy.GetComponent<Damage>().doDamage(8f, 0.5f);
 
+            }
+        }
+        
+    }
+
+    void OnDrawGizmosSelected()
+    {
+
+        if(basicAttackPoint == null)
+        return;
+        Gizmos.DrawWireSphere(basicAttackPoint.position, basicAttackRange);
+    }
     
+    
+}   
         
 }

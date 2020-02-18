@@ -15,11 +15,16 @@ namespace UnityStandardAssets._2D
 
         private Vector3 startPosition;
 
+        private SimpleHealthBar playerHealthBar;
+        private SimpleHealthBar staminaBar;
+
         
         private void Awake()
         {
             m_Character = GetComponent<PlatformerCharacter2D>();
             startPosition = transform.position;
+            playerHealthBar = gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>();
+            staminaBar = gameObject.GetComponent<PlatformerCharacter2D>().staminaBarObject.GetComponent<SimpleHealthBar>();
         }
 
 
