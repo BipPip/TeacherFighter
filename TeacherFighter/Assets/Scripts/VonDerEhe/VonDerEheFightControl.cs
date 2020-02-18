@@ -14,6 +14,13 @@ namespace UnityStandardAssets._2D
         private bool m_Dodge;
 
         private Vector3 startPosition;
+        
+        private Cooldown lightCooldown;
+        private Cooldown mediumCooldown;
+        private Cooldown heavyCooldown;
+        private Cooldown moveActive; // Used because there is a slight delay between anim.trigger and the actual animation returning active
+        private Cooldown damageWait;
+        private bool mediumActive, heavyActive, jumpActive;
 
         private SimpleHealthBar playerHealthBar;
         private SimpleHealthBar staminaBar;
@@ -69,6 +76,47 @@ namespace UnityStandardAssets._2D
             m_Dodge = false;
             
         }
-    }
+        
+        void Light() 
+        {
+            anim.SetTrigger("Light");
+
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+
+            foreach(Collider2D enemy in hitEnemies)
+            {
+                AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
+                enemy.GetComponent<Damage>().doDamage(1.5f, 0.5f);
+
+            }
+        }
+
+
+        void Medium() 
+        {
+            if(damageWait.isInitial()) {
+             anim.SetTrigger("Medium");
+             damageWait.startCooldown(Medium, 0.2f);
+            }
+            if(!damageWait.isInitial()) {
+                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+
+                foreach(Collider2D enemy in hitEnemies)
+                {
+                    AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
+                    enemy.GetComponent<Damage>().doDamage(4f, 0.5f);
+
+                }
+            }
+        }
+
+        void Heavy() 
+        {
+
+            if(damageWait.isInitial()) {
+                anim.SetTrigger("Heavy");
+                damageWait.startCooldown(Heavy, 0.2f);
+            }
+        }
         
 }
