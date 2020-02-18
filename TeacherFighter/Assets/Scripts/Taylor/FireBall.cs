@@ -10,7 +10,6 @@ public class FireBall : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject impactEffect;
     public LayerMask enemyLayers;
-
     private AudioSource[] audioData;
     private Component[] audioArray;
 
@@ -22,14 +21,16 @@ public class FireBall : MonoBehaviour
         audioArray = gameObject.GetComponents(typeof(AudioSource));
         audioData = new AudioSource[audioArray.Length];
         
-        for(int i = 0; i < audioArray.Length; i++) {
+        for(int i = 0; i < audioArray.Length; i++) 
+        {
             audioData[i] = (AudioSource) audioArray[i];
         }
 
         AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
     }
 
-    void Update(){
+    void Update()
+    {
         rb.velocity = new Vector2(speed * transform.localScale.x, 0);
         
     }
@@ -38,9 +39,9 @@ public class FireBall : MonoBehaviour
     {
         
 
-        if(col.gameObject.tag == "Player"){
+        if(col.gameObject.tag == "Player")
+        {
             col.gameObject.GetComponent<Damage>().doDamage(5f, 0.5f);
-            
         }
         AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
         Destroy(gameObject);

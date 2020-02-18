@@ -7,20 +7,14 @@ public class Cooldown : MonoBehaviour
 
     public delegate void Delegate(); // This defines what type of method you're going to call.
     private Delegate m_methodToCall; // This is the variable holding the method you're going to call.
+
     private bool usingDelegate;
     private bool intial = true;
     private bool methodCalled = false;
-
     private bool cooldownTimerActive;                 //Is this timer active?
-    //private float regenCooldown;              //How often this cooldown may be used
+
     private float cooldownTimer = 0;                 //Time left on timer, can be used at 0
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -28,10 +22,13 @@ public class Cooldown : MonoBehaviour
 
         if(this.cooldownTimerActive)
             this.cooldownTimer -= Time.deltaTime;    //Subtract the time since last frame from the timer.
-        if (this.cooldownTimer < 0) {
+        if (this.cooldownTimer < 0) 
+        {
             this.cooldownTimer = 0;                  //If timer is less than 0, reset it to 0 as we don't want it to be negative
             this.cooldownTimerActive = false;
-            if (this.usingDelegate && !this.methodCalled) {
+
+            if (this.usingDelegate && !this.methodCalled) 
+            {
                 this.intial = false;
                 this.methodCalled = true;
                 this.m_methodToCall();
@@ -40,7 +37,8 @@ public class Cooldown : MonoBehaviour
             
         }
 
-        if (!this.intial && this.methodCalled) {
+        if (!this.intial && this.methodCalled) 
+        {
             this.intial = true;
             this.methodCalled = false;
             this.usingDelegate = false;
@@ -48,14 +46,15 @@ public class Cooldown : MonoBehaviour
         
     }
 
-    public void startCooldown(/*Delegate method,*/ float cooldown) {
+    public void startCooldown(/*Delegate method,*/ float cooldown) 
+    {
         this.cooldownTimer = cooldown;
         this.cooldownTimerActive = true;
         this.usingDelegate = false;
-        //this.m_methodToCall = method;
     }
     
-    public void startCooldown(Delegate method, float cooldown) {
+    public void startCooldown(Delegate method, float cooldown) 
+    {
         this.cooldownTimer = cooldown;
         this.cooldownTimerActive = true;
         this.m_methodToCall = method;
@@ -64,15 +63,18 @@ public class Cooldown : MonoBehaviour
 
     }
 
-    public bool active() {
+    public bool active()
+    {
         return this.cooldownTimerActive;
     }
 
-    public float getCurrentTime() {
+    public float getCurrentTime() 
+    {
         return this.cooldownTimer;
     }
 
-    public bool isInitial() {
+    public bool isInitial() 
+    {
         return this.intial;
     }
 
