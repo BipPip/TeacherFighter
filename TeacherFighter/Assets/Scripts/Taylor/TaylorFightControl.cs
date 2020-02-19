@@ -107,9 +107,9 @@ namespace UnityStandardAssets._2D
             // Detect current active attack
 
             
-            heavyActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy");
+            heavyActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy");
     
-            mediumActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Medium");
+            mediumActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium");
                 
            
 
@@ -171,8 +171,8 @@ namespace UnityStandardAssets._2D
 
             // Freeze constraints after doing basic moves
 
-            if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Medium") 
-            || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Heavy") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Taylor_Fire")) {
+            if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium") 
+            || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Fire")) {
                 gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             }
 
