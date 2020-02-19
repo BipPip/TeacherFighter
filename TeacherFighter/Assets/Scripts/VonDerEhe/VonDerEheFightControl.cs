@@ -132,9 +132,9 @@ namespace UnityStandardAssets._2D
                     heavyCooldown.startCooldown(0.8f);
                     moveActive.startCooldown(0.5f);
                 }
+            }
+
         }
-
-
         // Updates Cooldown UI
             cooldownUI = m_Character.cooldownUI;
 
@@ -160,7 +160,7 @@ namespace UnityStandardAssets._2D
             }
 
 
-            }
+            
         }
 
         private void FixedUpdate()
@@ -238,13 +238,25 @@ namespace UnityStandardAssets._2D
         }
 
         void Heavy() 
-        {
+    {
+        
+        if(damageWait.isInitial()) {
+            anim.SetTrigger("Heavy");
+            damageWait.startCooldown(Heavy, 0.5f);
+        }
+      
+        if(!damageWait.isInitial()) {
+            
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+            foreach(Collider2D enemy in hitEnemies)
+            {   
+                // AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
+                enemy.GetComponent<Damage>().doDamage(8f, 0.5f);
 
-            if(damageWait.isInitial()) {
-                anim.SetTrigger("Heavy");
-                damageWait.startCooldown(Heavy, 0.2f);
             }
-        }   
+        }
+        
+    }  
 
         void OnDrawGizmosSelected()
         {
