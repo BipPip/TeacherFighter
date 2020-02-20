@@ -81,6 +81,14 @@ namespace UnityStandardAssets._2D
                 jumpActive = true;
             }
             
+            
+            // if(lariatActive)
+            //   lariatTimer -= Time.deltaTime;    //Subtract the time since last frame from the timer.
+            // if (lariatTimer < 0) {
+            //  lariatTimer = 0;                  //If timer is less than 0, reset it to 0 as we don't want it to be negative
+            //     lariatActive = false;
+            // }
+
 
             heavyActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy");
     
@@ -151,9 +159,19 @@ namespace UnityStandardAssets._2D
                 gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             }
 
+            // Freeze constraints after doing basic moves
+
+            if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium") 
+            || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
+                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            }
+
 
             
         }
+
+            
+        
 
         private void FixedUpdate()
         {

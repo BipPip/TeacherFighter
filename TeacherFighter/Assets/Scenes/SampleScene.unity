@@ -648,6 +648,11 @@ PrefabInstance:
       propertyPath: staminaBarObject
       value: 
       objectReference: {fileID: 1913096212}
+    - target: {fileID: 2842220579077722051, guid: 3e00a333e4dd97a4c80a9d8f2164302c,
+        type: 3}
+      propertyPath: cooldownUI
+      value: 
+      objectReference: {fileID: 798204980}
     - target: {fileID: 3323729921594255291, guid: 3e00a333e4dd97a4c80a9d8f2164302c,
         type: 3}
       propertyPath: m_Enabled
@@ -655,14 +660,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5159222777387934782, guid: 3e00a333e4dd97a4c80a9d8f2164302c,
         type: 3}
-      propertyPath: attackRange
-      value: 0.52
-      objectReference: {fileID: 0}
-    - target: {fileID: 5159222777387934782, guid: 3e00a333e4dd97a4c80a9d8f2164302c,
-        type: 3}
-      propertyPath: enemyLayers.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 2136479659}
     - target: {fileID: 5159222777387934782, guid: 3e00a333e4dd97a4c80a9d8f2164302c,
         type: 3}
       propertyPath: attackPoint
@@ -670,9 +670,14 @@ PrefabInstance:
       objectReference: {fileID: 843361396}
     - target: {fileID: 5159222777387934782, guid: 3e00a333e4dd97a4c80a9d8f2164302c,
         type: 3}
-      propertyPath: anim
+      propertyPath: enemyLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159222777387934782, guid: 3e00a333e4dd97a4c80a9d8f2164302c,
+        type: 3}
+      propertyPath: basicAttackPoint
       value: 
-      objectReference: {fileID: 2136479659}
+      objectReference: {fileID: 843361396}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e00a333e4dd97a4c80a9d8f2164302c, type: 3}
 --- !u!1 &438786841
@@ -3987,7 +3992,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839634840}
   m_CullTransparentMesh: 0
-<<<<<<< Updated upstream
 --- !u!1001 &1904235274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4061,8 +4065,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87a2357765801c34292d6718d8b4d770, type: 3}
-=======
->>>>>>> Stashed changes
 --- !u!1 &1913096212 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 132408, guid: 34017cf12560c804bb2f669f00c7af91,
@@ -4364,6 +4366,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 333517297}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2136479662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136479652}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ffe44ec73f604547b2716e39cd60647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 2136479659}
+  attackPoint: {fileID: 843361396}
+  attackRange: 0.52
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  lariatActive: 0
+  lariatCooldown: 0.5
+  lariatTimer: 0
 --- !u!4 &2145009003 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: a038b284634e29f4aaf058814aa61a6f,

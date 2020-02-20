@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets._2D;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Damage : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class Damage : MonoBehaviour
         || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Jumping") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-        if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")){
+        if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Block")){
                 gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
                 
             }
@@ -39,15 +40,22 @@ public class Damage : MonoBehaviour
     }
 
     public void doDamage(float damage, float knockback) {
+        if (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
+                knockback = knockback * -1;
+            }
+        float h = CrossPlatformInputManager.GetAxis("Horizontal");
+        if((gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && h < 0 || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && h > 0) && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
+            anim.SetTrigger("Block");
+        } else {
+
         this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * 100) - damage, 100);
         if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
             anim.SetTrigger("Hit");
-            if (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
-                knockback = knockback * -1;
-            }
-            gameObject.transform.position += new Vector3(knockback, 0, 0);
+            
         }
     }
+    gameObject.transform.position += new Vector3(knockback, 0, 0);
+}
 
     
 
