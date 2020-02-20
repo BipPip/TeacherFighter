@@ -66,11 +66,12 @@
      <Compile Include="Assets\Scripts\Cooldown.cs" />
      <Compile Include="Assets\Scripts\Damage.cs" />
      <Compile Include="Assets\Scripts\DestroyObject.cs" />
+     <Compile Include="Assets\Scripts\MenuScript.cs" />
      <Compile Include="Assets\Scripts\Respawn.cs" />
      <Compile Include="Assets\Scripts\Stamina.cs" />
+     <Compile Include="Assets\Scripts\StartMenuBlink.cs" />
      <Compile Include="Assets\Scripts\Taylor\FireBall.cs" />
      <Compile Include="Assets\Scripts\Taylor\TaylorFightControl.cs" />
-     <Compile Include="Assets\Scripts\VonDerEhe\VonDerCombat.cs" />
      <Compile Include="Assets\Scripts\VonDerEhe\VonDerEheFightControl.cs" />
      <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\GameManager.cs" />

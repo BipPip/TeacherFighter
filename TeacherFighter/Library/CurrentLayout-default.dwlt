@@ -301,7 +301,6 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_ViewTransforms:
     m_KeySerializationHelper:
-    - {fileID: 110700000, guid: f67688f08ab6cbd40b1fcdb7b57fa892, type: 2}
     - {fileID: 110700000, guid: f98acc17fed274e47a55d409ec351a50, type: 2}
     m_ValueSerializationHelper:
     - e00: 1.2656499
@@ -337,10 +336,10 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: f67688f08ab6cbd40b1fcdb7b57fa892,
+  m_AnimatorController: {fileID: 9100000, guid: f98acc17fed274e47a55d409ec351a50,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 110700000, guid: f67688f08ab6cbd40b1fcdb7b57fa892, type: 2}
+  - m_Target: {fileID: 110700000, guid: f98acc17fed274e47a55d409ec351a50, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -586,7 +585,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 32850000
     m_LastClickedInstanceID: 34098
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000605e0000
+    m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -679,15 +678,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: d023ffff
       m_LastClickedID: 0
       m_ExpandedIDs: 9071ffff3285000040850000
       m_RenameOverlay:
-        m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
-        m_EditFieldRect:
-          serializedVersion: 2
           x: 0
           y: 0
           width: 0
