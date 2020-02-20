@@ -12,7 +12,15 @@ namespace UnityStandardAssets._2D
         private PlatformerCharacter2D m_Character;
         private bool m_Jump;
         private bool m_Dodge;
-        public bool lariatActive;                 //Is this timer active?
+
+        private Vector3 startPosition;
+        
+        private Cooldown lightCooldown;
+        private Cooldown mediumCooldown;
+        private Cooldown heavyCooldown;
+        private Cooldown moveActive; // Used because there is a slight delay between anim.trigger and the actual animation returning active
+        private Cooldown damageWait;
+        private bool mediumActive, heavyActive, jumpActive;
 
         private SimpleHealthBar playerHealthBar;
         private SimpleHealthBar staminaBar;
@@ -97,31 +105,47 @@ namespace UnityStandardAssets._2D
             m_Dodge = false;
             
         }
-
-        void LariatAttack()
-        {
         
-            anim.SetTrigger("LariatAttack");
-            stamina.startCountdown(1f);
-            stamina.staminaDecrease(45f);
+        void Light() 
+        {
+            anim.SetTrigger("Light");
 
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
 
             foreach(Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<Damage>().doDamage(20f, 0.5f);
+                AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
+                enemy.GetComponent<Damage>().doDamage(1.5f, 0.5f);
 
             }
-        }   
+        }
 
-        void OnDrawGizmosSelected()
+
+        void Medium() 
+        {
+            if(damageWait.isInitial()) {
+             anim.SetTrigger("Medium");
+             damageWait.startCooldown(Medium, 0.2f);
+            }
+            if(!damageWait.isInitial()) {
+                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+
+                foreach(Collider2D enemy in hitEnemies)
+                {
+                    AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
+                    enemy.GetComponent<Damage>().doDamage(4f, 0.5f);
+
+                }
+            }
+        }
+
+        void Heavy() 
         {
 
-            if(attackPoint == null)
-            return;
-
-            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+            if(damageWait.isInitial()) {
+                anim.SetTrigger("Heavy");
+                damageWait.startCooldown(Heavy, 0.2f);
+            }
         }
-    }
         
 }
