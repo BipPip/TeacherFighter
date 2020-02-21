@@ -98,7 +98,7 @@ namespace UnityStandardAssets._2D
                 
             // Handle Inputs
 
-            if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !moveActive.active()) 
+            if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !moveActive.active() && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Block")) 
             {
 
                 if(Input.GetButtonDown("Taylor_Fire") || Input.GetAxis("Axis 10") != 0 && !heavyActive)
