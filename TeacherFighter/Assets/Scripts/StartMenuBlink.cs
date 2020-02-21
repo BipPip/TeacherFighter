@@ -19,7 +19,7 @@ public class StartMenuBlink : MonoBehaviour
  
     void Start()
     {
-        imageToToggle.enabled = defaultState;
+        //imageToToggle.enabled = defaultState;
         StartBlink();
     }
  
@@ -38,7 +38,7 @@ public class StartMenuBlink : MonoBehaviour
  
     public void ToggleState()
     {
-        imageToToggle.enabled = !imageToToggle.enabled;
+        //imageToToggle.enabled = !imageToToggle.enabled;
  
     }
 }
