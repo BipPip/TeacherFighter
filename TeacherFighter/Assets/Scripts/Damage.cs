@@ -9,6 +9,10 @@ public class Damage : MonoBehaviour
 
     private Animator anim;
     private SimpleHealthBar playerHealthBar;
+    private Cooldown blockDelay;
+    private bool blocking;
+    private bool allowBlock = false;
+    private bool blocked = true;
 
     float h;
     float h2;
@@ -24,6 +28,7 @@ public class Damage : MonoBehaviour
         this.anim = gameObject.GetComponent<Animator>();
         this.playerHealthBar = gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>();
         this.stamina = gameObject.GetComponent<Stamina>();
+        this.blockDelay = gameObject.AddComponent<Cooldown>();
         
     }
 
@@ -42,10 +47,36 @@ public class Damage : MonoBehaviour
         }
         
         if (this.stamina.getStamina() >= 5 && ((gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v == 1 && h < 1 && h > -1) || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v2 < 0 && CrossPlatformInputManager.GetButton("Vertical2")) && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
-            anim.SetTrigger("Block");
+            if (blocking)
+                anim.SetTrigger("Block");
             // v2 = 0;
         }
-        Debug.Log(p2block);
+
+        
+
+        if(this.stamina.getStamina() >= 5 && (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && (h < 0 || v > 0)
+        || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight &&
+         /*(h2 > 0 || v2 < 0))*/ (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow))) 
+         && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
+             
+             // Block Delay
+             if (blocked) {
+                blockDelay.startCooldown(enableBlock, 0.15f);
+                blocked = false;
+             }
+             
+             if (allowBlock) {
+                blocking = true;
+                blocked = true;
+             }
+         }
+         else {
+             blocking = false;
+             allowBlock = false;
+             blocked = true;
+         }
+
+        // Debug.Log(allowBlock);
 
         if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Walk") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Run") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Crouch") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("CrouchingWalk") 
         || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Jumping") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
@@ -72,10 +103,14 @@ public class Damage : MonoBehaviour
         h2 = CrossPlatformInputManager.GetAxis("Horizontal2");
         v = CrossPlatformInputManager.GetAxis("Vertical");
         v2 = CrossPlatformInputManager.GetAxis("Vertical2");
-        if(this.stamina.getStamina() >= 5 && (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && (h < 0 || v > 0) || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && (h2 > 0 || v2 < 0)) && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
+
+        // todo: for when we get player select to work, we need to find a way to tell if player is using controller or not
+
+        if(blocking) {
             anim.SetTrigger("Block");
-            this.stamina.staminaDecrease(5f);
+            this.stamina.staminaDecrease(damage * 2f);
             this.stamina.startCountdown(1);
+            //Debug.Log("TEST");
         } else {
 
         this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * 100) - damage, 100);
@@ -86,6 +121,9 @@ public class Damage : MonoBehaviour
     }
     gameObject.transform.position += new Vector3(knockback, 0, 0);
 }
+    public void enableBlock() {
+        allowBlock = true;
+    }
 
     
 

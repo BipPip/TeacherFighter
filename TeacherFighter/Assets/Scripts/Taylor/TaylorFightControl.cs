@@ -109,7 +109,7 @@ namespace UnityStandardAssets._2D
                         {
                         Shoot();
                         stamina.startCountdown(1f);
-                        fireCooldown.startCooldown(0.2f);
+                        fireCooldown.startCooldown(0.5f);
                         }
                     }
                 }
@@ -201,10 +201,20 @@ namespace UnityStandardAssets._2D
  
         void Shoot()
         {
+
+            if(damageWait.isInitial()) 
+            {
+                anim.SetTrigger("Fire");
+                damageWait.startCooldown(Shoot, 0.2f);
+            }
+
+            if(!damageWait.isInitial()) 
+            {
+
             GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
             ballClone.transform.localScale = transform.localScale;
-            anim.SetTrigger("Fire");
             stamina.staminaDecrease(20f);
+            }
         }
 
         void Light() 
