@@ -128,21 +128,25 @@ public class Damage : MonoBehaviour
         // todo: for when we get player select to work, we need to find a way to tell if player is using controller or not
 
         if(blocking) {
-            anim.SetTrigger("Block");
+            
             float staminaDecreaseAmount = (float) Math.Pow(damage, 1.4f);
             if (staminaDecreaseAmount > 35)
                 staminaDecreaseAmount = 35;
             this.stamina.staminaDecrease(staminaDecreaseAmount);
+            Debug.Log(this.stamina.getStamina());
             if(this.stamina.getStamina() <= 0) {
                 this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * 100) - damage, 100);
-                anim.SetTrigger("Hit");
                 knockbacking = true;
-                blocking = false;
-                allowBlock = false;
-                blocked = true;
+                // blocking = false;
+                // allowBlock = false;
+                // blocked = true;
+                // blockDelay.startCooldown(enableBlock, 0.15f);
                 anim.SetTrigger("Hit");
             }
-            Debug.Log(staminaDecreaseAmount);
+            else {
+                anim.SetTrigger("Block");
+            }
+            // Debug.Log(staminaDecreaseAmount);
             this.stamina.startCountdown(1);
             //Debug.Log("TEST");
         } else {
