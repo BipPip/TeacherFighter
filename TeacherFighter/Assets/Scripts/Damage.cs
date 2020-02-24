@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets._2D;
 using UnityStandardAssets.CrossPlatformInput;
+using System;
+
 
 public class Damage : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class Damage : MonoBehaviour
     private bool blocking;
     private bool allowBlock = false;
     private bool blocked = true;
+    private bool knockbacking;
+    private float knockback;
 
     float h;
     float h2;
@@ -40,21 +44,36 @@ public class Damage : MonoBehaviour
         v = CrossPlatformInputManager.GetAxis("Vertical");
         v2 = CrossPlatformInputManager.GetAxis("Vertical2");
 
+        
+
         if (CrossPlatformInputManager.GetButton("Vertical2")) {
             p2block = true;
         } else {
             p2block = false;
         }
-        
+        // Debug.Log(v);
         if (this.stamina.getStamina() >= 5 && ((gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v == 1 && h < 1 && h > -1) || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v2 < 0 && CrossPlatformInputManager.GetButton("Vertical2")) && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
             if (blocking)
                 anim.SetTrigger("Block");
             // v2 = 0;
         }
+        
+        if(knockbacking && knockback > 0) {
+            if (!gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight)
+                gameObject.transform.position += new Vector3(0.5f, 0, 0);
+            else {
+                gameObject.transform.position += new Vector3(-0.5f, 0, 0);
+            }
 
+            knockback--;
+        }
+        else {
+            knockbacking = false;
+            knockback = 0;
+        }
         
 
-        if(this.stamina.getStamina() >= 5 && (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && (h < 0 || v > 0)
+        if(this.stamina.getStamina() >= 0 && (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && (v == 1 && h < 1 && h > -1)
         || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight &&
          /*(h2 > 0 || v2 < 0))*/ (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow))) 
          && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
@@ -96,9 +115,11 @@ public class Damage : MonoBehaviour
     }
 
     public void doDamage(float damage, float knockback) {
-        if (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
-                knockback = knockback * -1;
-            }
+        // if (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
+        //         knockback = knockback * -1;
+        //     }
+
+        this.knockback = knockback;
         h = CrossPlatformInputManager.GetAxis("Horizontal");
         h2 = CrossPlatformInputManager.GetAxis("Horizontal2");
         v = CrossPlatformInputManager.GetAxis("Vertical");
@@ -108,18 +129,33 @@ public class Damage : MonoBehaviour
 
         if(blocking) {
             anim.SetTrigger("Block");
-            this.stamina.staminaDecrease(damage * 2f);
+            float staminaDecreaseAmount = (float) Math.Pow(damage, 1.4f);
+            if (staminaDecreaseAmount > 35)
+                staminaDecreaseAmount = 35;
+            this.stamina.staminaDecrease(staminaDecreaseAmount);
+            if(this.stamina.getStamina() <= 0) {
+                this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * 100) - damage, 100);
+                anim.SetTrigger("Hit");
+                knockbacking = true;
+                blocking = false;
+                allowBlock = false;
+                blocked = true;
+                anim.SetTrigger("Hit");
+            }
+            Debug.Log(staminaDecreaseAmount);
             this.stamina.startCountdown(1);
             //Debug.Log("TEST");
         } else {
 
         this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * 100) - damage, 100);
-        if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
+        if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
             anim.SetTrigger("Hit");
+            knockbacking = true;
             
         }
     }
-    gameObject.transform.position += new Vector3(knockback, 0, 0);
+    
+    
 }
     public void enableBlock() {
         allowBlock = true;

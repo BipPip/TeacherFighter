@@ -14,7 +14,11 @@ namespace UnityStandardAssets._2D
         private bool m_Jump;
         private bool m_Dodge;
         private bool m_FacingRight = true;
-        private bool mediumActive, heavyActive, jumpActive;
+        private bool lightActive, mediumActive, heavyActive, jumpActive;
+        private int lightCount;
+        private Cooldown lightSpamCooldown;
+
+        private float lightCooldownAmount;
 
         private Cooldown fireCooldown;
         private Cooldown lightCooldown;
@@ -73,6 +77,9 @@ namespace UnityStandardAssets._2D
             fireCooldown = gameObject.AddComponent<Cooldown>();
             damageWait = gameObject.AddComponent<Cooldown>();
             moveActive = gameObject.AddComponent<Cooldown>();
+            lightSpamCooldown = gameObject.AddComponent<Cooldown>();
+
+            lightCount = 0;
             
         }
 
@@ -93,8 +100,11 @@ namespace UnityStandardAssets._2D
             // Detect current active attack
             
             heavyActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy");
-    
             mediumActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium");
+            lightActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light");
+
+            if (!lightSpamCooldown.active())
+                lightCount = 0;
                 
             // Handle Inputs
 
@@ -118,7 +128,17 @@ namespace UnityStandardAssets._2D
                     if (!lightCooldown.active()) 
                     {
                         Light();
-                        lightCooldown.startCooldown(0.2f);
+                        lightCount++;
+                        if (lightCount < 3) {
+                            lightCooldown.startCooldown(0.2f);
+                            lightCooldownAmount = 0.2f;
+                            lightSpamCooldown.startCooldown(0.5f);
+                        }
+                        else {
+                            lightCount = 0;
+                            lightCooldown.startCooldown(0.5f);
+                            lightCooldownAmount = 0.5f;
+                        }
                     }
                 }
                 else if (Input.GetButtonDown("Taylor_Medium") && !heavyActive) 
@@ -146,7 +166,7 @@ namespace UnityStandardAssets._2D
 
             // Light
             cooldownUI.transform.GetChild(0).gameObject.transform.GetChild(0)
-                .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(lightCooldown.getCurrentTime(), 0.2f);
+                .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(lightCooldown.getCurrentTime(), lightCooldownAmount);
             // Medium
             cooldownUI.transform.GetChild(1).gameObject.transform.GetChild(0)
                 .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(mediumCooldown.getCurrentTime(), 0.5f);

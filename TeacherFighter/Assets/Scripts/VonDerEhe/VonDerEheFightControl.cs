@@ -210,7 +210,7 @@ namespace UnityStandardAssets._2D
 
             foreach(Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<Damage>().doDamage(20f, 0.5f);
+                enemy.GetComponent<Damage>().doDamage(20f, 5f);
 
             }
         }
