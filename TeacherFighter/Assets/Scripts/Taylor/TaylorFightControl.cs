@@ -136,8 +136,8 @@ namespace UnityStandardAssets._2D
                         }
                         else {
                             lightCount = 0;
-                            lightCooldown.startCooldown(0.5f);
-                            lightCooldownAmount = 0.5f;
+                            lightCooldown.startCooldown(0.8f);
+                            lightCooldownAmount = 0.8f;
                         }
                     }
                 }
@@ -245,7 +245,11 @@ namespace UnityStandardAssets._2D
             foreach(Collider2D enemy in hitEnemies)
             {
                 AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
-                enemy.GetComponent<Damage>().doDamage(1.5f, 0.5f);
+                if (lightCount == 2) {
+                    enemy.GetComponent<Damage>().doDamage(2.5f, 3.0f);
+                } else {
+                    enemy.GetComponent<Damage>().doDamage(1.5f, 0.5f);
+                }
             }
         }
     
@@ -265,7 +269,7 @@ namespace UnityStandardAssets._2D
                 foreach(Collider2D enemy in hitEnemies)
                 {
                     AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
-                    enemy.GetComponent<Damage>().doDamage(4f, 0.5f);
+                    enemy.GetComponent<Damage>().doDamage(4f, 1f);
 
                 }
             }
@@ -286,7 +290,7 @@ namespace UnityStandardAssets._2D
                 foreach(Collider2D enemy in hitEnemies)
                 {   
                     AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
-                    enemy.GetComponent<Damage>().doDamage(8f, 0.5f);
+                    enemy.GetComponent<Damage>().doDamage(8f, 2.5f);
 
                 }
             }

@@ -223,7 +223,7 @@ namespace UnityStandardAssets._2D
             foreach(Collider2D enemy in hitEnemies)
             {
                 //AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
-                enemy.GetComponent<Damage>().doDamage(1.5f, 0.5f);
+                enemy.GetComponent<Damage>().doDamage(1.85f, 1f);
 
             }
         }
@@ -241,7 +241,7 @@ namespace UnityStandardAssets._2D
                 foreach(Collider2D enemy in hitEnemies)
                 {
                     //AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
-                    enemy.GetComponent<Damage>().doDamage(4f, 0.5f);
+                    enemy.GetComponent<Damage>().doDamage(5f, 1f);
 
                 }
             }
@@ -261,7 +261,7 @@ namespace UnityStandardAssets._2D
             foreach(Collider2D enemy in hitEnemies)
             {   
                 // AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
-                enemy.GetComponent<Damage>().doDamage(8f, 0.5f);
+                enemy.GetComponent<Damage>().doDamage(10f, 3.5f);
 
             }
         }
