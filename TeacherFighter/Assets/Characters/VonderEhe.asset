@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c600a422cfa0e8c4ab1dfb2f15b85385, type: 3}
+  m_Name: VonderEhe
+  m_EditorClassIdentifier: 
+  characterName: VonderEhe
+  CharacterSprite: {fileID: -4830381639740362634, guid: 25e0e0f4a0ba8b14eabd8d169f470f5f,
+    type: 3}
