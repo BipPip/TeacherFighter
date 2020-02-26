@@ -67,10 +67,10 @@
      <Compile Include="Assets\Scripts\Damage.cs" />
      <Compile Include="Assets\Scripts\DestroyObject.cs" />
      <Compile Include="Assets\Scripts\Respawn.cs" />
-     <Compile Include="Assets\Scripts\SceneScripts\Character.cs" />
+     <Compile Include="Assets\Scripts\SceneScripts\CharacterSelect.cs" />
      <Compile Include="Assets\Scripts\SceneScripts\LoadOnClick.cs" />
      <Compile Include="Assets\Scripts\SceneScripts\MenuScript.cs" />
-     <Compile Include="Assets\Scripts\SceneScripts\SelectCSS.cs" />
+     <Compile Include="Assets\Scripts\SceneScripts\RunTimeSpawn.cs" />
      <Compile Include="Assets\Scripts\SceneScripts\StartMenuBlink.cs" />
      <Compile Include="Assets\Scripts\Stamina.cs" />
      <Compile Include="Assets\Scripts\Taylor\FireBall.cs" />
