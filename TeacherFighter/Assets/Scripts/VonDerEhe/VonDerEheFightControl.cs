@@ -128,13 +128,15 @@ namespace UnityStandardAssets._2D
                         if(tripleJab.notLast()) {
                             lightCooldown.startCooldown(0.2f);
                             lightCooldownAmount = 0.2f;
+                            moveActive.startCooldown(0.1f);
                         }
                         else {
                             lightCooldown.startCooldown(0.8f);
                             lightCooldownAmount = 0.8f;
+                            moveActive.startCooldown(0.3f);
                         }
 
-                    moveActive.startCooldown(0.1f);
+                    
                 }
             }
             else if (Input.GetButtonDown("Vonder_Medium") && !heavyActive && !lightActive) {
@@ -148,7 +150,7 @@ namespace UnityStandardAssets._2D
                 if (!heavyCooldown.active()) {
                     Heavy();
                     heavyCooldown.startCooldown(0.8f);
-                    moveActive.startCooldown(0.5f);
+                    moveActive.startCooldown(0.3f);
                 }
             }
 
@@ -234,12 +236,11 @@ namespace UnityStandardAssets._2D
         }
         void Light() 
         {
-            Debug.Log(anim.speed);
+            
 
             if (tripleJab.beforeLast()) {
-                moveActive.startCooldown(0.5f);
-                anim.speed = 0.3f;
-            }
+                anim.speed = 0.5f;
+            } 
            
             anim.SetTrigger("Light");
 

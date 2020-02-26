@@ -87,6 +87,9 @@ namespace UnityStandardAssets._2D
         private void Update()
         {
             
+            if(!moveActive.active()) {
+                anim.speed = 1f;
+            }
 
             if (!m_Jump)
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
@@ -135,6 +138,7 @@ namespace UnityStandardAssets._2D
                         else {
                             lightCooldown.startCooldown(0.8f);
                             lightCooldownAmount = 0.8f;
+                            moveActive.startCooldown(0.45f);
                         }
                       
                     }
@@ -237,6 +241,11 @@ namespace UnityStandardAssets._2D
 
         void Light() 
         {
+
+            if (tripleJab.beforeLast()) {
+                anim.speed = 0.1f;
+            } 
+
             anim.SetTrigger("Light");
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
 
