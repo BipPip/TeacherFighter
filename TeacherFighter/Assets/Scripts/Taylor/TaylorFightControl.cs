@@ -15,10 +15,11 @@ namespace UnityStandardAssets._2D
         private bool m_Dodge;
         private bool m_FacingRight = true;
         private bool lightActive, mediumActive, heavyActive, jumpActive;
-        private int lightCount;
-        private Cooldown lightSpamCooldown;
+
 
         private float lightCooldownAmount;
+
+        private SpamPrevention tripleJab;
 
         private Cooldown fireCooldown;
         private Cooldown lightCooldown;
@@ -77,9 +78,8 @@ namespace UnityStandardAssets._2D
             fireCooldown = gameObject.AddComponent<Cooldown>();
             damageWait = gameObject.AddComponent<Cooldown>();
             moveActive = gameObject.AddComponent<Cooldown>();
-            lightSpamCooldown = gameObject.AddComponent<Cooldown>();
-
-            lightCount = 0;
+            tripleJab = gameObject.AddComponent<SpamPrevention>();
+            tripleJab.init(3, 0.5f);
             
         }
 
@@ -103,8 +103,7 @@ namespace UnityStandardAssets._2D
             mediumActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium");
             lightActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light");
 
-            if (!lightSpamCooldown.active())
-                lightCount = 0;
+
                 
             // Handle Inputs
 
@@ -128,17 +127,16 @@ namespace UnityStandardAssets._2D
                     if (!lightCooldown.active()) 
                     {
                         Light();
-                        lightCount++;
-                        if (lightCount < 3) {
+                        tripleJab.run();
+                        if(tripleJab.notLast()) {
                             lightCooldown.startCooldown(0.2f);
                             lightCooldownAmount = 0.2f;
-                            lightSpamCooldown.startCooldown(0.5f);
                         }
                         else {
-                            lightCount = 0;
                             lightCooldown.startCooldown(0.8f);
                             lightCooldownAmount = 0.8f;
                         }
+                      
                     }
                 }
                 else if (Input.GetButtonDown("Taylor_Medium") && !heavyActive) 
@@ -245,7 +243,7 @@ namespace UnityStandardAssets._2D
             foreach(Collider2D enemy in hitEnemies)
             {
                 AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
-                if (lightCount == 2) {
+                if (tripleJab.beforeLast()) {
                     enemy.GetComponent<Damage>().doDamage(2.5f, 3.0f);
                 } else {
                     enemy.GetComponent<Damage>().doDamage(1.5f, 0.5f);
