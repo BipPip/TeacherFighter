@@ -14,7 +14,12 @@ namespace UnityStandardAssets._2D
         private bool m_Jump;
         private bool m_Dodge;
         private bool m_FacingRight = true;
-        private bool mediumActive, heavyActive, jumpActive;
+        private bool lightActive, mediumActive, heavyActive, jumpActive;
+
+
+        private float lightCooldownAmount;
+
+        private SpamPrevention tripleJab;
 
         private Cooldown fireCooldown;
         private Cooldown lightCooldown;
@@ -73,6 +78,8 @@ namespace UnityStandardAssets._2D
             fireCooldown = gameObject.AddComponent<Cooldown>();
             damageWait = gameObject.AddComponent<Cooldown>();
             moveActive = gameObject.AddComponent<Cooldown>();
+            tripleJab = gameObject.AddComponent<SpamPrevention>();
+            tripleJab.init(3, 0.5f);
             
         }
 
@@ -80,6 +87,9 @@ namespace UnityStandardAssets._2D
         private void Update()
         {
             
+            if(!moveActive.active()) {
+                anim.speed = 1f;
+            }
 
             if (!m_Jump)
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
@@ -93,8 +103,10 @@ namespace UnityStandardAssets._2D
             // Detect current active attack
             
             heavyActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy");
-    
             mediumActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium");
+            lightActive = this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light");
+
+
                 
             // Handle Inputs
 
@@ -109,7 +121,7 @@ namespace UnityStandardAssets._2D
                         {
                         Shoot();
                         stamina.startCountdown(1f);
-                        fireCooldown.startCooldown(0.2f);
+                        fireCooldown.startCooldown(0.5f);
                         }
                     }
                 }
@@ -118,7 +130,17 @@ namespace UnityStandardAssets._2D
                     if (!lightCooldown.active()) 
                     {
                         Light();
-                        lightCooldown.startCooldown(0.2f);
+                        tripleJab.run();
+                        if(tripleJab.notLast()) {
+                            lightCooldown.startCooldown(0.2f);
+                            lightCooldownAmount = 0.2f;
+                        }
+                        else {
+                            lightCooldown.startCooldown(0.8f);
+                            lightCooldownAmount = 0.8f;
+                            moveActive.startCooldown(0.45f);
+                        }
+                      
                     }
                 }
                 else if (Input.GetButtonDown("Taylor_Medium") && !heavyActive) 
@@ -146,7 +168,7 @@ namespace UnityStandardAssets._2D
 
             // Light
             cooldownUI.transform.GetChild(0).gameObject.transform.GetChild(0)
-                .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(lightCooldown.getCurrentTime(), 0.2f);
+                .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(lightCooldown.getCurrentTime(), lightCooldownAmount);
             // Medium
             cooldownUI.transform.GetChild(1).gameObject.transform.GetChild(0)
                 .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(mediumCooldown.getCurrentTime(), 0.5f);
@@ -201,21 +223,40 @@ namespace UnityStandardAssets._2D
  
         void Shoot()
         {
+
+            if(damageWait.isInitial()) 
+            {
+                anim.SetTrigger("Fire");
+                damageWait.startCooldown(Shoot, 0.2f);
+            }
+
+            if(!damageWait.isInitial()) 
+            {
+
             GameObject ballClone = Instantiate(fireBallPrefab, firePoint.position, firePoint.rotation);
             ballClone.transform.localScale = transform.localScale;
-            anim.SetTrigger("Fire");
             stamina.staminaDecrease(20f);
+            }
         }
 
         void Light() 
         {
+
+            if (tripleJab.beforeLast()) {
+                anim.speed = 0.1f;
+            } 
+
             anim.SetTrigger("Light");
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
 
             foreach(Collider2D enemy in hitEnemies)
             {
                 AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
-                enemy.GetComponent<Damage>().doDamage(1.5f, 0.5f);
+                if (tripleJab.beforeLast()) {
+                    enemy.GetComponent<Damage>().doDamage(2.5f, 3.0f);
+                } else {
+                    enemy.GetComponent<Damage>().doDamage(1.5f, 0.5f);
+                }
             }
         }
     
@@ -235,7 +276,7 @@ namespace UnityStandardAssets._2D
                 foreach(Collider2D enemy in hitEnemies)
                 {
                     AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
-                    enemy.GetComponent<Damage>().doDamage(4f, 0.5f);
+                    enemy.GetComponent<Damage>().doDamage(4f, 1f);
 
                 }
             }
@@ -256,7 +297,7 @@ namespace UnityStandardAssets._2D
                 foreach(Collider2D enemy in hitEnemies)
                 {   
                     AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
-                    enemy.GetComponent<Damage>().doDamage(8f, 0.5f);
+                    enemy.GetComponent<Damage>().doDamage(8f, 2.5f);
 
                 }
             }

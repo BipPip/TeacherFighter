@@ -73,6 +73,7 @@
      <Compile Include="Assets\Scripts\SceneScripts\RunTimeSpawn.cs" />
      <Compile Include="Assets\Scripts\SceneScripts\StartMenuBlink.cs" />
      <Compile Include="Assets\Scripts\SceneScripts\SwipeLock.cs" />
+     <Compile Include="Assets\Scripts\SpamPrevention.cs" />
      <Compile Include="Assets\Scripts\Stamina.cs" />
      <Compile Include="Assets\Scripts\Taylor\FireBall.cs" />
      <Compile Include="Assets\Scripts\Taylor\TaylorFightControl.cs" />

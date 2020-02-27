@@ -20,7 +20,8 @@ namespace UnityStandardAssets._2D
 
         // public float lariatCooldown = 0.5f;              //How often this cooldown may be used
         // public float lariatTimer;
-      
+        private float lightCooldownAmount;
+        private SpamPrevention tripleJab;
 
         private Vector3 startPosition;
 
@@ -62,11 +63,17 @@ namespace UnityStandardAssets._2D
             lariatCooldown = gameObject.AddComponent<Cooldown>();
             damageWait = gameObject.AddComponent<Cooldown>();
             moveActive = gameObject.AddComponent<Cooldown>();
+            tripleJab = gameObject.AddComponent<SpamPrevention>();
+            tripleJab.init(3, 0.5f);
         }
 
 
         private void Update()
         {
+            if(!moveActive.active()) {
+                anim.speed = 1f;
+            }
+
             if (!m_Jump)
             {
                 // Read the jump input in Update so button presses aren't missed.
@@ -113,9 +120,22 @@ namespace UnityStandardAssets._2D
             }
             else if (Input.GetButtonDown("Vonder_Light") && !heavyActive && !mediumActive) {
                 if (!lightCooldown.active()) {
+
+
                     Light();
-                    lightCooldown.startCooldown(0.2f);
-                    moveActive.startCooldown(0.1f);
+                        tripleJab.run();
+                        if(tripleJab.notLast()) {
+                            lightCooldown.startCooldown(0.2f);
+                            lightCooldownAmount = 0.2f;
+                            moveActive.startCooldown(0.1f);
+                        }
+                        else {
+                            lightCooldown.startCooldown(0.8f);
+                            lightCooldownAmount = 0.8f;
+                            moveActive.startCooldown(0.3f);
+                        }
+
+                    
                 }
             }
             else if (Input.GetButtonDown("Vonder_Medium") && !heavyActive && !lightActive) {
@@ -129,7 +149,7 @@ namespace UnityStandardAssets._2D
                 if (!heavyCooldown.active()) {
                     Heavy();
                     heavyCooldown.startCooldown(0.8f);
-                    moveActive.startCooldown(0.5f);
+                    moveActive.startCooldown(0.3f);
                 }
             }
 
@@ -140,7 +160,7 @@ namespace UnityStandardAssets._2D
            
             // Light
             cooldownUI.transform.GetChild(0).gameObject.transform.GetChild(0)
-            .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(lightCooldown.getCurrentTime(), 0.2f);
+            .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(lightCooldown.getCurrentTime(), lightCooldownAmount);
             // Medium
             cooldownUI.transform.GetChild(1).gameObject.transform.GetChild(0)
             .gameObject.transform.GetChild(0).GetComponent<SimpleHealthBar>().UpdateBar(mediumCooldown.getCurrentTime(), 0.5f);
@@ -165,7 +185,7 @@ namespace UnityStandardAssets._2D
                 gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             }
 
-
+            
             
         }
 
@@ -209,12 +229,18 @@ namespace UnityStandardAssets._2D
 
             foreach(Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<Damage>().doDamage(20f, 0.5f);
+                enemy.GetComponent<Damage>().doDamage(20f, 5f);
 
             }
         }
         void Light() 
         {
+            
+
+            if (tripleJab.beforeLast()) {
+                anim.speed = 0.5f;
+            } 
+           
             anim.SetTrigger("Light");
 
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
@@ -222,7 +248,12 @@ namespace UnityStandardAssets._2D
             foreach(Collider2D enemy in hitEnemies)
             {
                 //AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
-                enemy.GetComponent<Damage>().doDamage(1.5f, 0.5f);
+                if (tripleJab.beforeLast()) {
+                    enemy.GetComponent<Damage>().doDamage(3f, 3f);
+                } else {
+                    enemy.GetComponent<Damage>().doDamage(1.85f, 1f);
+                }
+                
 
             }
         }
@@ -240,7 +271,7 @@ namespace UnityStandardAssets._2D
                 foreach(Collider2D enemy in hitEnemies)
                 {
                     //AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
-                    enemy.GetComponent<Damage>().doDamage(4f, 0.5f);
+                    enemy.GetComponent<Damage>().doDamage(5f, 1f);
 
                 }
             }
@@ -260,7 +291,7 @@ namespace UnityStandardAssets._2D
             foreach(Collider2D enemy in hitEnemies)
             {   
                 // AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
-                enemy.GetComponent<Damage>().doDamage(8f, 0.5f);
+                enemy.GetComponent<Damage>().doDamage(10f, 3.5f);
 
             }
         }
