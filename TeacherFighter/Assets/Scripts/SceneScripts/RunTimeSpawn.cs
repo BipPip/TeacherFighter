@@ -8,30 +8,16 @@ public class RunTimeSpawn : CharacterSelect
     // Start is called before the first frame update
 
     string prefabName;
+    GameObject char1;
 
     void Start()
     {
 
         prefabName = getPlayer1();
 
-        //charsel = GameObject.FindObjectOfType<CharacterSelect>();
-        //string charselected = charsel.charName;
+        Debug.Log(prefabName);
        
-
-
-        //charsel = gm.GetComponent<CharacterSelect>(); 
-        //string charselected = gameObject.GetComponent<CharacterSelect>().charName;
-
-
-
-        Debug.Log();
-        //Debug.Log(charsel.charName);
-
-
-
-
-
-        //char1 = (GameObject)Resources.Load("prefabs/" + charName, typeof(GameObject));
+        char1 = (GameObject)Resources.Load("prefabs/" + prefabName, typeof(GameObject));
         //Instantiate(char1, new Vector3(0,0,0), Quaternion.identity);
     }
 
