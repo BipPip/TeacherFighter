@@ -1938,8 +1938,8 @@ AnimatorStateMachine:
   - {fileID: -2417036951600599639}
   - {fileID: 6954683782942806998}
   - {fileID: -4405995944737387198}
-  - {fileID: -1716385389256807092}
   - {fileID: 5004357688994057602}
+  - {fileID: -1716385389256807092}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []

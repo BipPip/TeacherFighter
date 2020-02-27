@@ -52,13 +52,10 @@ public class Damage : MonoBehaviour
             p2block = false;
         }
         // Debug.Log(v);
-        if (this.stamina.getStamina() >= 5 && ((gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v == 1 && h < 1 && h > -1) || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v2 < 0 && CrossPlatformInputManager.GetButton("Vertical2")) && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
-            if (blocking)
-                anim.SetTrigger("Block");
-            // v2 = 0;
-        }
+        
         
         if(knockbacking && knockback > 0) {
+            anim.SetTrigger("Hit");
             if (!gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight)
                 gameObject.transform.position += new Vector3(0.5f, 0, 0);
             else {
@@ -73,14 +70,14 @@ public class Damage : MonoBehaviour
         }
         
 
-        if(this.stamina.getStamina() >= 0 && (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && (v == 1 && h < 1 && h > -1)
+        if(this.stamina.getStamina() > 0 && (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && (v == 1 && h < 1 && h > -1)
         || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight &&
          /*(h2 > 0 || v2 < 0))*/ (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow))) 
          && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
              
              // Block Delay
              if (blocked) {
-                blockDelay.startCooldown(enableBlock, 0.15f);
+                blockDelay.startCooldown(enableBlock, 0.3f);
                 blocked = false;
              }
              
@@ -94,6 +91,17 @@ public class Damage : MonoBehaviour
              allowBlock = false;
              blocked = true;
          }
+
+         if ((this.stamina.getStamina() >= 5 && ((gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v == 1 && h < 1 && h > -1) || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v2 < 0 && CrossPlatformInputManager.GetButton("Vertical2"))) 
+        && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
+            
+            if (blocking) {
+                Debug.Log("RIP");
+                anim.SetTrigger("Block");
+            }
+            
+            // v2 = 0;
+        }
 
         // Debug.Log(allowBlock);
 
@@ -133,19 +141,22 @@ public class Damage : MonoBehaviour
             if (staminaDecreaseAmount > 35)
                 staminaDecreaseAmount = 35;
             this.stamina.staminaDecrease(staminaDecreaseAmount);
-            Debug.Log(this.stamina.getStamina());
+            // Debug.Log(this.stamina.getStamina());
             if(this.stamina.getStamina() <= 0) {
                 this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * 100) - damage, 100);
                 knockbacking = true;
-                // blocking = false;
-                // allowBlock = false;
-                // blocked = true;
-                // blockDelay.startCooldown(enableBlock, 0.15f);
-                anim.SetTrigger("Hit");
+                blocking = false;
+                allowBlock = false;
+                blocked = false;
+                blockDelay.startCooldown(enableBlock, 0.15f);
+            
+                // anim.SetTrigger("Hit");
             }
             else {
+                // Debug.Log("TEEEEEEEEEEESTTT");
                 anim.SetTrigger("Block");
             }
+            // Debug.Log("t");
             // Debug.Log(staminaDecreaseAmount);
             this.stamina.startCountdown(1);
             //Debug.Log("TEST");
