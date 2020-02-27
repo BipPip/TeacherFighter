@@ -39,7 +39,9 @@ public class SwipeLock : MonoBehaviour
             if(scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - (distance /2))
             {
                 transform.GetChild(i).localScale = Vector2.Lerp(transform.GetChild(i).localScale, new Vector2(1f,1f), 0.1f);
-                Debug.Log(transform.GetChild(i).name);
+
+                    // here is where it knows what button is selected
+
                 for(int a = 0; a < pos.Length; a++)
                 {
                     if(a != i)
