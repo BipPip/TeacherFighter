@@ -55,7 +55,7 @@ public class Damage : MonoBehaviour
         
         
         if(knockbacking && knockback > 0) {
-            anim.SetTrigger("Hit");
+            //anim.SetTrigger("Hit");
             if (!gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight)
                 gameObject.transform.position += new Vector3(0.5f, 0, 0);
             else {
@@ -96,7 +96,7 @@ public class Damage : MonoBehaviour
         && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
             
             if (blocking) {
-                Debug.Log("RIP");
+                // Debug.Log("RIP");
                 anim.SetTrigger("Block");
             }
             
@@ -149,8 +149,8 @@ public class Damage : MonoBehaviour
                 allowBlock = false;
                 blocked = false;
                 blockDelay.startCooldown(enableBlock, 0.15f);
-            
-                // anim.SetTrigger("Hit");
+                Debug.Log(this.stamina.getStamina());
+                anim.SetTrigger("Hit");
             }
             else {
                 // Debug.Log("TEEEEEEEEEEESTTT");
