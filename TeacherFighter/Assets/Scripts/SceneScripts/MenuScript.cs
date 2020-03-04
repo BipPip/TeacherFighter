@@ -7,7 +7,7 @@ public class MenuScript: MonoBehaviour {
     void Update()
     {
         if(Input.anyKey){
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("CharacterSelect");
         }
     }
 }
