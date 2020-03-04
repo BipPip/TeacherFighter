@@ -25,6 +25,8 @@ namespace UnityStandardAssets._2D
         public GameObject staminaBarObject;
         public GameObject cooldownUI;
 
+        public float playerHealth;
+
         private void Awake()
         {
             // Setting up references.
