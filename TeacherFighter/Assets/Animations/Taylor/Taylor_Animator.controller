@@ -2759,7 +2759,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Block
-  m_Speed: 8
+  m_Speed: 20
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8645639934240087243}

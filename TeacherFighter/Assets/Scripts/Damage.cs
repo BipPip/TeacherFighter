@@ -12,6 +12,7 @@ public class Damage : MonoBehaviour
     private Animator anim;
     private SimpleHealthBar playerHealthBar;
     private Cooldown blockDelay;
+    private Cooldown forceStun;
     private bool blocking;
     private bool allowBlock = false;
     private bool blocked = true;
@@ -35,6 +36,7 @@ public class Damage : MonoBehaviour
         this.playerHealthBar = gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>();
         this.stamina = gameObject.GetComponent<Stamina>();
         this.blockDelay = gameObject.AddComponent<Cooldown>();
+        this.forceStun = gameObject.AddComponent<Cooldown>();
         this.playerHealth = gameObject.GetComponent<PlatformerCharacter2D>().playerHealth;
         
         Debug.Log(playerHealth);
@@ -60,7 +62,7 @@ public class Damage : MonoBehaviour
         
         
         if(knockbacking && knockback > 0) {
-            anim.SetTrigger("Hit");
+            //anim.SetTrigger("Hit");
             if (!gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight)
                 gameObject.transform.position += new Vector3(0.5f, 0, 0);
             else {
@@ -97,11 +99,22 @@ public class Damage : MonoBehaviour
              blocked = true;
          }
 
+         if (forceStun.active()) {
+            anim.SetTrigger("Hit");
+            allowBlock = false;
+            blocking = false;
+            v = 0;
+            h = 0;
+            v2 = 0;
+            h2 = 0;
+            anim.ResetTrigger("Block");
+        }
+
          if ((this.stamina.getStamina() >= 5 && ((gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v == 1 && h < 1 && h > -1) || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v2 < 0 && CrossPlatformInputManager.GetButton("Vertical2"))) 
         && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
             
             if (blocking) {
-                Debug.Log("RIP");
+                // Debug.Log("RIP");
                 anim.SetTrigger("Block");
             }
             
@@ -109,6 +122,7 @@ public class Damage : MonoBehaviour
         }
 
         // Debug.Log(allowBlock);
+       
 
         if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Walk") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Run") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Crouch") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("CrouchingWalk") 
         || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Jumping") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
@@ -154,12 +168,14 @@ public class Damage : MonoBehaviour
                 allowBlock = false;
                 blocked = false;
                 blockDelay.startCooldown(enableBlock, 0.15f);
-            
-                // anim.SetTrigger("Hit");
+                forceStun.startCooldown(0.15f);
+                Debug.Log(this.stamina.getStamina());
+                anim.SetTrigger("Hit");
             }
             else {
                 // Debug.Log("TEEEEEEEEEEESTTT");
-                anim.SetTrigger("Block");
+                if (!forceStun.active())
+                    anim.SetTrigger("Block");
             }
             // Debug.Log("t");
             // Debug.Log(staminaDecreaseAmount);
