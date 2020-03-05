@@ -25,6 +25,8 @@ public class Damage : MonoBehaviour
     float v2;
     bool p2block;
 
+    float playerHealth;
+
     private Stamina stamina;
 
     // Start is called before the first frame update
@@ -35,6 +37,9 @@ public class Damage : MonoBehaviour
         this.stamina = gameObject.GetComponent<Stamina>();
         this.blockDelay = gameObject.AddComponent<Cooldown>();
         this.forceStun = gameObject.AddComponent<Cooldown>();
+        this.playerHealth = gameObject.GetComponent<PlatformerCharacter2D>().playerHealth;
+        
+        Debug.Log(playerHealth);
         
     }
 
@@ -157,7 +162,7 @@ public class Damage : MonoBehaviour
             this.stamina.staminaDecrease(staminaDecreaseAmount);
             // Debug.Log(this.stamina.getStamina());
             if(this.stamina.getStamina() <= 0) {
-                this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * 100) - damage, 100);
+                this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * playerHealth) - damage, playerHealth);
                 knockbacking = true;
                 blocking = false;
                 allowBlock = false;
@@ -178,7 +183,7 @@ public class Damage : MonoBehaviour
             //Debug.Log("TEST");
         } else {
 
-        this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * 100) - damage, 100);
+        this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * playerHealth) - damage, playerHealth);
         if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
             anim.SetTrigger("Hit");
             knockbacking = true;

@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-//This is the script that Mr Taylor Uses for movement
 
 namespace UnityStandardAssets._2D
 {
