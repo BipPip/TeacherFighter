@@ -35,6 +35,7 @@ namespace UnityStandardAssets._2D
 
         public Animator anim;
         public Transform basicAttackPoint;
+        public Transform longAttackPoint;
         public float basicAttackRange = 0.5f;
         public LayerMask enemyLayers;
 
@@ -305,6 +306,7 @@ namespace UnityStandardAssets._2D
             return;
 
             Gizmos.DrawWireSphere(basicAttackPoint.position, basicAttackRange);
+            Gizmos.DrawWireSphere(longAttackPoint.position, basicAttackRange);
         }
     }
         
