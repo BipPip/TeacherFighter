@@ -1538,6 +1538,10 @@ PrefabInstance:
       propertyPath: basicAttackPoint
       value: 
       objectReference: {fileID: 188149096}
+    - target: {fileID: 1695637347, guid: 174b5db10f82a0a458f4410a6b1281ce, type: 3}
+      propertyPath: speed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2394598230562451157, guid: 174b5db10f82a0a458f4410a6b1281ce,
         type: 3}
       propertyPath: m_Enabled

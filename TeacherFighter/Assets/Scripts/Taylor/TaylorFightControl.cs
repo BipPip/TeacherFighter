@@ -35,7 +35,6 @@ namespace UnityStandardAssets._2D
         public GameObject fireBallPrefab;
         private GameObject cooldownUI;
 
-        public float speed = 20f;
         public float basicAttackRange = 0.5f;
         
         private SimpleHealthBar playerHealthBar;
