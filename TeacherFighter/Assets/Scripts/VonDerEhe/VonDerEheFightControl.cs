@@ -36,6 +36,7 @@ namespace UnityStandardAssets._2D
         public Animator anim;
         public Transform basicAttackPoint;
         public Transform longAttackPoint;
+        public Transform shortAttackPoint;
         public float basicAttackRange = 0.5f;
         public LayerMask enemyLayers;
 
@@ -267,7 +268,7 @@ namespace UnityStandardAssets._2D
              damageWait.startCooldown(Medium, 0.2f);
             }
             if(!damageWait.isInitial()) {
-                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(longAttackPoint.position, basicAttackRange, enemyLayers);
 
                 foreach(Collider2D enemy in hitEnemies)
                 {
@@ -288,7 +289,7 @@ namespace UnityStandardAssets._2D
       
         if(!damageWait.isInitial()) {
             
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(shortAttackPoint.position, basicAttackRange, enemyLayers);
             foreach(Collider2D enemy in hitEnemies)
             {   
                 // AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
@@ -307,6 +308,7 @@ namespace UnityStandardAssets._2D
 
             Gizmos.DrawWireSphere(basicAttackPoint.position, basicAttackRange);
             Gizmos.DrawWireSphere(longAttackPoint.position, basicAttackRange);
+            Gizmos.DrawWireSphere(shortAttackPoint.position, basicAttackRange);
         }
     }
         

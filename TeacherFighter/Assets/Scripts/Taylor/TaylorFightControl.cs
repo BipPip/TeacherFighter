@@ -31,6 +31,7 @@ namespace UnityStandardAssets._2D
         public Transform firePoint;
         public Transform respawnPoint;
         public Transform basicAttackPoint;
+        public  Transform shortAttackPoint;
         
         public GameObject fireBallPrefab;
         private GameObject cooldownUI;
@@ -271,7 +272,7 @@ namespace UnityStandardAssets._2D
 
             if(!damageWait.isInitial()) 
             {
-                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(shortAttackPoint.position, basicAttackRange, enemyLayers);
 
                 foreach(Collider2D enemy in hitEnemies)
                 {
@@ -293,7 +294,7 @@ namespace UnityStandardAssets._2D
             if(!damageWait.isInitial()) 
             {
             
-                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(shortAttackPoint.position, basicAttackRange, enemyLayers);
                 foreach(Collider2D enemy in hitEnemies)
                 {   
                     AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
@@ -309,6 +310,7 @@ namespace UnityStandardAssets._2D
             if(basicAttackPoint == null)
             return;
             Gizmos.DrawWireSphere(basicAttackPoint.position, basicAttackRange);
+            Gizmos.DrawWireSphere(shortAttackPoint.position, basicAttackRange);
         }
     }        
 }
