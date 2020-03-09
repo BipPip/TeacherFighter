@@ -13,6 +13,13 @@ public class RunTimeSpawn : CharacterSelect
     public GameObject CTaylor;
     public GameObject CVonderehe;
 
+    public GameObject rightBar;
+    public GameObject leftBar;
+
+    public GameObject leftCooldown;
+    public GameObject rightCooldown;
+
+
 
     void Start()
     {
@@ -21,10 +28,14 @@ public class RunTimeSpawn : CharacterSelect
 
         Debug.Log("RunTimeSpawn Script" + prefabName);
        
+        GameObject p1Health = Instantiate(rightBar,new Vector3(0,0,0), Quaternion.identity, GameObject.FindGameObjectWithTag("Canvas").transform);
+        //p1Health.transform.SetParent (GameObject.FindGameObjectWithTag("Canvas").transform, false);
+
         if(prefabName.Equals("CharacterTaylor")){
-            Instantiate(CTaylor);
+            //Instantiate(CTaylor);
+
         }else if(prefabName.Equals("CharacterVonDerEhe")){
-            Instantiate(CVonderehe);
+            //Instantiate(CVonderehe);
         }
     }
 
