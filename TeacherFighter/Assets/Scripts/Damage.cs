@@ -65,6 +65,7 @@ public class Damage : MonoBehaviour
         
         
         if(knockbacking && knockback > 0) {
+            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             //anim.SetTrigger("Hit");
             if (!gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
                 // gameObject.transform.position += new Vector3(0.5f, 0, 0);
@@ -199,6 +200,7 @@ public class Damage : MonoBehaviour
         this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * playerHealth) - damage, playerHealth);
         if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
             anim.SetTrigger("Hit");
+            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
            knockbacking = true;
            
             
