@@ -623,8 +623,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a487f31322d975a479ddae65e675867d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHealthBarObject: {fileID: 0}
-  rightHealthBarObject: {fileID: 0}
+  leftHealthBarObject: {fileID: 1588437937474962095, guid: 19d591dc546d17f47bc1afb6cecf1aac,
+    type: 3}
+  rightHealthBarObject: {fileID: 2382385240438640530, guid: 7c0e7e8b1123fa446b9f4b63592f4de7,
+    type: 3}
 --- !u!114 &549381556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,7 +676,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 765815636}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1

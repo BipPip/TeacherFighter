@@ -37,6 +37,13 @@ namespace UnityStandardAssets._2D
             //healthBar = healthBarObject.GetComponent<SimpleHealthBar>();
         }
 
+        //on instantiating a player call this to set the objects
+        public void setUI(GameObject health, GameObject cooldown)
+        {
+            this.healthBarObject = health;
+            //this.staminaBarObject = stamina;
+            this.cooldownUI = cooldown;
+        }
 
         private void FixedUpdate()
         {
