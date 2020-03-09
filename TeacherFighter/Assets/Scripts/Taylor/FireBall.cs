@@ -41,7 +41,7 @@ public class FireBall : MonoBehaviour
 
         if(col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<Damage>().doDamage(5f, 1.25f);
+            col.gameObject.GetComponent<Damage>().doDamage(8f, 4.75f);
         }
         AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
         Destroy(gameObject);

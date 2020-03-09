@@ -56,6 +56,7 @@ public class SpamPrevention : MonoBehaviour
     public bool beforeLast() {
         return (moveCount == moveCountMax - 1);
     }
+  
 
     public bool notLast() {
         return !isLast;

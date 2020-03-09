@@ -10,13 +10,14 @@ public class Damage : MonoBehaviour
 {
 
     private Animator anim;
+    private PlatformerCharacter2D m_Character;
     private SimpleHealthBar playerHealthBar;
     private Cooldown blockDelay;
     private Cooldown forceStun;
     private bool blocking;
     private bool allowBlock = false;
     private bool blocked = true;
-    private bool knockbacking;
+    public bool knockbacking;
     private float knockback;
 
     float h;
@@ -38,8 +39,10 @@ public class Damage : MonoBehaviour
         this.blockDelay = gameObject.AddComponent<Cooldown>();
         this.forceStun = gameObject.AddComponent<Cooldown>();
         this.playerHealth = gameObject.GetComponent<PlatformerCharacter2D>().playerHealth;
+        this.m_Character = gameObject.GetComponent<PlatformerCharacter2D>();
         
-        Debug.Log(playerHealth);
+        
+        // Debug.Log(playerHealth);
         
     }
 
@@ -62,11 +65,19 @@ public class Damage : MonoBehaviour
         
         
         if(knockbacking && knockback > 0) {
+            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             //anim.SetTrigger("Hit");
-            if (!gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight)
-                gameObject.transform.position += new Vector3(0.5f, 0, 0);
+            if (!gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
+                // gameObject.transform.position += new Vector3(0.5f, 0, 0);
+                // m_Character.Move(100f, false, false);
+                // m_Character.
+                // m_Character.m_Rigidbody2D.velocity += new Vector2(0.5f, m_Character.m_Rigidbody2D.velocity.y);
+                // m_Character.m_Rigidbody2D.AddForce(new Vector2(0.5f * 10000f, 0f));
+                m_Character.m_Rigidbody2D.velocity = new Vector2(50f, m_Character.m_Rigidbody2D.velocity.y);
+            }
             else {
-                gameObject.transform.position += new Vector3(-0.5f, 0, 0);
+                // gameObject.transform.position += new Vector3(-0.5f, 0, 0);
+                m_Character.m_Rigidbody2D.velocity = new Vector2(-50f, m_Character.m_Rigidbody2D.velocity.y);
             }
 
             knockback--;
@@ -77,14 +88,15 @@ public class Damage : MonoBehaviour
         }
         
 
-        if(this.stamina.getStamina() > 0 && (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && (v == 1 && h < 1 && h > -1)
+        if(this.m_Character.m_Grounded && this.stamina.getStamina() > 0 && (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && ((v == 1 && h < 1 && h > -1) || h < 0 || (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S)))
         || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight &&
          /*(h2 > 0 || v2 < 0))*/ (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow))) 
          && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
              
              // Block Delay
              if (blocked) {
-                blockDelay.startCooldown(enableBlock, 0.3f);
+                // Debug.Log("poggers");
+                blockDelay.startCooldown(enableBlock, 0.1f);
                 blocked = false;
              }
              
@@ -110,7 +122,9 @@ public class Damage : MonoBehaviour
             anim.ResetTrigger("Block");
         }
 
-         if ((this.stamina.getStamina() >= 5 && ((gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v == 1 && h < 1 && h > -1) || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v2 < 0 && CrossPlatformInputManager.GetButton("Vertical2"))) 
+         if (m_Character.m_Grounded && (this.stamina.getStamina() >= 5 && ((gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight 
+         && ((v == 1 && h < 1 && h > -1) || Input.GetKey(KeyCode.S))) 
+         || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v2 < 0 && CrossPlatformInputManager.GetButton("Vertical2"))) 
         && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
             
             if (blocking) {
@@ -124,11 +138,11 @@ public class Damage : MonoBehaviour
         // Debug.Log(allowBlock);
        
 
-        if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Walk") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Run") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Crouch") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("CrouchingWalk") 
+        if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light") && this.anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Walk")) || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Run") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Crouch") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("CrouchingWalk") 
         || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Jumping") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-        if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Block")){
+        if(!knockbacking && this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Block")){
                 gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
                 
             }
@@ -169,7 +183,7 @@ public class Damage : MonoBehaviour
                 blocked = false;
                 blockDelay.startCooldown(enableBlock, 0.15f);
                 forceStun.startCooldown(0.15f);
-                Debug.Log(this.stamina.getStamina());
+                //Debug.Log(this.stamina.getStamina());
                 anim.SetTrigger("Hit");
             }
             else {
@@ -186,7 +200,9 @@ public class Damage : MonoBehaviour
         this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * playerHealth) - damage, playerHealth);
         if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
             anim.SetTrigger("Hit");
-            knockbacking = true;
+            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+           knockbacking = true;
+           
             
         }
     }

@@ -36,6 +36,7 @@ namespace UnityStandardAssets._2D
         public Animator anim;
         public Transform basicAttackPoint;
         public Transform longAttackPoint;
+        public Transform shortAttackPoint;
         public float basicAttackRange = 0.5f;
         public LayerMask enemyLayers;
 
@@ -71,6 +72,7 @@ namespace UnityStandardAssets._2D
 
         private void Update()
         {
+            // Debug.Log(m_Character.m_Rigidbody2D.velocity.x);
             if(!moveActive.active()) {
                 anim.speed = 1f;
             }
@@ -213,7 +215,8 @@ namespace UnityStandardAssets._2D
             }
 
             // Pass all parameters to the character control script.
-            m_Character.Move(h, crouch, m_Jump);
+            if (!gameObject.GetComponent<Damage>().knockbacking)
+                m_Character.Move(h, crouch, m_Jump);
             m_Jump = false;
             m_Dodge = false;
             
@@ -236,26 +239,36 @@ namespace UnityStandardAssets._2D
         }
         void Light() 
         {
+
+        
+
             
+            if(damageWait.isInitial()) 
+            {
+                if (tripleJab.beforeLast()) {
+                anim.SetTrigger("Light");
+                anim.speed = 0.1f;
+                
+                damageWait.startCooldown(Light, 0.1f);
+                } else {
+                    anim.SetTrigger("Light");
+                    damageWait.startCooldown(Light, 0.01f);
+                }
+            }
 
-            if (tripleJab.beforeLast()) {
-                anim.speed = 0.5f;
-            } 
-           
-            anim.SetTrigger("Light");
-
+            if(!damageWait.isInitial()) 
+            {
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
 
             foreach(Collider2D enemy in hitEnemies)
             {
-                //AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
-                if (tripleJab.beforeLast()) {
-                    enemy.GetComponent<Damage>().doDamage(3f, 3f);
+                // AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
+                if (!tripleJab.notLast()) {
+                    enemy.GetComponent<Damage>().doDamage(2.5f, 4f);
                 } else {
-                    enemy.GetComponent<Damage>().doDamage(1.85f, 1f);
+                    enemy.GetComponent<Damage>().doDamage(1.85f, 2f);
                 }
-                
-
+            }
             }
         }
 
@@ -267,12 +280,12 @@ namespace UnityStandardAssets._2D
              damageWait.startCooldown(Medium, 0.2f);
             }
             if(!damageWait.isInitial()) {
-                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(longAttackPoint.position, basicAttackRange, enemyLayers);
 
                 foreach(Collider2D enemy in hitEnemies)
                 {
                     //AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
-                    enemy.GetComponent<Damage>().doDamage(5f, 1f);
+                    enemy.GetComponent<Damage>().doDamage(5f, 3f);
 
                 }
             }
@@ -288,7 +301,7 @@ namespace UnityStandardAssets._2D
       
         if(!damageWait.isInitial()) {
             
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(shortAttackPoint.position, basicAttackRange, enemyLayers);
             foreach(Collider2D enemy in hitEnemies)
             {   
                 // AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
@@ -307,6 +320,7 @@ namespace UnityStandardAssets._2D
 
             Gizmos.DrawWireSphere(basicAttackPoint.position, basicAttackRange);
             Gizmos.DrawWireSphere(longAttackPoint.position, basicAttackRange);
+            Gizmos.DrawWireSphere(shortAttackPoint.position, basicAttackRange);
         }
     }
         
