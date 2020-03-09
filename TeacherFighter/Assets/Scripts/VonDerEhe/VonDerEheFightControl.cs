@@ -12,6 +12,7 @@ namespace UnityStandardAssets._2D
         private bool m_Jump;
         private bool m_Dodge;
         public bool lariatActive;                 //Is this timer active?
+        public bool disableMove;
 
         private SimpleHealthBar playerHealthBar;
         private SimpleHealthBar staminaBar;
@@ -176,18 +177,23 @@ namespace UnityStandardAssets._2D
 
             // Freeze constraints after doing basic moves
 
-            if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium") 
-            || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
-                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-            }
+            // if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium") 
+            // || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
+            //     gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            // }
 
             // Freeze constraints after doing basic moves
 
             if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium") 
             || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
-                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+                // disableMove = true;
+                if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !gameObject.GetComponent<Damage>().knockbacking)
+                    gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             }
-
+            // else {
+            //     disableMove = false;
+            // }
+        // Debug.Log(gameObject.GetComponent<Rigidbody2D>().constraints);
             
             
         }

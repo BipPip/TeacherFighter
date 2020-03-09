@@ -142,7 +142,7 @@ public class Damage : MonoBehaviour
         || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Jumping") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-        if(!knockbacking && this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Block")){
+        if((!knockbacking && this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Block")){
                 gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
                 
             }
@@ -159,7 +159,7 @@ public class Damage : MonoBehaviour
         // if (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
         //         knockback = knockback * -1;
         //     }
-
+        // gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         this.knockback = knockback;
         h = CrossPlatformInputManager.GetAxis("Horizontal");
         h2 = CrossPlatformInputManager.GetAxis("Horizontal2");
@@ -198,10 +198,10 @@ public class Damage : MonoBehaviour
         } else {
 
         this.playerHealthBar.UpdateBar((gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction * playerHealth) - damage, playerHealth);
-        if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
+        if (/*!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") &&*/ !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
             anim.SetTrigger("Hit");
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-           knockbacking = true;
+            knockbacking = true;
            
             
         }
