@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 8289676201906724989}
   - component: {fileID: 8289676201906724988}
   - component: {fileID: 8289676201906724987}
+  - component: {fileID: 3518070807318507147}
   m_Layer: 0
   m_Name: CharacterTaylor
   m_TagString: Player
@@ -223,7 +224,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.15, y: 0.14}
+  m_Offset: {x: -0.48, y: 0.14}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -234,7 +235,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.32}
+  m_Size: {x: 0.36, y: 1.32}
   m_EdgeRadius: 0
 --- !u!114 &8289676201461918355
 MonoBehaviour:
@@ -668,6 +669,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &3518070807318507147
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6087529806493323219}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.53, y: 1.68}
+  m_Direction: 0
 --- !u!1 &6087529806493323221
 GameObject:
   m_ObjectHideFlags: 0
