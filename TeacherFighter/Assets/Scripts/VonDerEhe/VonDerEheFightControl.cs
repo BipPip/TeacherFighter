@@ -14,6 +14,10 @@ namespace UnityStandardAssets._2D
         public bool lariatActive;                 //Is this timer active?
         public bool disableMove;
 
+        public bool startedWait;
+        public bool isColliding;
+        private Cooldown wait;
+
         private SimpleHealthBar playerHealthBar;
         private SimpleHealthBar staminaBar;
         private Stamina stamina;
@@ -43,6 +47,7 @@ namespace UnityStandardAssets._2D
 
         private AudioSource[] audioData;
         private Component[] audioArray;
+       
     
         private void Awake()
         {
@@ -68,11 +73,20 @@ namespace UnityStandardAssets._2D
             moveActive = gameObject.AddComponent<Cooldown>();
             tripleJab = gameObject.AddComponent<SpamPrevention>();
             tripleJab.init(3, 0.5f);
+            wait = gameObject.AddComponent<Cooldown>();
+         
         }
 
 
         private void Update()
         {
+
+
+            if (!wait.active() && startedWait == true) {
+                m_Character.preventMovement = false;
+                startedWait = false;
+                isColliding = false;
+            }
             // Debug.Log(m_Character.m_Rigidbody2D.velocity.x);
             if(!moveActive.active()) {
                 anim.speed = 1f;
@@ -221,7 +235,7 @@ namespace UnityStandardAssets._2D
             }
 
             // Pass all parameters to the character control script.
-            if (!gameObject.GetComponent<Damage>().knockbacking)
+            if (!gameObject.GetComponent<Damage>().knockbacking && !m_Character.preventMovement)
                 m_Character.Move(h, crouch, m_Jump);
             m_Jump = false;
             m_Dodge = false;
@@ -317,7 +331,25 @@ namespace UnityStandardAssets._2D
         }
         
     }  
-
+    //     private void OnTriggerEnter2D(Collider2D other) {
+    //     if(isColliding) return;
+    //         isColliding = true;
+    //  // Rest of the code
+    //     if (other.tag == "Player" && other.name != gameObject.name) {
+    //         // Debug.Log("EPIC");
+    //         // m_Character = other.GetComponentInParent<PlatformerCharacter2D>();
+    //         m_Character.preventMovement = true;
+    //         wait.startCooldown(0.5f);
+    //         startedWait = true;
+    //         float velocity = 10f;
+    //         if (!m_Character.m_FacingRight) {
+    //             velocity = velocity * -1;
+    //         }
+    //         m_Character.m_Rigidbody2D.velocity = new Vector2(velocity, m_Character.m_Rigidbody2D.velocity.y);
+    //         Debug.Log(other.name);
+            
+    //     }
+    // }
         void OnDrawGizmosSelected()
         {
 

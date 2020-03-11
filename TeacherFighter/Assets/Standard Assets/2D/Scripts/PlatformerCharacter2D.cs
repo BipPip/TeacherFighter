@@ -26,6 +26,7 @@ namespace UnityStandardAssets._2D
         public GameObject cooldownUI;
 
         public float playerHealth;
+        public bool preventMovement;
 
         private void Awake()
         {

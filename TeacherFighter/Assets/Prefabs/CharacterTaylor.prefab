@@ -53,6 +53,8 @@ GameObject:
   - component: {fileID: 8289676201906724988}
   - component: {fileID: 8289676201906724987}
   - component: {fileID: 3518070807318507147}
+  - component: {fileID: 2481563095932151133}
+  - component: {fileID: 6010558634739214780}
   m_Layer: 0
   m_Name: CharacterTaylor
   m_TagString: Player
@@ -211,6 +213,7 @@ MonoBehaviour:
   staminaBarObject: {fileID: 0}
   cooldownUI: {fileID: 0}
   playerHealth: 100
+  preventMovement: 0
 --- !u!61 &6087529806499388753
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -249,6 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5102e615db445f24f9e4943e6a0e8455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startedWait: 0
+  isColliding: 0
   firePoint: {fileID: 8470170960572439954}
   respawnPoint: {fileID: 0}
   basicAttackPoint: {fileID: 8289676202613648535}
@@ -685,6 +690,47 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.53, y: 1.68}
   m_Direction: 0
+--- !u!114 &2481563095932151133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6087529806493323219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18958113a26e23d409095a147e403690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startedWait: 0
+  isColliding: 0
+  velocity: 10
+--- !u!61 &6010558634739214780
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6087529806493323219}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.1, y: 1.07}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.32, y: 1.68}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.58, y: 0.4}
+  m_EdgeRadius: 0
 --- !u!1 &6087529806493323221
 GameObject:
   m_ObjectHideFlags: 0
