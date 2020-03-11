@@ -34,14 +34,15 @@ namespace UnityStandardAssets._2D
             m_CeilingCheck = transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
+
             //healthBar = healthBarObject.GetComponent<SimpleHealthBar>();
         }
 
         //on instantiating a player call this to set the objects
-        public void setUI(GameObject health, GameObject cooldown)
+        public void setUI(GameObject health, GameObject stamina, GameObject cooldown)
         {
             this.healthBarObject = health;
-            //this.staminaBarObject = stamina;
+            this.staminaBarObject = stamina;
             this.cooldownUI = cooldown;
         }
 

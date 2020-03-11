@@ -549,6 +549,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 300202016}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &359840382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1588437936922029341, guid: 19d591dc546d17f47bc1afb6cecf1aac,
+    type: 3}
+  m_PrefabInstance: {fileID: 300202016}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &438786841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,6 +1662,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1693692925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 698887995413791726, guid: 7c0e7e8b1123fa446b9f4b63592f4de7,
+    type: 3}
+  m_PrefabInstance: {fileID: 133000950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1767711727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1829,8 +1841,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a487f31322d975a479ddae65e675867d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHealthBarObject: {fileID: 0}
-  rightHealthBarObject: {fileID: 0}
+  leftHealthBarObject: {fileID: 52400742}
+  rightHealthBarObject: {fileID: 825859163}
 --- !u!1 &2012292219
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,7 +2263,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healthBarObject
       value: 
-      objectReference: {fileID: 825859163}
+      objectReference: {fileID: 1693692925}
     - target: {fileID: 7791815108070976667, guid: da5d9e23b6ceffd4896d0d459313af42,
         type: 3}
       propertyPath: staminaBarObject
@@ -2335,7 +2347,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healthBarObject
       value: 
-      objectReference: {fileID: 52400742}
+      objectReference: {fileID: 359840382}
     - target: {fileID: 6087529806483651123, guid: d3689838cf7bb3049921a52393e1bde0,
         type: 3}
       propertyPath: staminaBarObject
@@ -2346,5 +2358,15 @@ PrefabInstance:
       propertyPath: cooldownUI
       value: 
       objectReference: {fileID: 1605492617}
+    - target: {fileID: 6087529806483651123, guid: d3689838cf7bb3049921a52393e1bde0,
+        type: 3}
+      propertyPath: m_FacingRight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8289676201461918355, guid: d3689838cf7bb3049921a52393e1bde0,
+        type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 438786842}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3689838cf7bb3049921a52393e1bde0, type: 3}
