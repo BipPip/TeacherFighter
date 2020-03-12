@@ -21,7 +21,7 @@ public class PlayerJumpPush : MonoBehaviour
         // Debug.Log("Test");
         wait = gameObject.AddComponent<Cooldown>();
         m_Character = GetComponent<PlatformerCharacter2D>();
-        if (!m_Character.m_FacingRight) velocity = velocity * -1;
+        // if (!m_Character.m_FacingRight) velocity = velocity * -1;
         // if (!m_Character.m_FacingRight) {
         //         velocity = velocity * -1;
         //     }
@@ -36,19 +36,23 @@ public class PlayerJumpPush : MonoBehaviour
         
             
         if (isColliding) {
+            m_Character = GetComponent<PlatformerCharacter2D>();
             // if (!m_Character.m_FacingRight) {
             //     velocity = velocity * -1;
             // }
             // if(velocity < 0) velocity = velocity * -1;
-            
-            m_Character.m_Rigidbody2D.velocity = new Vector2(velocity, m_Character.m_Rigidbody2D.velocity.y);
+            if (m_Character.m_Rigidbody2D.velocity.x > 0) {
+                m_Character.m_Rigidbody2D.velocity = new Vector2(velocity, m_Character.m_Rigidbody2D.velocity.y);
+            } else {
+                m_Character.m_Rigidbody2D.velocity = new Vector2(velocity * -1, m_Character.m_Rigidbody2D.velocity.y);
+            }
         }
         if (!wait.active() && startedWait == true) {
            m_Character.preventMovement = false;
            startedWait = false;
         //    if(velocity < 0) velocity = velocity * -1;
         //    if (!m_Character.m_FacingRight) velocity = velocity * -1;
-        //    isColliding = false;
+           isColliding = false;
        }
 
 
@@ -56,7 +60,12 @@ public class PlayerJumpPush : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         this.other = other;
         // Debug.Log("bRUH");
+        // // if(velocity < 0) velocity = velocity * -1;
+        // if (!m_Character.m_FacingRight) velocity = velocity * -1;
         if(isColliding || this.gameObject.transform.position.y < this.other.gameObject.transform.position.y) return;
+        m_Character = GetComponent<PlatformerCharacter2D>();
+        Debug.Log(m_Character.m_Rigidbody2D.velocity.x);
+        
         isColliding = true;
     // if(count == 0) m_Character = GetComponent<PlatformerCharacter2D>();
      // Rest of the code
@@ -72,7 +81,8 @@ public class PlayerJumpPush : MonoBehaviour
             //     velocity = velocity * -1;
             // }
             // m_Character.m_Rigidbody2D.velocity = new Vector2(velocity, m_Character.m_Rigidbody2D.velocity.y + 2);
-            Debug.Log(other.name);
+            Debug.Log(m_Character.name);
+            //Debug.Log(other.name);
             
         }
         count++;
@@ -81,8 +91,8 @@ public class PlayerJumpPush : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) {
         this.other = other;
         if(this.gameObject.transform.position.y < this.other.gameObject.transform.position.y) return;
-        velocity = velocity * -1;
-        count = 0;
+        // velocity = velocity * -1;
+        // count = 0;
         isColliding = false;
         
     }

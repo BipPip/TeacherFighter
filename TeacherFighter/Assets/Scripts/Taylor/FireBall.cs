@@ -38,7 +38,7 @@ public class FireBall : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         
-
+        if (!col.isTrigger) {
         if(col.gameObject.tag == "Player")
         {
             col.gameObject.GetComponent<Damage>().doDamage(8f, 4.75f);
@@ -46,6 +46,7 @@ public class FireBall : MonoBehaviour
         AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
         Destroy(gameObject);
         Instantiate(impactEffect, transform.position, transform.rotation);
+        }
     }
 
 }
