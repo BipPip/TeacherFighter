@@ -82,11 +82,11 @@ namespace UnityStandardAssets._2D
         {
 
 
-            if (!wait.active() && startedWait == true) {
-                m_Character.preventMovement = false;
-                startedWait = false;
-                isColliding = false;
-            }
+            // if (!wait.active() && startedWait == true) {
+            //     m_Character.preventMovement = false;
+            //     startedWait = false;
+            //     isColliding = false;
+            // }
             // Debug.Log(m_Character.m_Rigidbody2D.velocity.x);
             if(!moveActive.active()) {
                 anim.speed = 1f;
@@ -122,7 +122,7 @@ namespace UnityStandardAssets._2D
 
 
             // Handle Inputs
-
+            // Debug.Log(gameObject.GetComponent<PlayerJumpPush>().isColliding);
             if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !moveActive.active() && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Block") && !gameObject.GetComponent<PlayerJumpPush>().isColliding) {
             if(Input.GetButtonDown("Vonder_Lariat"))
             {

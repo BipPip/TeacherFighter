@@ -94,11 +94,11 @@ namespace UnityStandardAssets._2D
         private void Update()
         {
 
-            if (!wait.active() && startedWait == true) {
-                m_Character.preventMovement = false;
-                startedWait = false;
-                isColliding = false;
-            }
+            // if (!wait.active() && startedWait == true) {
+            //     m_Character.preventMovement = false;
+            //     startedWait = false;
+            //     isColliding = false;
+            // }
             // Debug.Log(m_Character.m_Rigidbody2D.velocity.x);
             if(!moveActive.active()) {
                 anim.speed = 1f;

@@ -14,13 +14,15 @@ public class PlayerJumpPush : MonoBehaviour
     public float velocity = 10f;
     private Collider2D other;
     
-    static PlatformerCharacter2D m_Character;
+    private PlatformerCharacter2D m_Character;
     // Start is called before the first frame update
     void Start()
     {
         // Debug.Log("Test");
-        wait = gameObject.AddComponent<Cooldown>();
         m_Character = GetComponent<PlatformerCharacter2D>();
+        Debug.Log(m_Character.name);
+        wait = gameObject.AddComponent<Cooldown>();
+        
         // if (!m_Character.m_FacingRight) velocity = velocity * -1;
         // if (!m_Character.m_FacingRight) {
         //         velocity = velocity * -1;
@@ -81,7 +83,7 @@ public class PlayerJumpPush : MonoBehaviour
             //     velocity = velocity * -1;
             // }
             // m_Character.m_Rigidbody2D.velocity = new Vector2(velocity, m_Character.m_Rigidbody2D.velocity.y + 2);
-            Debug.Log(m_Character.name);
+            // Debug.Log(m_Character.name);
             //Debug.Log(other.name);
             
         }
@@ -93,7 +95,8 @@ public class PlayerJumpPush : MonoBehaviour
         if(this.gameObject.transform.position.y < this.other.gameObject.transform.position.y) return;
         // velocity = velocity * -1;
         // count = 0;
-        isColliding = false;
+        // m_Character.preventMovement = false;
+        // isColliding = false;
         
     }
 
