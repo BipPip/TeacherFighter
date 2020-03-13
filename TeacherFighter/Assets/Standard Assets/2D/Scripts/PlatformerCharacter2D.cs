@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using VariablesCanva;
 
 namespace UnityStandardAssets._2D
 {
@@ -20,12 +21,15 @@ namespace UnityStandardAssets._2D
         public Rigidbody2D m_Rigidbody2D;
         public bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
-        //public SimpleHealthBar healthBar;
+        public GameObject Bar;
         public GameObject healthBarObject;
         public GameObject staminaBarObject;
         public GameObject cooldownUI;
 
         public float playerHealth;
+
+        public Boolean isPlayer1;
+     
 
         private void Awake()
         {
@@ -35,16 +39,16 @@ namespace UnityStandardAssets._2D
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
-            //healthBar = healthBarObject.GetComponent<SimpleHealthBar>();
+            healthBarObject = gameObject.GetComponent<CanvasScript>().leftHealthBarObject.GetComponent<SimpleHealthBar>();
         }
 
         //on instantiating a player call this to set the objects
-        public void setUI(GameObject health, GameObject stamina, GameObject cooldown)
+        /*public void setUI(GameObject health, GameObject stamina, GameObject cooldown)
         {
             this.healthBarObject = health;
             this.staminaBarObject = stamina;
             this.cooldownUI = cooldown;
-        }
+        }*/
 
         private void FixedUpdate()
         {

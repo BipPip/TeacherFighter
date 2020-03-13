@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &-2370256115612988626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6087529806493422581}
+  m_Layer: 0
+  m_Name: Recovery GameObject (6087529806493422581)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6087529806493422581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: -2370256115612988626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.84, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6087529806493422579}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6087529806493323217
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,6 +240,7 @@ MonoBehaviour:
   staminaBarObject: {fileID: 0}
   cooldownUI: {fileID: 0}
   playerHealth: 100
+  isPlayer1: 1
 --- !u!61 &6087529806499388753
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -254,7 +285,6 @@ MonoBehaviour:
   shortAttackPoint: {fileID: 8289676201518562535}
   fireBallPrefab: {fileID: 8140991650851786002, guid: 2cf1f88ddff5dac44a9f427a486019f1,
     type: 3}
-  speed: 20
   basicAttackRange: 0.5
   enemyLayers:
     serializedVersion: 2
@@ -668,58 +698,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1695637347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2842220579083778595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5102e615db445f24f9e4943e6a0e8455, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 470290850103634018}
-  respawnPoint: {fileID: 0}
-  basicAttackPoint: {fileID: 470290850103634018}
-  fireBallPrefab: {fileID: 8140991650851786002, guid: 2cf1f88ddff5dac44a9f427a486019f1,
-    type: 3}
-  speed: 20
-  basicAttackRange: 0.5
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 0
---- !u!114 &542852084423340853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6087529806493422581}
-  m_Layer: 0
-  m_Name: CeilingCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6087529806493422581
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6087529806493323221}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.84, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6087529806493422579}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6495780506097036658
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,3 +788,37 @@ Transform:
   m_Father: {fileID: 6087529806493422579}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1695637347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5102e615db445f24f9e4943e6a0e8455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 0}
+  respawnPoint: {fileID: 0}
+  basicAttackPoint: {fileID: 0}
+  shortAttackPoint: {fileID: 0}
+  fireBallPrefab: {fileID: 8140991650851786002, guid: 2cf1f88ddff5dac44a9f427a486019f1,
+    type: 3}
+  basicAttackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &542852084423340853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: CeilingCheck
+  m_EditorClassIdentifier: 

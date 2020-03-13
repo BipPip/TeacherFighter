@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class CharacterSelect : MonoBehaviour
 {
     
-    static string charName;
+    public static string charName;
 
     public GameObject vonderehedisplay;
     public GameObject taylordisplay;
