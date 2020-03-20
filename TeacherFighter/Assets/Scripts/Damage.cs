@@ -88,9 +88,9 @@ public class Damage : MonoBehaviour
         }
         
 
-        if(this.m_Character.m_Grounded && this.stamina.getStamina() > 0 && (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && ((v == 1 && h < 1 && h > -1) || h < 0 || (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S)))
-        || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight &&
-         /*(h2 > 0 || v2 < 0))*/ (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow))) 
+        if(this.m_Character.m_Grounded && this.stamina.getStamina() > 0 && (gameObject.name == "CharacterTaylor" && ((v == 1 && h < 1 && h > -1) || (h < 0 && m_Character.m_FacingRight) || (h > 0 && !m_Character.m_FacingRight) || ((Input.GetKey(KeyCode.A) && m_Character.m_FacingRight) || (Input.GetKey(KeyCode.D) && !m_Character.m_FacingRight) || Input.GetKey(KeyCode.S)))
+        || gameObject.name == "CharacterVonDerEhe" &&
+         /*(h2 > 0 || v2 < 0))*/ (Input.GetKey(KeyCode.DownArrow) || (Input.GetKey(KeyCode.RightArrow) && !m_Character.m_FacingRight) || (Input.GetKey(KeyCode.LeftArrow) && m_Character.m_FacingRight))) 
          && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
              
              // Block Delay
@@ -122,9 +122,9 @@ public class Damage : MonoBehaviour
             anim.ResetTrigger("Block");
         }
 
-         if (m_Character.m_Grounded && (this.stamina.getStamina() >= 5 && ((gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight 
+         if (m_Character.m_Grounded && (this.stamina.getStamina() >= 5 && ((gameObject.name == "CharacterTaylor" 
          && ((v == 1 && h < 1 && h > -1) || Input.GetKey(KeyCode.S))) 
-         || !gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight && v2 < 0 && CrossPlatformInputManager.GetButton("Vertical2"))) 
+         || gameObject.name == "CharacterVonDerEhe" && v2 < 0 && CrossPlatformInputManager.GetButton("Vertical2"))) 
         && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
             
             if (blocking) {
@@ -156,6 +156,8 @@ public class Damage : MonoBehaviour
     }
 
     public void doDamage(float damage, float knockback) {
+        if (gameObject.GetComponent<PlayerJumpPush>().isColliding)
+            return;
         // if (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
         //         knockback = knockback * -1;
         //     }

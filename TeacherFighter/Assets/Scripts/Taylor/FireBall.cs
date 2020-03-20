@@ -37,8 +37,8 @@ public class FireBall : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        
-        if (!col.isTrigger) {
+        Debug.Log(col.offset.y);
+        if (!col.isTrigger && col.offset.y != 1.1f) {
         if(col.gameObject.tag == "Player")
         {
             col.gameObject.GetComponent<Damage>().doDamage(8f, 4.75f);
