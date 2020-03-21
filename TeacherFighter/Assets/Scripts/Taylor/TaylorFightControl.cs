@@ -339,6 +339,7 @@ namespace UnityStandardAssets._2D
 
         void Heavy() 
         {
+            
             if(damageWait.isInitial())
             {
                 anim.SetTrigger("Heavy");

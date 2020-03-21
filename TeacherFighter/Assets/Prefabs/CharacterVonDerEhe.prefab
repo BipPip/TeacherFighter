@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 5839049605425573764}
   - component: {fileID: 6660690798375631505}
   - component: {fileID: 557122903625225490}
+  - component: {fileID: 6494028301667395960}
   m_Layer: 0
   m_Name: CharacterVonDerEhe
   m_TagString: Player
@@ -301,6 +302,7 @@ MonoBehaviour:
   cooldownUI: {fileID: 0}
   playerHealth: 125
   preventMovement: 0
+  nearWall: 0
 --- !u!114 &7791815108070976665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,7 +446,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startedWait: 0
   isColliding: 0
+  nonTriggerCollide: 0
   velocity: 10
+--- !u!114 &6494028301667395960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7791815108081736059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f7b12327e546c4f82f7c95aad296bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7791815108081736061
 GameObject:
   m_ObjectHideFlags: 0

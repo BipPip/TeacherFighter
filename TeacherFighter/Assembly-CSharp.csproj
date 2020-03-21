@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\Cooldown.cs" />
      <Compile Include="Assets\Scripts\Damage.cs" />
      <Compile Include="Assets\Scripts\DestroyObject.cs" />
+     <Compile Include="Assets\Scripts\MovePlayer.cs" />
      <Compile Include="Assets\Scripts\PlayerDirection.cs" />
      <Compile Include="Assets\Scripts\PlayerJumpPush.cs" />
      <Compile Include="Assets\Scripts\Respawn.cs" />

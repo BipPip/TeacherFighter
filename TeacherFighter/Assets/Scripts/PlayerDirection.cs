@@ -32,14 +32,14 @@ public class PlayerDirection : MonoBehaviour
         // Debug.Log(player1.transform.position.x);
         // Debug.Log(player1.transform.position.x > player2.transform.position.x);
         // Debug.Log(player1.transform.localScale.x);
-        if ((player1.transform.position.x > player2.transform.position.x) && player1Platformer.m_FacingRight) {
+        if ((player1.transform.position.x > player2.transform.position.x + 0.5) && player1Platformer.m_FacingRight) {
             player1Platformer.m_FacingRight = false;
             player1.transform.localScale = new Vector3(player1Scale.x * -1, player1Scale.y, player1Scale.z);
 
             player2Platformer.m_FacingRight = true;
             player2.transform.localScale = new Vector3(player2Scale.x * -1, player2Scale.y, player2Scale.z);
 
-        } else if ((player1.transform.position.x < player2.transform.position.x) && !player1Platformer.m_FacingRight) {
+        } else if ((player1.transform.position.x + 0.5 < player2.transform.position.x) && !player1Platformer.m_FacingRight) {
             player1Platformer.m_FacingRight = true;
             player1.transform.localScale = new Vector3(player1Scale.x * -1, player1Scale.y, player1Scale.z);
 
