@@ -27,6 +27,7 @@ namespace UnityStandardAssets._2D
 
         public float playerHealth;
         public bool preventMovement;
+        public bool nearWall;
 
         private void Awake()
         {
@@ -35,6 +36,7 @@ namespace UnityStandardAssets._2D
             m_CeilingCheck = transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
+            nearWall = false;
             //healthBar = healthBarObject.GetComponent<SimpleHealthBar>();
         }
 
@@ -48,7 +50,7 @@ namespace UnityStandardAssets._2D
             Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
             for (int i = 0; i < colliders.Length; i++)
             {
-                if (colliders[i].gameObject != gameObject)
+                if (colliders[i].gameObject != gameObject && colliders[i].tag != "Player")
                     m_Grounded = true;
             }
             m_Anim.SetBool("Ground", m_Grounded);

@@ -9,10 +9,12 @@ public class PlayerJumpPush : MonoBehaviour
     // public bool preventMovement;
     public bool startedWait;
     public bool isColliding;
+    public bool nonTriggerCollide = false;
     private bool firstEntry = true;
     private Cooldown wait;
     private static int count;
     public float velocity = 10f;
+    private Vector3 pushVelocity;
     private Collider2D other;
     
     private PlatformerCharacter2D m_Character;
@@ -36,14 +38,18 @@ public class PlayerJumpPush : MonoBehaviour
     {  
         
         // Debug.Log(count);
-        
-            
+        // if (!m_Character.m_Grounded)
+        //     m_Character.m_Rigidbody2D.velocity = new Vector2(m_Character.m_Rigidbody2D.velocity.x, m_Character.m_Rigidbody2D.velocity.y + 1);
+
+
         if (isColliding) {
             if (!firstEntry) {
             m_Character = other.GetComponent<PlatformerCharacter2D>();
             }  else {
                 m_Character = GetComponent<PlatformerCharacter2D>();
             }
+
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             // if (!m_Character.m_FacingRight) {
             //     velocity = velocity * -1;
             // }
@@ -54,6 +60,20 @@ public class PlayerJumpPush : MonoBehaviour
                 m_Character.m_Rigidbody2D.velocity = new Vector2(velocity * -1, m_Character.m_Rigidbody2D.velocity.y);
             }
         }
+
+        if (nonTriggerCollide) {
+            // m_Character.m_Rigidbody2D.AddForce(new Vector2(pushVelocity.x * -1, 0f));
+            
+            m_Character.preventMovement = true;
+            // Debug.Log("test");
+            // velocity = 0;
+            m_Character.m_Rigidbody2D.velocity = new Vector2(0, m_Character.m_Rigidbody2D.velocity.y);
+            if (m_Character.m_Grounded) {
+                nonTriggerCollide = false;
+                m_Character.preventMovement = false;
+            }
+        }
+
         if (!wait.active() && startedWait == true) {
            m_Character.preventMovement = false;
            startedWait = false;
@@ -65,13 +85,20 @@ public class PlayerJumpPush : MonoBehaviour
 
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        this.other = other;
-        
+
+        if (other.gameObject.tag != "Player")
+            return;
+
+
+        if (other.GetComponent<PlatformerCharacter2D>().nearWall) {
+            nonTriggerCollide = true;
+            return;
+        } 
         
         // Debug.Log("bRUH");
         // // if(velocity < 0) velocity = velocity * -1;
         // if (!m_Character.m_FacingRight) velocity = velocity * -1;
-        if(isColliding || this.gameObject.transform.position.y < this.other.gameObject.transform.position.y) return;
+        if(isColliding || this.gameObject.transform.position.y < other.gameObject.transform.position.y) return;
         
         
         if (!firstEntry) {
@@ -89,6 +116,7 @@ public class PlayerJumpPush : MonoBehaviour
             // Debug.Log("EPIC");
             // m_Character = other.GetComponentInParent<PlatformerCharacter2D>();
             m_Character.preventMovement = true;
+            
             wait.startCooldown(0.5f);
             startedWait = true;
             
@@ -101,17 +129,46 @@ public class PlayerJumpPush : MonoBehaviour
             //Debug.Log(other.name);
             
         }
-        count++;
+
+    
+
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         this.other = other;
-        if(this.gameObject.transform.position.y < this.other.gameObject.transform.position.y) return;
+        nonTriggerCollide = false;
+        if (!wait.active())
+            m_Character.preventMovement = false;
+        if(this.gameObject.transform.position.y < other.gameObject.transform.position.y) return;
         // velocity = velocity * -1;
         // count = 0;
         // m_Character.preventMovement = false;
-        // isColliding = false;
+        isColliding = false;
         
     }
+
+    // private void OnCollisionEnter2D(Collision2D other) {
+    //     if (other.collider.isTrigger)
+    //         Debug.Log("test");
+
+    //     if(other.collider.offset.y == 1.25f || other.collider.offset.y == 1.19f) {
+    //         Vector3 pushVelocity = other.relativeVelocity;
+    //         Debug.Log(pushVelocity.x);
+    //         // other.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+    //         m_Character.preventMovement = true;
+    //         m_Character.m_Rigidbody2D.velocity = new Vector2(0, m_Character.m_Rigidbody2D.velocity.y);
+    //         nonTriggerCollide = true;
+
+    //     }
+    // }
+
+    // private void OnCollisionExit2D(Collision2D other) {
+    //     if(other.collider.offset.y == 1.25f || other.collider.offset.y == 1.19f) {
+    //         nonTriggerCollide = false;
+    //         m_Character.preventMovement = false;
+           
+    //     }
+    // }
+
 
 }

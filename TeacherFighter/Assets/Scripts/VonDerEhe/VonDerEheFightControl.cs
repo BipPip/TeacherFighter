@@ -88,14 +88,16 @@ namespace UnityStandardAssets._2D
             float distanceToRight = GameObject.Find("/PlatformRight").transform.position.x;
             distanceToRight = distanceToRight - (gameObject.transform.position.x + gameObject.GetComponent<CapsuleCollider2D>().size.x);
 
-            if (distanceToLeft > -4.57 || distanceToRight <= 10) {
-                gameObject.GetComponents<BoxCollider2D>()[1].isTrigger = false;
+            if ((distanceToLeft > -4.57 && m_Character.m_FacingRight) || (distanceToRight <= 10 && !m_Character.m_FacingRight)) {
+                m_Character.nearWall = true;
+                // gameObject.GetComponents<BoxCollider2D>()[1].isTrigger = false;
                 gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(0f, 1.19f);
                 if (m_Character.m_Rigidbody2D.velocity.y > -21f && !m_Character.m_Grounded && ((distanceToLeft > -4.57 && !m_Character.m_FacingRight) || (distanceToRight <= 10 && m_Character.m_FacingRight)))
                     m_Character.m_Rigidbody2D.velocity = new Vector2(m_Character.m_Rigidbody2D.velocity.x, m_Character.m_Rigidbody2D.velocity.y - 0.5f);
             }
             else {
-                gameObject.GetComponents<BoxCollider2D>()[1].isTrigger = true;
+                m_Character.nearWall = false;
+                // gameObject.GetComponents<BoxCollider2D>()[1].isTrigger = true;
                 gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(-0.1f, 1.19f);
             }
 
@@ -218,14 +220,14 @@ namespace UnityStandardAssets._2D
             if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium") 
             || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
                 // disableMove = true;
-                if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !gameObject.GetComponent<Damage>().knockbacking)
+                if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !gameObject.GetComponent<Damage>().knockbacking && !gameObject.GetComponent<PlayerJumpPush>().isColliding)
                     gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             }
             // else {
             //     disableMove = false;
             // }
         // Debug.Log(gameObject.GetComponent<Rigidbody2D>().constraints);
-            
+            if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) damageWait.cancel();
             
         }
 
@@ -287,7 +289,7 @@ namespace UnityStandardAssets._2D
                 anim.SetTrigger("Light");
                 anim.speed = 0.1f;
                 
-                damageWait.startCooldown(Light, 0.1f);
+                damageWait.startCooldown(Light, 0.15f);
                 } else {
                     anim.SetTrigger("Light");
                     damageWait.startCooldown(Light, 0.01f);
@@ -296,6 +298,7 @@ namespace UnityStandardAssets._2D
 
             if(!damageWait.isInitial()) 
             {
+            if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) return;
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
 
             foreach(Collider2D enemy in hitEnemies)
@@ -320,6 +323,7 @@ namespace UnityStandardAssets._2D
              damageWait.startCooldown(Medium, 0.2f);
             }
             if(!damageWait.isInitial()) {
+                if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) return;
                 Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(longAttackPoint.position, basicAttackRange, enemyLayers);
 
                 foreach(Collider2D enemy in hitEnemies)

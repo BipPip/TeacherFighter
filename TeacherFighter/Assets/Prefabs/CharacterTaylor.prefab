@@ -704,6 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startedWait: 0
   isColliding: 0
+  nonTriggerCollide: 0
   velocity: 10
 --- !u!61 &6010558634739214780
 BoxCollider2D:

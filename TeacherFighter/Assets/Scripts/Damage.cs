@@ -63,6 +63,10 @@ public class Damage : MonoBehaviour
         }
         // Debug.Log(v);
         
+
+        if(m_Character.m_Grounded)
+            gameObject.GetComponent<PlayerJumpPush>().isColliding = false;
+
         
         if(knockbacking && knockback > 0) {
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -157,7 +161,8 @@ public class Damage : MonoBehaviour
 
     public void doDamage(float damage, float knockback) {
         if (gameObject.GetComponent<PlayerJumpPush>().isColliding)
-            return;
+            gameObject.GetComponent<PlayerJumpPush>().isColliding = false;
+
         // if (gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
         //         knockback = knockback * -1;
         //     }

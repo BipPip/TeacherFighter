@@ -78,4 +78,10 @@ public class Cooldown : MonoBehaviour
         return this.intial;
     }
 
+    public void cancel() {
+        this.usingDelegate = false;
+        this.cooldownTimerActive = false;
+        this.cooldownTimer = 0;
+    }
+
 }
