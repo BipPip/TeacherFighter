@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using VariablesCanva;
+//using VariablesCanva;
 
 namespace UnityStandardAssets._2D
 {
@@ -39,7 +39,7 @@ namespace UnityStandardAssets._2D
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
-            healthBarObject = gameObject.GetComponent<CanvasScript>().leftHealthBarObject.GetComponent<SimpleHealthBar>();
+            //healthBarObject = gameObject.GetComponent<CanvasScript>().leftHealthBarObject.GetComponent<SimpleHealthBar>();
         }
 
         //on instantiating a player call this to set the objects
