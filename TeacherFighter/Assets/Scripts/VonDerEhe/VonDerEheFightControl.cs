@@ -258,6 +258,10 @@ namespace UnityStandardAssets._2D
             // Pass all parameters to the character control script.
             if (!gameObject.GetComponent<Damage>().knockbacking && !m_Character.preventMovement)
                 m_Character.Move(h, crouch, m_Jump);
+
+            if(m_Jump && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Jumping") && !audioData[3].isPlaying && !jumpActive)
+                audioData[3].Play();
+            
             m_Jump = false;
             m_Dodge = false;
             
@@ -310,7 +314,7 @@ namespace UnityStandardAssets._2D
             foreach(Collider2D enemy in hitEnemies)
             {
                 if (!enemy.isTrigger && enemy.offset.y != 1.25f) {
-                // AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
+                AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
                 if (!tripleJab.notLast()) {
                     enemy.GetComponent<Damage>().doDamage(2.5f, 4f);
                 } else {
@@ -335,7 +339,7 @@ namespace UnityStandardAssets._2D
                 foreach(Collider2D enemy in hitEnemies)
                 {
                     if (!enemy.isTrigger && enemy.offset.y != 1.25f) {
-                    //AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
+                    AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
                     enemy.GetComponent<Damage>().doDamage(5f, 3f);
                     }
                 }
@@ -356,7 +360,7 @@ namespace UnityStandardAssets._2D
             foreach(Collider2D enemy in hitEnemies)
             {   
                 if (!enemy.isTrigger && enemy.offset.y != 1.25f) {
-                // AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
+                AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
                 enemy.GetComponent<Damage>().doDamage(10f, 3.5f);
                 }
 
