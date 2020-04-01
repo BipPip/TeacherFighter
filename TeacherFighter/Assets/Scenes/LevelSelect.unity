@@ -491,7 +491,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: TestLevel2
+          m_StringArgument: Level2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &472331705
@@ -1440,8 +1440,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 113386879}
   m_HandleRect: {fileID: 113386878}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.70098037
+  m_Value: -0.000000100057676
+  m_Size: 0.7009805
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
