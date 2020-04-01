@@ -27,6 +27,7 @@ namespace UnityStandardAssets._2D
         private Cooldown heavyCooldown;
         private Cooldown moveActive; // Used because there is a slight delay between anim.trigger and the actual animation returning active
         private Cooldown damageWait;
+        private Cooldown animEnd;
         public bool startedWait;
         public bool isColliding;
         private Cooldown wait;
@@ -84,6 +85,7 @@ namespace UnityStandardAssets._2D
             fireCooldown = gameObject.AddComponent<Cooldown>();
             damageWait = gameObject.AddComponent<Cooldown>();
             moveActive = gameObject.AddComponent<Cooldown>();
+            animEnd = gameObject.AddComponent<Cooldown>();
             tripleJab = gameObject.AddComponent<SpamPrevention>();
             tripleJab.init(3, 0.5f);
             wait = gameObject.AddComponent<Cooldown>();
@@ -286,7 +288,12 @@ namespace UnityStandardAssets._2D
             {
                 if (tripleJab.beforeLast()) {
                 anim.SetTrigger("Light");
-                anim.speed = 0.1f;
+                
+                if (anim.GetNextAnimatorStateInfo(0).IsName("Idle") || anim.GetNextAnimatorStateInfo(0).IsName("Walk") || anim.GetNextAnimatorStateInfo(0).IsName("Run")) { 
+                    animEnd.startCooldown(slowAnimSpeed, anim.GetCurrentAnimatorStateInfo(0).length);
+                } else {
+                    anim.speed = 0.1f;
+                }
                 
                 damageWait.startCooldown(Light, 0.1f);
                 } else {
@@ -359,6 +366,13 @@ namespace UnityStandardAssets._2D
                 }
             }
         
+        }
+
+        private void setAnimSpeed(float x) {
+            anim.speed = x;
+        }
+        private void slowAnimSpeed() {
+            anim.speed = 0.1f;
         }
 
     //     private void OnTriggerEnter2D(Collider2D other) {
