@@ -157,6 +157,7 @@ public class Damage : MonoBehaviour
         if (playerHealthBar.GetCurrentFraction <= 0) {
             
                 anim.SetTrigger("Die");
+                anim.SetBool("Dead", true);
                 //Destroy(gameObject);
             }
     }
