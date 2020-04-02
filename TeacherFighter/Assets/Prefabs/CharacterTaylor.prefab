@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d08f91df3bd212f429df17f53ce2f364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: CharTaylor
   m_MaxSpeed: 10
   m_JumpForce: 1000
   m_CrouchSpeed: 0.25
@@ -236,11 +237,11 @@ MonoBehaviour:
   m_Grounded: 0
   m_Rigidbody2D: {fileID: 0}
   m_FacingRight: 1
+  Bar: {fileID: 0}
   healthBarObject: {fileID: 0}
   staminaBarObject: {fileID: 0}
   cooldownUI: {fileID: 0}
   playerHealth: 100
-  isPlayer1: 1
 --- !u!61 &6087529806499388753
 BoxCollider2D:
   m_ObjectHideFlags: 0

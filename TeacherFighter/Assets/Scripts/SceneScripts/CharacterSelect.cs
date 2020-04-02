@@ -17,7 +17,6 @@ public class CharacterSelect : MonoBehaviour
     PortraitInfo[,] charGrid;
 
     public GameObject portraitCanvas;
-
     public bool bothPlayersSelected;
 
     CharacterManager charManager;
@@ -27,7 +26,7 @@ public class CharacterSelect : MonoBehaviour
         charManager = CharacterManager.getInstance();
         numberOfPlayers = charManager.numberOfUsers;
 
-        charGrid = new PortraitInfo[maxX,MaxY];
+        charGrid = new PortraitInfo[maxX,maxY];
 
         int x = 0;
         int y = 0;
@@ -62,10 +61,10 @@ public class CharacterSelect : MonoBehaviour
             if(i < numberOfPlayers)
             {
 
-                if(Input.getButtonUp("Fire2" + charManager.players[i].inputId))
+               /* if(Input.GetButtonDown("Fire1" + charManager.players[i].inputId))
                 {
                     plInterfaces[i].playerBase.hasCharacter = false;
-                }
+                }*/
 
                 if(!charManager.players[i].hasCharacter)
                 {
@@ -112,7 +111,7 @@ public class CharacterSelect : MonoBehaviour
 
     void HandleSelectScreenInput(PlayerInterfaces pl, string playerId)
     {
-        float vertical = Input.getAxis("Vertical" + playerId);
+        float vertical = Input.GetAxis("Vertical" + playerId);
 
         if(vertical != 0)
         {
@@ -130,6 +129,8 @@ public class CharacterSelect : MonoBehaviour
                 pl.hitInputOnce = true;
             }
         }
+
+        float horizontal = Input.GetAxis("Horizontal" + playerId);
 
         if(horizontal != 0)
         {
@@ -156,12 +157,12 @@ public class CharacterSelect : MonoBehaviour
 
         // Actual Character Selection
 
-        if(Input.getButtonUp("Fire1" + playerId))
+        if(Input.GetButtonDown("Submit" + playerId))
         {
            // pl.createdCharacter.GetComponentsInChildren<Animator>().Player("Win"); // Plays the winning animation on selection change later xoxo
 
            //Passes to Character Manager
-           pl.playerBase.playerprefab = charManager.returnCharacterWithID(pl.activePortrait.characterId).prefab;
+           pl.playerBase.playerprefab = charManager.returnCharacterWithID(pl.activePortrait.CharacterId).prefab;
 
            pl.playerBase.hasCharacter = true;
         }
@@ -180,7 +181,7 @@ public class CharacterSelect : MonoBehaviour
             }
 
             GameObject go = Instantiate(
-                CharacterManager.getInstance().returnCharacterWithID(pl.activePortrait.characterId).prefab,
+                CharacterManager.getInstance().returnCharacterWithID(pl.activePortrait.CharacterId).prefab,
                 pl.charVisPos.position,
                 Quaternion.identity) as GameObject;
             
@@ -196,7 +197,7 @@ public class CharacterSelect : MonoBehaviour
     [System.Serializable]
     public class PlayerInterfaces{
         public PortraitInfo activePortrait;
-        PortraitInfo previewPortrait;
+        public PortraitInfo previewPortrait;
         public GameObject selector;
         public Transform charVisPos;
         public GameObject createdCharacter;

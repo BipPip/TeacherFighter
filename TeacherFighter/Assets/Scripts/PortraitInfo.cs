@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PortraitInfo : MonoBehaviour
 {
-    public int PosX;
-    public int PosY;
+    public int posX;
+    public int posY;
     public string CharacterId;
 }

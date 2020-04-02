@@ -323,6 +323,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281226042}
   m_CullTransparentMesh: 0
+--- !u!1 &684106341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 684106342}
+  m_Layer: 0
+  m_Name: Player 1 Vis Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &684106342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684106341}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.5346766, y: 1.1813154, z: -1.9023438}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &692182754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 692182755}
+  m_Layer: 0
+  m_Name: 'Player 2 Vis Pos '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &692182755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692182754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.5346766, y: 1.1813154, z: -1.9023438}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &733648727
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,8 +512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e308bb1b4d27c4883d642865b2a689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PosX: 0
-  PosY: 0
+  posX: 0
+  posY: 0
   CharacterId: CharVonDerEhe
 --- !u!114 &900027967
 MonoBehaviour:
@@ -568,8 +628,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.036491}
-  m_SizeDelta: {x: 800, y: 450.17}
+  m_AnchoredPosition: {x: 0, y: -0.086428}
+  m_SizeDelta: {x: 800, y: 449.92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &917560058
 MonoBehaviour:
@@ -980,7 +1040,7 @@ MonoBehaviour:
   plInterfaces: []
   portraitPrefabs: []
   maxX: 0
-  MaxY: 0
+  maxY: 0
   portraitCanvas: {fileID: 0}
   bothPlayersSelected: 0
 --- !u!1 &1713013852
@@ -1035,8 +1095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e308bb1b4d27c4883d642865b2a689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PosX: 0
-  PosY: 0
+  posX: 0
+  posY: 0
   CharacterId: CharTaylor
 --- !u!114 &1713013855
 MonoBehaviour:
@@ -1144,7 +1204,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746768273}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2406.533}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1713013853}
@@ -1154,8 +1214,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.8, y: -94.2}
-  m_SizeDelta: {x: 416.1, y: 248.1}
+  m_AnchoredPosition: {x: 0, y: -94.2}
+  m_SizeDelta: {x: 415, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1746768275
 MonoBehaviour:
@@ -1248,37 +1308,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfPlayers: 2
   plInterfaces:
-  - activePortrait: {fileID: 0}
-    selector: {fileID: 0}
-    charVisPos: {fileID: 0}
+  - activePortrait: {fileID: 1713013854}
+    previewPortrait: {fileID: 1713013854}
+    selector: {fileID: 1451721085}
+    charVisPos: {fileID: 684106342}
     createdCharacter: {fileID: 0}
     activeX: 0
     activeY: 0
     hitInputOnce: 0
     timerToReset: 0
     playerBase:
-      playerId: 
+      playerId: Player 1
       inputId: 
       hasCharacter: 0
       playerprefab: {fileID: 0}
       score: 0
-  - activePortrait: {fileID: 0}
-    selector: {fileID: 0}
-    charVisPos: {fileID: 0}
+  - activePortrait: {fileID: 900027966}
+    previewPortrait: {fileID: 900027966}
+    selector: {fileID: 2107268541}
+    charVisPos: {fileID: 692182755}
     createdCharacter: {fileID: 0}
     activeX: 0
     activeY: 0
     hitInputOnce: 0
     timerToReset: 0
     playerBase:
-      playerId: 
-      inputId: 
+      playerId: Player 2
+      inputId: 2
       hasCharacter: 0
       playerprefab: {fileID: 0}
       score: 0
   portraitPrefabs: []
   maxX: 2
-  MaxY: 1
+  maxY: 1
   portraitCanvas: {fileID: 1746768273}
   bothPlayersSelected: 0
 --- !u!4 &1749168293
@@ -1409,7 +1471,7 @@ MonoBehaviour:
     playerprefab: {fileID: 0}
     score: 0
   - playerId: Player 2
-    inputId: 1
+    inputId: 2
     hasCharacter: 0
     playerprefab: {fileID: 0}
     score: 0
