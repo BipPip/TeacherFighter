@@ -30,15 +30,19 @@ public class PlayerWin : MonoBehaviour
         if (player1Anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
             if (!player2Win)
                 player2Anim.SetTrigger("Win");
+            player2Anim.SetBool("Won", true);
             player2Win = true;
             gameOver = true;
+            player2.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 
         }
         if (player2Anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
             if (!player1Win)
                 player1Anim.SetTrigger("Win");
+            player1Anim.SetBool("Won", true);
             player1Win = true;
             gameOver = true;
+            player1.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
 
         }
 
@@ -50,14 +54,18 @@ public class PlayerWin : MonoBehaviour
         < player2.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction) {
             if (!player2Win)
                 player2Anim.SetTrigger("Win");
+            player2Anim.SetBool("Won", true);
             player2Win = true;
             gameOver = true;
+            player2.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             player1.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().UpdateBar(0, player1.GetComponent<PlatformerCharacter2D>().playerHealth);
         } else {
             if (!player1Win)
                 player1Anim.SetTrigger("Win");
+            player1Anim.SetBool("Won", true);
             player1Win = true;
             gameOver = true;
+            player1.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             player2.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().UpdateBar(0, player2.GetComponent<PlatformerCharacter2D>().playerHealth);
         }
     }
