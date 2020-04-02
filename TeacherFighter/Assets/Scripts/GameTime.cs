@@ -26,6 +26,11 @@ public class GameTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (mainCamera.GetComponent<PlayerWin>().gameOver) {
+            timeCooldown.cancel();
+            return;
+        }
+        
         timeObject.GetComponent<UnityEngine.UI.Text>().text = Convert.ToInt32(timeCooldown.getCurrentTime()).ToString();
         if (!timeCooldown.active()) {
             mainCamera.GetComponent<PlayerWin>().timeoutWin();

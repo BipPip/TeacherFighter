@@ -9,6 +9,7 @@ public class PlayerWin : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
     private bool player1Win, player2Win;
+    public bool gameOver;
     private Animator player1Anim, player2Anim;
     
 
@@ -30,12 +31,14 @@ public class PlayerWin : MonoBehaviour
             if (!player2Win)
                 player2Anim.SetTrigger("Win");
             player2Win = true;
+            gameOver = true;
 
         }
         if (player2Anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
             if (!player1Win)
                 player1Anim.SetTrigger("Win");
             player1Win = true;
+            gameOver = true;
 
         }
 
@@ -48,11 +51,13 @@ public class PlayerWin : MonoBehaviour
             if (!player2Win)
                 player2Anim.SetTrigger("Win");
             player2Win = true;
+            gameOver = true;
             player1.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().UpdateBar(0, player1.GetComponent<PlatformerCharacter2D>().playerHealth);
         } else {
             if (!player1Win)
                 player1Anim.SetTrigger("Win");
             player1Win = true;
+            gameOver = true;
             player2.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().UpdateBar(0, player2.GetComponent<PlatformerCharacter2D>().playerHealth);
         }
     }
