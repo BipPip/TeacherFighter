@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets._2D;
+using UnityEngine.SceneManagement;
 
 public class PlayerWin : MonoBehaviour
 {
@@ -11,11 +12,13 @@ public class PlayerWin : MonoBehaviour
     private bool player1Win, player2Win;
     public bool gameOver;
     private Animator player1Anim, player2Anim;
+    private Cooldown exitLevelCountdown;
     
 
     private void Awake() {
         player1Anim = player1.GetComponent<Animator>(); 
         player2Anim = player2.GetComponent<Animator>();    
+        exitLevelCountdown = gameObject.AddComponent<Cooldown>();
     }
     void Start()
     {
@@ -27,6 +30,11 @@ public class PlayerWin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameOver && !exitLevelCountdown.active()) {
+            exitLevelCountdown.startCooldown(exitLevel, 3f);
+        }
+
+
         if (player1Anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
             if (!player2Win)
                 player2Anim.SetTrigger("Win");
@@ -68,6 +76,10 @@ public class PlayerWin : MonoBehaviour
             player1.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             player2.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().UpdateBar(0, player2.GetComponent<PlatformerCharacter2D>().playerHealth);
         }
+    }
+
+    public void exitLevel() {
+        SceneManager.LoadScene("LevelSelect");
     }
     
 }

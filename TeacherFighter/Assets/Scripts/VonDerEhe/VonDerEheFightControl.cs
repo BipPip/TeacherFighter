@@ -284,6 +284,7 @@ namespace UnityStandardAssets._2D
             foreach(Collider2D enemy in hitEnemies)
             {
                 if (!enemy.isTrigger && enemy.offset.y != 1.25f) {
+                AudioSource.PlayClipAtPoint(audioData[4].clip, gameObject.transform.position);
                 enemy.GetComponent<Damage>().doDamage(20f, 5f);
                 }
             }
