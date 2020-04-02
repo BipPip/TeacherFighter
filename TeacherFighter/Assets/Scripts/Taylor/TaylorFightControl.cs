@@ -95,6 +95,9 @@ namespace UnityStandardAssets._2D
 
         private void Update()
         {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
+                return;
+
             float distanceToLeft = GameObject.Find("/PlatformLeft").transform.position.x;
             distanceToLeft = distanceToLeft - (gameObject.transform.position.x + gameObject.GetComponent<CapsuleCollider2D>().size.x);
 
@@ -228,6 +231,8 @@ namespace UnityStandardAssets._2D
 
         private void FixedUpdate()
         {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
+                return;
             // Read the inputs.
             bool crouch = Input.GetKey(KeyCode.LeftControl);
             float h = CrossPlatformInputManager.GetAxis("Horizontal");

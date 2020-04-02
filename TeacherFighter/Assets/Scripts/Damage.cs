@@ -49,6 +49,8 @@ public class Damage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
+                return;
         h = CrossPlatformInputManager.GetAxis("Horizontal");
         h2 = CrossPlatformInputManager.GetAxis("Horizontal2");
         v = CrossPlatformInputManager.GetAxis("Vertical");

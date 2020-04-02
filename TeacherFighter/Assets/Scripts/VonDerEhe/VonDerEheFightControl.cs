@@ -82,6 +82,8 @@ namespace UnityStandardAssets._2D
 
         private void Update()
         {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
+                return;
 
             // Debug.Log(m_Character.m_Rigidbody2D.velocity.y);
             float distanceToLeft = GameObject.Find("/PlatformLeft").transform.position.x;
@@ -238,6 +240,9 @@ namespace UnityStandardAssets._2D
 
         private void FixedUpdate()
         {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
+                return;
+
             if(Input.GetKey("o"))
             {
                 Debug.Log("wow you found a secret thats so cool");
