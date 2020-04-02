@@ -188,7 +188,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d8675433a508ec47b8f895201eacf20, type: 3}
   m_Color: {r: 0.18039216, g: 0.14509805, b: 0.3019608, a: 1}
   m_FlipX: 0
@@ -435,7 +435,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 99
 --- !u!222 &267132003
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2345,6 +2345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeObject: {fileID: 267132000}
+  mainCamera: {fileID: 519420028}
 --- !u!1 &1962551960 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1448560980449628781, guid: 1daa33f840b082d4c81aed30c4990655,

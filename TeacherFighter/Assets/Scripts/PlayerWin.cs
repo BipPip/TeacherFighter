@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets._2D;
 
 public class PlayerWin : MonoBehaviour
 {
@@ -40,4 +41,20 @@ public class PlayerWin : MonoBehaviour
 
 
     }
+
+    public void timeoutWin() {
+        if (player1.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction 
+        < player2.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction) {
+            if (!player2Win)
+                player2Anim.SetTrigger("Win");
+            player2Win = true;
+            player1.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().UpdateBar(0, player1.GetComponent<PlatformerCharacter2D>().playerHealth);
+        } else {
+            if (!player1Win)
+                player1Anim.SetTrigger("Win");
+            player1Win = true;
+            player2.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().UpdateBar(0, player2.GetComponent<PlatformerCharacter2D>().playerHealth);
+        }
+    }
+    
 }

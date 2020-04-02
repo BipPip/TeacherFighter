@@ -8,6 +8,7 @@ public class GameTime : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject timeObject;
+    public GameObject mainCamera;
     private string timeText;
     private Cooldown timeCooldown;
 
@@ -26,5 +27,8 @@ public class GameTime : MonoBehaviour
     void Update()
     {
         timeObject.GetComponent<UnityEngine.UI.Text>().text = Convert.ToInt32(timeCooldown.getCurrentTime()).ToString();
+        if (!timeCooldown.active()) {
+            mainCamera.GetComponent<PlayerWin>().timeoutWin();
+        }
     }
 }
