@@ -14,7 +14,7 @@ using System;
          Application.targetFrameRate = target;
      }
      
-     void Update()
+     void FixedUpdate()
      {
          if(Application.targetFrameRate != target)
              Application.targetFrameRate = target;

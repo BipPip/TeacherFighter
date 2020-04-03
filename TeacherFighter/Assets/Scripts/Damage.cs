@@ -74,11 +74,7 @@ public class Damage : MonoBehaviour
             knockbacking = false;
             knockback = 0;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+  
       
 
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))

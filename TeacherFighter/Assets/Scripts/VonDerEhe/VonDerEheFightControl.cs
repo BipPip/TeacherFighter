@@ -80,7 +80,7 @@ namespace UnityStandardAssets._2D
         }
 
 
-        private void Update()
+        private void FixedUpdate()
         {
             
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
@@ -237,13 +237,7 @@ namespace UnityStandardAssets._2D
         // Debug.Log(gameObject.GetComponent<Rigidbody2D>().constraints);
             if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) damageWait.cancel();
             
-        }
-
-            
-        
-
-        private void FixedUpdate()
-        {
+     
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
                 return;
 

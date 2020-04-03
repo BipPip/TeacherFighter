@@ -17,11 +17,11 @@ public class Cooldown : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if(this.cooldownTimerActive)
-            this.cooldownTimer -= Time.deltaTime;    //Subtract the time since last frame from the timer.
+            this.cooldownTimer -= Time.fixedDeltaTime;    //Subtract the time since last frame from the timer.
         if (this.cooldownTimer < 0) 
         {
             this.cooldownTimer = 0;                  //If timer is less than 0, reset it to 0 as we don't want it to be negative

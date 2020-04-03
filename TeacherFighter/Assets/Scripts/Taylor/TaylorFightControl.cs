@@ -93,7 +93,8 @@ namespace UnityStandardAssets._2D
         }
 
 
-        private void Update()
+        
+        private void FixedUpdate()
         {
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
                 return;
@@ -227,10 +228,8 @@ namespace UnityStandardAssets._2D
 
             if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) damageWait.cancel();
           
-        }
+        
 
-        private void FixedUpdate()
-        {
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
                 return;
             // Read the inputs.
@@ -286,7 +285,7 @@ namespace UnityStandardAssets._2D
         void Light() 
         {
 
-        
+            // gameObject.GetComponent<MovePlayer>().moveFacingDirection(50, 0.5f);
 
             
             if(damageWait.isInitial()) 

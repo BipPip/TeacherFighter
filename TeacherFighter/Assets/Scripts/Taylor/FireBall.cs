@@ -15,7 +15,7 @@ public class FireBall : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         audioArray = gameObject.GetComponents(typeof(AudioSource));
@@ -29,7 +29,7 @@ public class FireBall : MonoBehaviour
         AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         rb.velocity = new Vector2(speed * transform.localScale.x, 0);
         
