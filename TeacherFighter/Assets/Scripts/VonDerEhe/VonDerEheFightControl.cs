@@ -274,8 +274,8 @@ namespace UnityStandardAssets._2D
             m_Jump = false;
             m_Dodge = false;
             
-            if (m_Character.m_Rigidbody2D.velocity.x != 0)
-                Debug.Log(m_Character.m_Rigidbody2D.velocity.x);
+            // if (m_Character.m_Rigidbody2D.velocity.x != 0)
+            //     Debug.Log(m_Character.m_Rigidbody2D.velocity.x);
             //   if (m_Character.preventMovement)
             //     Debug.Log(m_Character.preventMovement);
         }
