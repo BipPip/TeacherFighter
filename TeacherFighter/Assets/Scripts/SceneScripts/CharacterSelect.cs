@@ -61,10 +61,10 @@ public class CharacterSelect : MonoBehaviour
             if(i < numberOfPlayers)
             {
 
-               /* if(Input.GetButtonDown("Fire1" + charManager.players[i].inputId))
+                if(Input.GetButtonDown("Cancel" + charManager.players[i].inputId))
                 {
                     plInterfaces[i].playerBase.hasCharacter = false;
-                }*/
+                }
 
                 if(!charManager.players[i].hasCharacter)
                 {
@@ -84,7 +84,8 @@ public class CharacterSelect : MonoBehaviour
         if(bothPlayersSelected)
         {
             Debug.Log("Both Players have been selected");
-            //goes to the next level whatever
+
+            SceneManager.LoadScene("LevelSelect");
         }
         else
         {
@@ -159,8 +160,7 @@ public class CharacterSelect : MonoBehaviour
 
         if(Input.GetButtonDown("Submit" + playerId))
         {
-           // pl.createdCharacter.GetComponentsInChildren<Animator>().Player("Win"); // Plays the winning animation on selection change later xoxo
-
+            Debug.Log("player" + playerId + " has selected a character");
            //Passes to Character Manager
            pl.playerBase.playerprefab = charManager.returnCharacterWithID(pl.activePortrait.CharacterId).prefab;
 
@@ -181,7 +181,7 @@ public class CharacterSelect : MonoBehaviour
             }
 
             GameObject go = Instantiate(
-                CharacterManager.getInstance().returnCharacterWithID(pl.activePortrait.CharacterId).prefab,
+                CharacterManager.getInstance().returnCharacterWithID(pl.activePortrait.CharacterId).displayIcon,
                 pl.charVisPos.position,
                 Quaternion.identity) as GameObject;
             
@@ -189,7 +189,6 @@ public class CharacterSelect : MonoBehaviour
 
             pl.previewPortrait = pl.activePortrait;
 
-            //Needs directional alignment
         }
     }
 

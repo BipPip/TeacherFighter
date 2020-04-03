@@ -40,7 +40,9 @@ public class SwipeLock : MonoBehaviour
             {
                 transform.GetChild(i).localScale = Vector2.Lerp(transform.GetChild(i).localScale, new Vector2(1f,1f), 0.1f);
 
-                    // here is where it knows what button is selected
+                    // here is where it knows what button is selected To Do:
+                    
+                        
 
                 for(int a = 0; a < pos.Length; a++)
                 {

@@ -3,7 +3,9 @@ guid: 9d2e748e003b4804f9898b7de7053538
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - portraitCanvas: {fileID: 8313075901043768680, guid: 5e9a557645fb5fc4a97eabf544bcab99,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

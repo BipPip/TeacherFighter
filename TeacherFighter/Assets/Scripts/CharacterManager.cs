@@ -24,21 +24,7 @@ public class CharacterManager : MonoBehaviour
         return retVal;
     }
 
-    /*public PlayerBase returnPlayerFromStates(StateManager states)
-    {
-        PlayerBase retVal = null;
-
-        for(int i = 0; i < players.Count; i++)
-        {
-            if(plpayers[i].playerStates == states)
-            {
-                retVal = players[i];
-                break;
-            }
-        }
-        return retVal;
-    }*/
-
+    
     public static CharacterManager instance;
     public static CharacterManager getInstance()
     {
@@ -58,6 +44,8 @@ public class CharacterBase
 {
     public string CharID;
     public GameObject prefab;
+
+    public GameObject displayIcon;
 }
 
 [System.Serializable]
@@ -65,10 +53,10 @@ public class PlayerBase
 {
     public string playerId;
     public string inputId;
-    //public PlayerType playerType;
     public bool hasCharacter;
     public GameObject playerprefab;
-    //public StateManager playerStates;
-    public int score;
+
+    
+    //public int score; // not sure if well need this later but here it is
 
 }

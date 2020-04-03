@@ -9,38 +9,24 @@ using System;
 
 public class RunTimeSpawn : MonoBehaviour
 {
-    // Start is called before the first frame update
+   
+    /*
+        I believe everything can be accessed by the character select script 
+        keep in mind it does not have to be added to the scene it gets carried over
+        when it goes from chracter select to the level so there should be no visibility 
+        issues. Some uses can be found in the character manager script.
+    */
 
-    string prefabName;
+   public Transform player1spawn;
+   public Transform player2spawn;
 
-    public GameObject LeftCTaylor;
-    //public GameObject LeftCVonderehe;
+   CharacterManager charManager;
 
-    public GameObject rightBar, rightHealth, rightStamina, rightCooldown;
-    public GameObject leftBar, leftHealth, leftStamina, leftCooldown;
-    public static GameObject healthLeft;
-    private PlatformerCharacter2D player1;
-
-
+   //public List<PlayerInterfaces> plInterfaces = new List<PlayerInterfaces>();
 
     void Start()
     {
-       
-
-        Debug.Log("RunTimeSpawn Script" + prefabName);
-       
-        //GameObject p1Health = Instantiate(leftBar,new Vector3(-10,10.8f,0), Quaternion.identity, GameObject.FindGameObjectWithTag("Canvas").transform);
-        //GameObject p1Cooldown = Instantiate(leftCooldown,new Vector3(-3.42f,7.25f,0), Quaternion.identity, GameObject.FindGameObjectWithTag("Canvas").transform);
-
-        //GameObject p2Health = Instantiate(rightBar,new Vector3(10,10.8f,0), Quaternion.identity, GameObject.FindGameObjectWithTag("Canvas").transform);
-        //GameObject p2Cooldown = Instantiate(rightCooldown,new Vector3(3.42f,7.25f,0), Quaternion.identity, GameObject.FindGameObjectWithTag("Canvas").transform);
-
-        //player1 = GetComponent<PlatformerCharacter2D>();
-        //player1.setUI(rightHealth,rightStamina, rightCooldown);
-        Instantiate(LeftCTaylor); //maybe in the constructor say what character it is
-
-        //the issue is now that when setting the ui of the character its not saying who it is.
-        
+        // everything gets instantiated in here
     }
 
 }
