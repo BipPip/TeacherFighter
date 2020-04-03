@@ -15,7 +15,7 @@ public class FireBall : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         audioArray = gameObject.GetComponents(typeof(AudioSource));
@@ -29,7 +29,7 @@ public class FireBall : MonoBehaviour
         AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         rb.velocity = new Vector2(speed * transform.localScale.x, 0);
         
@@ -37,8 +37,8 @@ public class FireBall : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        
-
+        // Debug.Log(col.offset.y);
+        if (!col.isTrigger && col.offset.y != 1.19f) {
         if(col.gameObject.tag == "Player")
         {
             col.gameObject.GetComponent<Damage>().doDamage(8f, 4.75f);
@@ -46,6 +46,7 @@ public class FireBall : MonoBehaviour
         AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
         Destroy(gameObject);
         Instantiate(impactEffect, transform.position, transform.rotation);
+        }
     }
 
 }
