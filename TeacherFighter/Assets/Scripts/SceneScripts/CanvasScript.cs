@@ -16,11 +16,11 @@ namespace VariablesCanva{
         public static SimpleHealthBar healthBarRight;
         void Start()
         {
-            healthBarLeft = leftHealthBarObject.GetComponent<SimpleHealthBar>();
-            healthBarRight = rightHealthBarObject.GetComponent<SimpleHealthBar>();
+            // healthBarLeft = leftHealthBarObject.GetComponent<SimpleHealthBar>();
+            // healthBarRight = rightHealthBarObject.GetComponent<SimpleHealthBar>();
         
-            CooldownRight = rightCooldown;
-            CooldownLeft = leftCooldown;
+            // CooldownRight = rightCooldown;
+            // CooldownLeft = leftCooldown;
         }
 
     }

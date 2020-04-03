@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:TeacherFighter/Assets/Prefabs/CooldownLeftWhite Variant.prefab.meta
-guid: 586447f64aa8c6d4f86caa62bdc513ff
-=======
-guid: d3689838cf7bb3049921a52393e1bde0
->>>>>>> master:TeacherFighter/Assets/Prefabs/CharacterTaylorOld.prefab.meta
+guid: d8f45a63fd9992c4fa0dc2805527db3d
 PrefabImporter:
   externalObjects: {}
   userData: 
