@@ -24,7 +24,7 @@ public class GameTime : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (mainCamera.GetComponent<PlayerWin>().gameOver) {
             timeCooldown.cancel();
