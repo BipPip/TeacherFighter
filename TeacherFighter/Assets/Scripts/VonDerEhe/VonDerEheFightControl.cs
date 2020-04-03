@@ -82,6 +82,7 @@ namespace UnityStandardAssets._2D
 
         private void Update()
         {
+            
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
                 return;
 
@@ -96,8 +97,9 @@ namespace UnityStandardAssets._2D
                 m_Character.nearWall = true;
                 // gameObject.GetComponents<BoxCollider2D>()[1].isTrigger = false;
                 gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(0f, 1.19f);
-                if (m_Character.m_Rigidbody2D.velocity.y > -21f && !m_Character.m_Grounded && ((distanceToLeft > -4.57 && !m_Character.m_FacingRight) || (distanceToRight <= 10 && m_Character.m_FacingRight)))
-                    m_Character.m_Rigidbody2D.velocity = new Vector2(m_Character.m_Rigidbody2D.velocity.x, m_Character.m_Rigidbody2D.velocity.y - 0.5f);
+                if (m_Character.m_Rigidbody2D.velocity.y > -21f && !m_Character.m_Grounded && ((distanceToLeft > -4.57 && !m_Character.m_FacingRight) || (distanceToRight <= 10 && m_Character.m_FacingRight))) 
+                        m_Character.m_Rigidbody2D.velocity = new Vector2(m_Character.m_Rigidbody2D.velocity.x, m_Character.m_Rigidbody2D.velocity.y - 0.5f);
+               
             }
             else {
                 m_Character.nearWall = false;
@@ -272,6 +274,10 @@ namespace UnityStandardAssets._2D
             m_Jump = false;
             m_Dodge = false;
             
+            if (m_Character.m_Rigidbody2D.velocity.x != 0)
+                Debug.Log(m_Character.m_Rigidbody2D.velocity.x);
+            //   if (m_Character.preventMovement)
+            //     Debug.Log(m_Character.preventMovement);
         }
 
         void LariatAttack()

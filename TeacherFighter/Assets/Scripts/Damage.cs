@@ -11,6 +11,7 @@ public class Damage : MonoBehaviour
 
     private Animator anim;
     private PlatformerCharacter2D m_Character;
+    private MovePlayer mover;
     private SimpleHealthBar playerHealthBar;
     private Cooldown blockDelay;
     private Cooldown forceStun;
@@ -40,15 +41,46 @@ public class Damage : MonoBehaviour
         this.forceStun = gameObject.AddComponent<Cooldown>();
         this.playerHealth = gameObject.GetComponent<PlatformerCharacter2D>().playerHealth;
         this.m_Character = gameObject.GetComponent<PlatformerCharacter2D>();
+        this.mover = gameObject.GetComponent<MovePlayer>();
         
         
         // Debug.Log(playerHealth);
         
     }
 
+    void FixedUpdate() {
+        if(knockbacking && knockback > 0) {
+            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            //anim.SetTrigger("Hit");
+            if (!gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
+                // gameObject.transform.position += new Vector3(0.5f, 0, 0);
+                // m_Character.Move(100f, false, false);
+                // m_Character.
+                // m_Character.m_Rigidbody2D.velocity += new Vector2(0.5f, m_Character.m_Rigidbody2D.velocity.y);
+                // m_Character.m_Rigidbody2D.AddForce(new Vector2(0.5f * 10000f, 0f));
+                // mover.moveFacingDirection(-50, 1);
+                
+                m_Character.m_Rigidbody2D.velocity = new Vector2(50f, m_Character.m_Rigidbody2D.velocity.y);
+            }
+            else {
+                // gameObject.transform.position += new Vector3(-0.5f, 0, 0);
+                
+                m_Character.m_Rigidbody2D.velocity = new Vector2(-50f, m_Character.m_Rigidbody2D.velocity.y);
+            }
+
+            knockback--;
+        }
+        else {
+            knockbacking = false;
+            knockback = 0;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+      
+
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
                 return;
         h = CrossPlatformInputManager.GetAxis("Horizontal");
@@ -70,28 +102,8 @@ public class Damage : MonoBehaviour
             gameObject.GetComponent<PlayerJumpPush>().isColliding = false;
 
         
-        if(knockbacking && knockback > 0) {
-            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-            //anim.SetTrigger("Hit");
-            if (!gameObject.GetComponent<PlatformerCharacter2D>().m_FacingRight) {
-                // gameObject.transform.position += new Vector3(0.5f, 0, 0);
-                // m_Character.Move(100f, false, false);
-                // m_Character.
-                // m_Character.m_Rigidbody2D.velocity += new Vector2(0.5f, m_Character.m_Rigidbody2D.velocity.y);
-                // m_Character.m_Rigidbody2D.AddForce(new Vector2(0.5f * 10000f, 0f));
-                m_Character.m_Rigidbody2D.velocity = new Vector2(50f, m_Character.m_Rigidbody2D.velocity.y);
-            }
-            else {
-                // gameObject.transform.position += new Vector3(-0.5f, 0, 0);
-                m_Character.m_Rigidbody2D.velocity = new Vector2(-50f, m_Character.m_Rigidbody2D.velocity.y);
-            }
-
-            knockback--;
-        }
-        else {
-            knockbacking = false;
-            knockback = 0;
-        }
+        
+        
         
 
         if(this.m_Character.m_Grounded && this.stamina.getStamina() > 0 && (gameObject.name == "CharacterTaylor" && ((v == 1 && h < 1 && h > -1) || (h < 0 && m_Character.m_FacingRight) || (h > 0 && !m_Character.m_FacingRight) || ((Input.GetKey(KeyCode.A) && m_Character.m_FacingRight) || (Input.GetKey(KeyCode.D) && !m_Character.m_FacingRight) || Input.GetKey(KeyCode.S)))
@@ -212,9 +224,11 @@ public class Damage : MonoBehaviour
             anim.SetTrigger("Hit");
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             knockbacking = true;
+            // mover.moveFacingDirection(-50, knockback / 10);
            
             
         }
+        
     }
     
     

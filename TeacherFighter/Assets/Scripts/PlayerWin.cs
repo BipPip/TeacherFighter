@@ -34,7 +34,7 @@ public class PlayerWin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(player2Won);
+        
         
         if (gameOver && !exitLevelCountdown.active()) {
             match++;

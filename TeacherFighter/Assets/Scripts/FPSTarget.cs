@@ -6,7 +6,7 @@ using System;
  public class FPSTarget : MonoBehaviour
  {
      
-     public int target = 100;
+     public int target = 60;
      
      void Awake()
      {
