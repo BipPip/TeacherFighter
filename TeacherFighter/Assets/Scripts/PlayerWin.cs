@@ -20,6 +20,9 @@ public class PlayerWin : MonoBehaviour
 
     public GameObject round1Text;
     public GameObject round2Text;
+    public GameObject knockoutText;
+    public GameObject player1WinText;
+    public GameObject player2WinText;
     
 
     private void Awake() {
@@ -48,6 +51,9 @@ public class PlayerWin : MonoBehaviour
         if (gameOver && !exitLevelCountdown.active()) {
             match++;
             exitLevelCountdown.startCooldown(exitLevel, 3f);
+            if (!player2Won && !player1Won) knockoutText.GetComponent<TextFlash>().turnOn(2);
+            if (player1Won && !player2Won) player1WinText.GetComponent<TextFlash>().turnOn(2);
+            if (player2Won && !player1Won) player2WinText.GetComponent<TextFlash>().turnOn(2);
         }
 
 
