@@ -83,6 +83,7 @@
      <Compile Include="Assets\Scripts\Stamina.cs" />
      <Compile Include="Assets\Scripts\Taylor\FireBall.cs" />
      <Compile Include="Assets\Scripts\Taylor\TaylorFightControl.cs" />
+     <Compile Include="Assets\Scripts\TextFlash.cs" />
      <Compile Include="Assets\Scripts\VonDerEhe\VonDerEheFightControl.cs" />
      <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\AsteroidController.cs" />
      <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\GameManager.cs" />
@@ -90,6 +91,7 @@
      <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Simple Health Bar\_Asteroids Example\Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Simple Health Bar\Scripts\SimpleHealthBar.cs" />
+     <Compile Include="Assets\Test.cs" />
      <Compile Include="Assets\Zero Rare\Retro Sound Effects\Demo\Demo.cs" />
      <None Include="Assets\Simple Health Bar\README.txt" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />

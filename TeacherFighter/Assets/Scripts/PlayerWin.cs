@@ -17,6 +17,9 @@ public class PlayerWin : MonoBehaviour
     public static int match = 0;
     public static bool player1Won;
     public static bool player2Won;
+
+    public GameObject round1Text;
+    public GameObject round2Text;
     
 
     private void Awake() {
@@ -29,6 +32,12 @@ public class PlayerWin : MonoBehaviour
         player1Win = false;
         player2Win = false;
         
+        if (!player2Won && !player1Won) {
+            round1Text.GetComponent<TextFlash>().turnOn(2);
+        } else {
+            round2Text.GetComponent<TextFlash>().turnOn(2);
+        }
+
     }
 
     // Update is called once per frame
