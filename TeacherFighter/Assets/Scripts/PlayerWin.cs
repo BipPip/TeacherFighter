@@ -9,6 +9,8 @@ public class PlayerWin : MonoBehaviour
     // Start is called before the first frame update
     public GameObject player1;
     public GameObject player2;
+
+    public GameObject player1Token1, player1Token2, player2Token1, player2Token2;
     private bool player1Win, player2Win;
     public bool gameOver;
     private Animator player1Anim, player2Anim;
@@ -43,6 +45,8 @@ public class PlayerWin : MonoBehaviour
             round2Text.GetComponent<TextFlash>().turnOn(2);
         }
 
+        updateTokens();
+
     }
 
     // Update is called once per frame
@@ -56,6 +60,7 @@ public class PlayerWin : MonoBehaviour
             if (player1WinCount != 2 && player2WinCount != 2) knockoutText.GetComponent<TextFlash>().turnOn(2);
             if (player1WinCount == 2) player1WinText.GetComponent<TextFlash>().turnOn(2);
             if (player2WinCount == 2) player2WinText.GetComponent<TextFlash>().turnOn(2);
+            updateTokens();
         }
 
 
@@ -133,6 +138,14 @@ public class PlayerWin : MonoBehaviour
         
 
     
+    }
+
+    private void updateTokens() {
+        if (player1WinCount == 1) player1Token1.GetComponent<SpriteRenderer>().enabled = true;
+        if (player1WinCount == 2) player1Token2.GetComponent<SpriteRenderer>().enabled = true;
+
+        if (player2WinCount == 1) player2Token1.GetComponent<SpriteRenderer>().enabled = true;
+        if (player2WinCount == 2) player2Token2.GetComponent<SpriteRenderer>().enabled = true;
     }
     
 }

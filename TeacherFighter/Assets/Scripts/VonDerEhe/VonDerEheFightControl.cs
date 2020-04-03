@@ -83,8 +83,8 @@ namespace UnityStandardAssets._2D
         private void Update()
         {
             
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
-                return;
+            if (anim.GetBool("Won") || anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) return;
+                
 
             // Debug.Log(m_Character.m_Rigidbody2D.velocity.y);
             float distanceToLeft = GameObject.Find("/PlatformLeft").transform.position.x;
@@ -187,14 +187,14 @@ namespace UnityStandardAssets._2D
                 if (!mediumCooldown.active()) {
                     Medium();
                     mediumCooldown.startCooldown(0.5f);
-                    moveActive.startCooldown(0.2f);
+                    moveActive.startCooldown(0.5f);
                 }
             }
             else if (Input.GetButtonDown("Vonder_Heavy")) {
                 if (!heavyCooldown.active()) {
                     Heavy();
                     heavyCooldown.startCooldown(0.8f);
-                    moveActive.startCooldown(0.3f);
+                    moveActive.startCooldown(0.8f);
                 }
             }
 
@@ -244,8 +244,7 @@ namespace UnityStandardAssets._2D
 
         private void FixedUpdate()
         {
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die"))
-                return;
+            if (anim.GetBool("Won") || anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) return;
 
             if(Input.GetKey("o"))
             {
