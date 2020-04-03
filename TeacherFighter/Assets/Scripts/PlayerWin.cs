@@ -13,6 +13,10 @@ public class PlayerWin : MonoBehaviour
     public bool gameOver;
     private Animator player1Anim, player2Anim;
     private Cooldown exitLevelCountdown;
+
+    public static int match = 0;
+    public static bool player1Won;
+    public static bool player2Won;
     
 
     private void Awake() {
@@ -30,7 +34,10 @@ public class PlayerWin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(player2Won);
+        
         if (gameOver && !exitLevelCountdown.active()) {
+            match++;
             exitLevelCountdown.startCooldown(exitLevel, 3f);
         }
 
@@ -38,7 +45,8 @@ public class PlayerWin : MonoBehaviour
         if (player1Anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
             if (!player2Win)
                 player2Anim.SetTrigger("Win");
-            player2Anim.SetBool("Won", true);
+            if (player2Won)
+                player2Anim.SetBool("Won", true);
             player2Win = true;
             gameOver = true;
             player2.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
@@ -47,7 +55,8 @@ public class PlayerWin : MonoBehaviour
         if (player2Anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) {
             if (!player1Win)
                 player1Anim.SetTrigger("Win");
-            player1Anim.SetBool("Won", true);
+            if (player1Won)
+                player1Anim.SetBool("Won", true);
             player1Win = true;
             gameOver = true;
             player1.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
@@ -60,17 +69,19 @@ public class PlayerWin : MonoBehaviour
     public void timeoutWin() {
         if (player1.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction 
         < player2.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().GetCurrentFraction) {
-            if (!player2Win)
+            if (!player2Win && player2Won)
                 player2Anim.SetTrigger("Win");
-            player2Anim.SetBool("Won", true);
+            if (player2Won)
+                player2Anim.SetBool("Won", true);
             player2Win = true;
             gameOver = true;
             player2.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             player1.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>().UpdateBar(0, player1.GetComponent<PlatformerCharacter2D>().playerHealth);
         } else {
-            if (!player1Win)
+            if (!player1Win && player1Won)
                 player1Anim.SetTrigger("Win");
-            player1Anim.SetBool("Won", true);
+            if (player1Won)
+                player1Anim.SetBool("Won", true);
             player1Win = true;
             gameOver = true;
             player1.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
@@ -79,7 +90,22 @@ public class PlayerWin : MonoBehaviour
     }
 
     public void exitLevel() {
-        SceneManager.LoadScene("LevelSelect");
+        if (player1Won || player2Won) {
+            player1Won = false;
+            player2Won = false;
+            SceneManager.LoadScene("LevelSelect");
+        } else {
+            player1Won = player1Win;
+            player2Won = player2Win;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            
+        }
+        
+        
+        
+        
+
+    
     }
     
 }

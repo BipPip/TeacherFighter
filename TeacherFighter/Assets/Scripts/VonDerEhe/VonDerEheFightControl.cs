@@ -147,6 +147,7 @@ namespace UnityStandardAssets._2D
             // Handle Inputs
             // Debug.Log(gameObject.GetComponent<PlayerJumpPush>().isColliding);
             if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !moveActive.active() && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Block") && !gameObject.GetComponent<PlayerJumpPush>().isColliding) {
+            
             if(Input.GetButtonDown("Vonder_Lariat"))
             {
                 if (stamina.getStamina() >= 45f && gameObject.GetComponent<PlatformerCharacter2D>().m_Grounded) {
@@ -156,6 +157,7 @@ namespace UnityStandardAssets._2D
                         lariatCooldown.startCooldown(1f);
                         // lariatActive = true;
                         // lariatTimer = lariatCooldown;
+                        moveActive.startCooldown(0.4f);
                     }
                 }
             }
