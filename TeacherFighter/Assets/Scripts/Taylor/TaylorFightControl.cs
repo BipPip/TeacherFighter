@@ -52,12 +52,17 @@ namespace UnityStandardAssets._2D
         private Component[] audioArray;
         private AudioSource[] audioData;
 
-
+        private GameObject player1, player2;
 
         private void Start()
         {
-           anim = gameObject.GetComponent<Animator>();
-           stamina = gameObject.GetComponent<Stamina>();
+
+
+            player1 = GameObject.Find("Main Camera").GetComponent<PlayerLoad>().player1;
+            player2 = GameObject.Find("Main Camera").GetComponent<PlayerLoad>().player2;
+
+            anim = gameObject.GetComponent<Animator>();
+            stamina = gameObject.GetComponent<Stamina>();
            
      
             m_Character = GetComponent<PlatformerCharacter2D>();
@@ -122,8 +127,11 @@ namespace UnityStandardAssets._2D
                 anim.speed = 1f;
             }
 
-            if (!m_Jump)
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+            if (!m_Jump) { 
+                if (gameObject == player1) m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+                if (gameObject == player2) m_Jump = CrossPlatformInputManager.GetButtonDown("Jump2");
+
+            }
             if (!m_Dodge)
             
                 m_Dodge = CrossPlatformInputManager.GetButtonDown("Taylor_Dodge");
@@ -144,8 +152,9 @@ namespace UnityStandardAssets._2D
             if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !moveActive.active() &&
             !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Block") && !gameObject.GetComponent<PlayerJumpPush>().isColliding) 
             {
-
-                if(Input.GetButtonDown("Taylor_Fire") || Input.GetAxis("Axis 10") != 0 && !heavyActive)
+                
+                if(((Input.GetButtonDown("Taylor_Fire") || Input.GetAxis("Axis 10") != 0) && gameObject == player1
+                 || (Input.GetButtonDown("Taylor_Fire 2") || Input.GetAxis("Axis 10 2") != 0) && gameObject == player2) && !heavyActive)
                 {
                     if (stamina.getStamina() >= 20f) 
                     {
@@ -157,7 +166,7 @@ namespace UnityStandardAssets._2D
                         }
                     }
                 }
-                else if (Input.GetButtonDown("Taylor_Light") && !heavyActive) 
+                else if ((Input.GetButtonDown("Taylor_Light") && gameObject == player1) || (Input.GetButtonDown("Taylor_Light 2") && gameObject == player2) && !heavyActive) 
                 {
                     if (!lightCooldown.active()) 
                     {
@@ -228,15 +237,18 @@ namespace UnityStandardAssets._2D
             if (anim.GetBool("Won") || anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) return;
             // Read the inputs.
             bool crouch = Input.GetKey(KeyCode.LeftControl);
-            float h = CrossPlatformInputManager.GetAxis("Horizontal");
+            float h = 0;
+            if (gameObject == player1) h = CrossPlatformInputManager.GetAxis("Horizontal");
+            if (gameObject == player2) h = CrossPlatformInputManager.GetAxis("Horizontal2");
+            
         
-            if(m_Dodge) 
-            {
-                if(h > 0) 
-                    h = 5;
-                else if (h < 0) 
-                    h = (-5);
-            }
+            // if(m_Dodge) 
+            // {
+            //     if(h > 0) 
+            //         h = 5;
+            //     else if (h < 0) 
+            //         h = (-5);
+            // }
 
             // Pass all parameters to the character control script.
             if (!gameObject.GetComponent<Damage>().knockbacking && !m_Character.preventMovement)

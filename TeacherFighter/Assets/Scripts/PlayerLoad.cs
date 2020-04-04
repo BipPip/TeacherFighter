@@ -38,6 +38,11 @@ public class PlayerLoad : MonoBehaviour
         m_Character2.healthBarObject = barRight.transform.Find("healthBarRight").gameObject;
         m_Character2.staminaBarObject = barRight.transform.Find("StaminaRight").gameObject;
         m_Character2.cooldownUI = GameObject.Find("CooldownRight");
+        m_Character2.m_FacingRight = false;
+        if (player1.name == player2.name)
+            player2.transform.localScale = new Vector3(player2.transform.localScale.x * -1, player2.transform.localScale.y, player2.transform.localScale.z);
+
+
         foreach(CharacterBase character in characterManager.characterList) {
             if (character.prefab == characterManager.players[1].playerprefab) {
                 barRight.transform.Find("Head").gameObject.GetComponent<SpriteRenderer>().sprite = character.displayIcon.GetComponent<SpriteRenderer>().sprite;

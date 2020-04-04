@@ -39,7 +39,7 @@ public class PlayerJumpPush : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {  
         // Debug.Log(other.name);
         // Debug.Log(Math.Abs(other.transform.position.x - m_Character.transform.position.x));
@@ -129,7 +129,7 @@ public class PlayerJumpPush : MonoBehaviour
         isColliding = true;
     // if(count == 0) m_Character = GetComponent<PlatformerCharacter2D>();
      // Rest of the code
-        if (other.tag == "Player" && other.name != gameObject.name) {
+        if (other.tag == "Player" && other.gameObject != gameObject) {
             // Debug.Log("EPIC");
             // m_Character = other.GetComponentInParent<PlatformerCharacter2D>();
             m_Character.preventMovement = true;
@@ -167,6 +167,8 @@ public class PlayerJumpPush : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) {
       
+        // if (m_Character.m_Grounded) return;
+        Debug.Log("Test");
         // if (other.GetComponent<PlatformerCharacter2D>().nearWall) {
         //     nonTriggerCollide = true;
         //     // other.GetComponent<PlatformerCharacter2D>().preventMovement = true;
