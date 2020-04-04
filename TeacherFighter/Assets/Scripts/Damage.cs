@@ -49,6 +49,8 @@ public class Damage : MonoBehaviour
     }
 
     void FixedUpdate() {
+
+
         if(knockbacking && knockback > 0) {
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             //anim.SetTrigger("Hit");
@@ -93,7 +95,7 @@ public class Damage : MonoBehaviour
         }
         // Debug.Log(v);
         
-
+     
         if(m_Character.m_Grounded)
             gameObject.GetComponent<PlayerJumpPush>().isColliding = false;
 

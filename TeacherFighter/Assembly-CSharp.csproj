@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\MovePlayer.cs" />
      <Compile Include="Assets\Scripts\PlayerDirection.cs" />
      <Compile Include="Assets\Scripts\PlayerJumpPush.cs" />
+     <Compile Include="Assets\Scripts\PlayerLoad.cs" />
      <Compile Include="Assets\Scripts\PlayerWin.cs" />
      <Compile Include="Assets\Scripts\PortraitInfo.cs" />
      <Compile Include="Assets\Scripts\Respawn.cs" />

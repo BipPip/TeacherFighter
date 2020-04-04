@@ -1055,14 +1055,14 @@ MonoBehaviour:
     playerprefab: {fileID: 0}
   characterList:
   - CharID: CharVonDerEhe
-    prefab: {fileID: 7791815108081736059, guid: da5d9e23b6ceffd4896d0d459313af42,
+    prefab: {fileID: 1408647338717957753, guid: fb608cc9dd8803a4a969f94063ea5f6e,
       type: 3}
-    displayIcon: {fileID: 4148011665993948963, guid: 74353052de6a6e247abd63ef5b412167,
+    displayIcon: {fileID: 773706606651379167, guid: 74353052de6a6e247abd63ef5b412167,
       type: 3}
   - CharID: CharTaylor
-    prefab: {fileID: 6087529806493323219, guid: d3689838cf7bb3049921a52393e1bde0,
+    prefab: {fileID: 4936401797913854266, guid: de6d3833226b63343a90b3d198fa39b0,
       type: 3}
-    displayIcon: {fileID: 4173160570883143648, guid: 159866239c5a50a41be3d37958ee619a,
+    displayIcon: {fileID: 3498089304221896039, guid: 159866239c5a50a41be3d37958ee619a,
       type: 3}
 --- !u!4 &1958239408
 Transform:

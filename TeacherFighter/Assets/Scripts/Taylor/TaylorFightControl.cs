@@ -59,11 +59,7 @@ namespace UnityStandardAssets._2D
            anim = gameObject.GetComponent<Animator>();
            stamina = gameObject.GetComponent<Stamina>();
            
-        }
-      
      
-        private void Awake()
-        {
             m_Character = GetComponent<PlatformerCharacter2D>();
             startPosition = transform.position;
             anim = gameObject.GetComponent<Animator>();

@@ -50,7 +50,7 @@ namespace UnityStandardAssets._2D
         private Component[] audioArray;
        
     
-        private void Awake()
+        private void Start()
         {
             m_Character = GetComponent<PlatformerCharacter2D>();
             startPosition = transform.position;
