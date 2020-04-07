@@ -30,6 +30,8 @@ namespace UnityStandardAssets._2D
         public GameObject cooldownUI;
 
         public float playerHealth;
+        public bool preventMovement;
+        public bool nearWall;
 
         //public Boolean isPlayer1;
      
@@ -41,8 +43,8 @@ namespace UnityStandardAssets._2D
             m_CeilingCheck = transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
-
-            //healthBarObject = gameObject.GetComponent<CanvasScript>().leftHealthBarObject.GetComponent<SimpleHealthBar>();
+            nearWall = false;
+            //healthBar = healthBarObject.GetComponent<SimpleHealthBar>();
         }
 
         //on instantiating a player call this to set the objects
@@ -62,7 +64,7 @@ namespace UnityStandardAssets._2D
             Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
             for (int i = 0; i < colliders.Length; i++)
             {
-                if (colliders[i].gameObject != gameObject)
+                if (colliders[i].gameObject != gameObject && colliders[i].tag != "Player")
                     m_Grounded = true;
             }
             m_Anim.SetBool("Ground", m_Grounded);

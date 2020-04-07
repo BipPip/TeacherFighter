@@ -12,6 +12,11 @@ namespace UnityStandardAssets._2D
         private bool m_Jump;
         private bool m_Dodge;
         public bool lariatActive;                 //Is this timer active?
+        public bool disableMove;
+
+        public bool startedWait;
+        public bool isColliding;
+        private Cooldown wait;
 
         private SimpleHealthBar playerHealthBar;
         private SimpleHealthBar staminaBar;
@@ -31,6 +36,7 @@ namespace UnityStandardAssets._2D
         private Cooldown heavyCooldown;
         private Cooldown moveActive; // Used because there is a slight delay between anim.trigger and the actual animation returning active
         private Cooldown damageWait;
+        private Cooldown animEnd;
         private bool mediumActive, heavyActive, jumpActive, lightActive;
 
         public Animator anim;
@@ -42,6 +48,7 @@ namespace UnityStandardAssets._2D
 
         private AudioSource[] audioData;
         private Component[] audioArray;
+       
     
         private void Awake()
         {
@@ -64,14 +71,47 @@ namespace UnityStandardAssets._2D
             lightCooldown = gameObject.AddComponent<Cooldown>();
             lariatCooldown = gameObject.AddComponent<Cooldown>();
             damageWait = gameObject.AddComponent<Cooldown>();
+            animEnd = gameObject.AddComponent<Cooldown>();
             moveActive = gameObject.AddComponent<Cooldown>();
             tripleJab = gameObject.AddComponent<SpamPrevention>();
             tripleJab.init(3, 0.5f);
+            wait = gameObject.AddComponent<Cooldown>();
+         
         }
 
 
         private void Update()
         {
+            
+            if (anim.GetBool("Won") || anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) return;
+                
+
+            // Debug.Log(m_Character.m_Rigidbody2D.velocity.y);
+            float distanceToLeft = GameObject.Find("/PlatformLeft").transform.position.x;
+            distanceToLeft = distanceToLeft - (gameObject.transform.position.x + gameObject.GetComponent<CapsuleCollider2D>().size.x);
+
+            float distanceToRight = GameObject.Find("/PlatformRight").transform.position.x;
+            distanceToRight = distanceToRight - (gameObject.transform.position.x + gameObject.GetComponent<CapsuleCollider2D>().size.x);
+
+            if ((distanceToLeft > -4.57 && m_Character.m_FacingRight) || (distanceToRight <= 10 && !m_Character.m_FacingRight)) {
+                m_Character.nearWall = true;
+                // gameObject.GetComponents<BoxCollider2D>()[1].isTrigger = false;
+                gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(0f, 1.19f);
+                if (m_Character.m_Rigidbody2D.velocity.y > -21f && !m_Character.m_Grounded && ((distanceToLeft > -4.57 && !m_Character.m_FacingRight) || (distanceToRight <= 10 && m_Character.m_FacingRight))) 
+                        m_Character.m_Rigidbody2D.velocity = new Vector2(m_Character.m_Rigidbody2D.velocity.x, m_Character.m_Rigidbody2D.velocity.y - 0.5f);
+               
+            }
+            else {
+                m_Character.nearWall = false;
+                // gameObject.GetComponents<BoxCollider2D>()[1].isTrigger = true;
+                gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(-0.1f, 1.19f);
+            }
+
+            // if (!wait.active() && startedWait == true) {
+            //     m_Character.preventMovement = false;
+            //     startedWait = false;
+            //     isColliding = false;
+            // }
             // Debug.Log(m_Character.m_Rigidbody2D.velocity.x);
             if(!moveActive.active()) {
                 anim.speed = 1f;
@@ -107,8 +147,9 @@ namespace UnityStandardAssets._2D
 
 
             // Handle Inputs
-
-            if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !moveActive.active() && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Block")) {
+            // Debug.Log(gameObject.GetComponent<PlayerJumpPush>().isColliding);
+            if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !moveActive.active() && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Block") && !gameObject.GetComponent<PlayerJumpPush>().isColliding) {
+            
             if(Input.GetButtonDown("Vonder_Lariat"))
             {
                 if (stamina.getStamina() >= 45f && gameObject.GetComponent<PlatformerCharacter2D>().m_Grounded) {
@@ -118,6 +159,7 @@ namespace UnityStandardAssets._2D
                         lariatCooldown.startCooldown(1f);
                         // lariatActive = true;
                         // lariatTimer = lariatCooldown;
+                        moveActive.startCooldown(0.4f);
                     }
                 }
             }
@@ -145,14 +187,14 @@ namespace UnityStandardAssets._2D
                 if (!mediumCooldown.active()) {
                     Medium();
                     mediumCooldown.startCooldown(0.5f);
-                    moveActive.startCooldown(0.2f);
+                    moveActive.startCooldown(0.5f);
                 }
             }
             else if (Input.GetButtonDown("Vonder_Heavy")) {
                 if (!heavyCooldown.active()) {
                     Heavy();
                     heavyCooldown.startCooldown(0.8f);
-                    moveActive.startCooldown(0.3f);
+                    moveActive.startCooldown(0.8f);
                 }
             }
 
@@ -176,19 +218,24 @@ namespace UnityStandardAssets._2D
 
             // Freeze constraints after doing basic moves
 
-            if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium") 
-            || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
-                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-            }
+            // if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium") 
+            // || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
+            //     gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            // }
 
             // Freeze constraints after doing basic moves
 
             if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Light") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Medium") 
             || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Heavy") || this.anim.GetCurrentAnimatorStateInfo(0).IsName("Lariat")) {
-                gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+                // disableMove = true;
+                if (!this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun") && !gameObject.GetComponent<Damage>().knockbacking && !gameObject.GetComponent<PlayerJumpPush>().isColliding)
+                    gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             }
-
-            
+            // else {
+            //     disableMove = false;
+            // }
+        // Debug.Log(gameObject.GetComponent<Rigidbody2D>().constraints);
+            if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) damageWait.cancel();
             
         }
 
@@ -197,6 +244,8 @@ namespace UnityStandardAssets._2D
 
         private void FixedUpdate()
         {
+            if (anim.GetBool("Won") || anim.GetCurrentAnimatorStateInfo(0).IsName("Win") || anim.GetCurrentAnimatorStateInfo(0).IsName("Die")) return;
+
             if(Input.GetKey("o"))
             {
                 Debug.Log("wow you found a secret thats so cool");
@@ -215,11 +264,19 @@ namespace UnityStandardAssets._2D
             }
 
             // Pass all parameters to the character control script.
-            if (!gameObject.GetComponent<Damage>().knockbacking)
+            if (!gameObject.GetComponent<Damage>().knockbacking && !m_Character.preventMovement)
                 m_Character.Move(h, crouch, m_Jump);
+
+            if(m_Jump && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Jumping") && !audioData[3].isPlaying && !jumpActive)
+                audioData[3].Play();
+            
             m_Jump = false;
             m_Dodge = false;
             
+            // if (m_Character.m_Rigidbody2D.velocity.x != 0)
+            //     Debug.Log(m_Character.m_Rigidbody2D.velocity.x);
+            //   if (m_Character.preventMovement)
+            //     Debug.Log(m_Character.preventMovement);
         }
 
         void LariatAttack()
@@ -233,8 +290,10 @@ namespace UnityStandardAssets._2D
 
             foreach(Collider2D enemy in hitEnemies)
             {
+                if (!enemy.isTrigger && enemy.offset.y != 1.25f) {
+                AudioSource.PlayClipAtPoint(audioData[4].clip, gameObject.transform.position);
                 enemy.GetComponent<Damage>().doDamage(20f, 5f);
-
+                }
             }
         }
         void Light() 
@@ -247,9 +306,13 @@ namespace UnityStandardAssets._2D
             {
                 if (tripleJab.beforeLast()) {
                 anim.SetTrigger("Light");
-                anim.speed = 0.1f;
+                if (anim.GetNextAnimatorStateInfo(0).IsName("Idle") || anim.GetNextAnimatorStateInfo(0).IsName("Walk") || anim.GetNextAnimatorStateInfo(0).IsName("Run")) { 
+                    animEnd.startCooldown(slowAnimSpeed, anim.GetCurrentAnimatorStateInfo(0).length);
+                } else {
+                    anim.speed = 0.1f;
+                }
                 
-                damageWait.startCooldown(Light, 0.1f);
+                damageWait.startCooldown(Light, 0.15f);
                 } else {
                     anim.SetTrigger("Light");
                     damageWait.startCooldown(Light, 0.01f);
@@ -258,16 +321,19 @@ namespace UnityStandardAssets._2D
 
             if(!damageWait.isInitial()) 
             {
+            if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) return;
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(basicAttackPoint.position, basicAttackRange, enemyLayers);
 
             foreach(Collider2D enemy in hitEnemies)
             {
-                // AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
+                if (!enemy.isTrigger && enemy.offset.y != 1.25f) {
+                AudioSource.PlayClipAtPoint(audioData[0].clip, gameObject.transform.position);
                 if (!tripleJab.notLast()) {
                     enemy.GetComponent<Damage>().doDamage(2.5f, 4f);
                 } else {
                     enemy.GetComponent<Damage>().doDamage(1.85f, 2f);
                 }
+            }
             }
             }
         }
@@ -280,13 +346,15 @@ namespace UnityStandardAssets._2D
              damageWait.startCooldown(Medium, 0.2f);
             }
             if(!damageWait.isInitial()) {
+                if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) return;
                 Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(longAttackPoint.position, basicAttackRange, enemyLayers);
 
                 foreach(Collider2D enemy in hitEnemies)
                 {
-                    //AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
+                    if (!enemy.isTrigger && enemy.offset.y != 1.25f) {
+                    AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
                     enemy.GetComponent<Damage>().doDamage(5f, 3f);
-
+                    }
                 }
             }
         }
@@ -304,14 +372,41 @@ namespace UnityStandardAssets._2D
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(shortAttackPoint.position, basicAttackRange, enemyLayers);
             foreach(Collider2D enemy in hitEnemies)
             {   
-                // AudioSource.PlayClipAtPoint(audioData[1].clip, gameObject.transform.position);
+                if (!enemy.isTrigger && enemy.offset.y != 1.25f) {
+                AudioSource.PlayClipAtPoint(audioData[2].clip, gameObject.transform.position);
                 enemy.GetComponent<Damage>().doDamage(10f, 3.5f);
+                }
 
             }
         }
         
     }  
+    //     private void OnTriggerEnter2D(Collider2D other) {
+    //     if(isColliding) return;
+    //         isColliding = true;
+    //  // Rest of the code
+    //     if (other.tag == "Player" && other.name != gameObject.name) {
+    //         // Debug.Log("EPIC");
+    //         // m_Character = other.GetComponentInParent<PlatformerCharacter2D>();
+    //         m_Character.preventMovement = true;
+    //         wait.startCooldown(0.5f);
+    //         startedWait = true;
+    //         float velocity = 10f;
+    //         if (!m_Character.m_FacingRight) {
+    //             velocity = velocity * -1;
+    //         }
+    //         m_Character.m_Rigidbody2D.velocity = new Vector2(velocity, m_Character.m_Rigidbody2D.velocity.y);
+    //         Debug.Log(other.name);
+            
+    //     }
+    // }
 
+        private void setAnimSpeed(float x) {
+            anim.speed = x;
+        }
+        private void slowAnimSpeed() {
+            anim.speed = 0.1f;
+        }
         void OnDrawGizmosSelected()
         {
 
