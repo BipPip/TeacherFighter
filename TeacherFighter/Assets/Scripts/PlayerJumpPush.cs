@@ -106,7 +106,6 @@ public class PlayerJumpPush : MonoBehaviour
         if (other.gameObject.tag != "Player")
             return;
 
-
         if (other.GetComponent<PlatformerCharacter2D>().nearWall) {
             nonTriggerCollide = true;
             return;
@@ -168,7 +167,7 @@ public class PlayerJumpPush : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other) {
       
         // if (m_Character.m_Grounded) return;
-        Debug.Log("Test");
+     
         // if (other.GetComponent<PlatformerCharacter2D>().nearWall) {
         //     nonTriggerCollide = true;
         //     // other.GetComponent<PlatformerCharacter2D>().preventMovement = true;
