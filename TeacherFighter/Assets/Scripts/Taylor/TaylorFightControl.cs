@@ -106,14 +106,14 @@ namespace UnityStandardAssets._2D
              if ((distanceToLeft > -4.57 && m_Character.m_FacingRight) || (distanceToRight <= 10 && !m_Character.m_FacingRight)) {
                 m_Character.nearWall = true;
                 // gameObject.GetComponents<BoxCollider2D>()[1].isTrigger = true;
-                gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(0f, 1.25f);
+                gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(0f, gameObject.GetComponents<BoxCollider2D>()[1].offset.y);
                 if (m_Character.m_Rigidbody2D.velocity.y > -21f && !m_Character.m_Grounded && ((distanceToLeft > -4.57 && !m_Character.m_FacingRight) || (distanceToRight <= 10 && m_Character.m_FacingRight)))
                     m_Character.m_Rigidbody2D.velocity = new Vector2(m_Character.m_Rigidbody2D.velocity.x, m_Character.m_Rigidbody2D.velocity.y - 0.5f);
             }
             else {
                 m_Character.nearWall = false;
                 // gameObject.GetComponents<BoxCollider2D>()[1].isTrigger = true;
-                gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(-0.1f, 1.25f);
+                gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(-0.1f, gameObject.GetComponents<BoxCollider2D>()[1].offset.y);
             }
 
             // Debug.Log(distanceToRight);

@@ -98,8 +98,14 @@ public class PlayerJumpPush : MonoBehaviour
            isColliding = false;
        }
 
-    if (movementWait.active())
+    if (movementWait.active() && !m_Character.m_Grounded)
         m_Character.preventMovement = true;
+
+     if (m_Character.m_Grounded && wait.active()) {
+            wait.cancel();
+            m_Character.preventMovement = false;
+            
+        }
     }
     private void OnTriggerEnter2D(Collider2D other) {
         // this.other = other;
@@ -128,12 +134,12 @@ public class PlayerJumpPush : MonoBehaviour
         isColliding = true;
     // if(count == 0) m_Character = GetComponent<PlatformerCharacter2D>();
      // Rest of the code
-        if (other.tag == "Player" && other.gameObject != gameObject) {
+        if (other.tag == "Player" && other.gameObject != gameObject && !m_Character.m_Grounded) {
             // Debug.Log("EPIC");
             // m_Character = other.GetComponentInParent<PlatformerCharacter2D>();
             m_Character.preventMovement = true;
             
-            wait.startCooldown(0.5f);
+            wait.startCooldown(0.3f);
             startedWait = true;
             
             // float velocity = 10f;
@@ -145,6 +151,7 @@ public class PlayerJumpPush : MonoBehaviour
             //Debug.Log(other.name);
             
         }
+       
 
     
 
