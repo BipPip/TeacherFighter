@@ -167,7 +167,7 @@ namespace UnityStandardAssets._2D
                     }
                 }
             }
-            else if (Input.GetButtonDown("Vonder_Light") && !heavyActive && !mediumActive) {
+            else if ((Input.GetButtonDown("Vonder_Light") && gameObject == player1) || (Input.GetButtonDown("Vonder_Light 2") && gameObject == player2) && !heavyActive && !mediumActive) {
                 if (!lightCooldown.active()) {
 
 
@@ -187,7 +187,7 @@ namespace UnityStandardAssets._2D
                     
                 }
             }
-            else if (Input.GetButtonDown("Vonder_Medium") && !heavyActive && !lightActive) {
+            else if ((Input.GetButtonDown("Vonder_Medium") && gameObject == player1) || (Input.GetButtonDown("Vonder_Medium 2") && gameObject == player2) && !heavyActive && !lightActive) {
                 if (!mediumCooldown.active()) {
                     Medium();
                     mediumCooldown.startCooldown(0.5f);
