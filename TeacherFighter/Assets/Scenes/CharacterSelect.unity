@@ -1064,6 +1064,11 @@ MonoBehaviour:
       type: 3}
     displayIcon: {fileID: 3498089304221896039, guid: 159866239c5a50a41be3d37958ee619a,
       type: 3}
+  - CharID: CharErickson
+    prefab: {fileID: 4936401797913854266, guid: b23fafd220a9e5d4b9c99d94456c5a99,
+      type: 3}
+    displayIcon: {fileID: 3498089304221896039, guid: 159866239c5a50a41be3d37958ee619a,
+      type: 3}
 --- !u!4 &1958239408
 Transform:
   m_ObjectHideFlags: 0
