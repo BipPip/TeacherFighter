@@ -173,10 +173,14 @@ public class CharacterSelect : MonoBehaviour
 
     void HandleCharacterPreview(PlayerInterfaces pl)
     {
+        
         if(pl.previewPortrait != pl.activePortrait)
         {
+            //shes broken here shes not accessing this if statement ^
+             
             if(pl.createdCharacter != null)
             {
+                 
                 Destroy(pl.createdCharacter);
             }
 
