@@ -184,7 +184,7 @@ namespace UnityStandardAssets._2D
                       
                     }
                 }
-                else if (Input.GetButtonDown("Taylor_Medium") && !heavyActive) 
+                else if ((Input.GetButtonDown("Taylor_Medium") && gameObject == player1) || (Input.GetButtonDown("Taylor_Medium 2") && gameObject == player2) && !heavyActive) 
                 {
                     if (!mediumCooldown.active()) 
                     {
@@ -193,7 +193,7 @@ namespace UnityStandardAssets._2D
                         moveActive.startCooldown(0.2f);
                     }
                 }
-                else if (Input.GetButtonDown("Taylor_Heavy")) 
+                else if ((Input.GetButtonDown("Taylor_Heavy") && gameObject == player1) || (Input.GetButtonDown("Taylor_Heavy 2") && gameObject == player2)) 
                 {
                     if (!heavyCooldown.active()) 
                     {
