@@ -49,9 +49,13 @@ namespace UnityStandardAssets._2D
         private AudioSource[] audioData;
         private Component[] audioArray;
        
+        private GameObject player1, player2;
     
-        private void Awake()
+        private void Start()
         {
+            player1 = GameObject.Find("Main Camera").GetComponent<PlayerLoad>().player1;
+            player2 = GameObject.Find("Main Camera").GetComponent<PlayerLoad>().player2;
+
             m_Character = GetComponent<PlatformerCharacter2D>();
             startPosition = transform.position;
             playerHealthBar = gameObject.GetComponent<PlatformerCharacter2D>().healthBarObject.GetComponent<SimpleHealthBar>();
@@ -96,7 +100,7 @@ namespace UnityStandardAssets._2D
             if ((distanceToLeft > -4.57 && m_Character.m_FacingRight) || (distanceToRight <= 10 && !m_Character.m_FacingRight)) {
                 m_Character.nearWall = true;
                 // gameObject.GetComponents<BoxCollider2D>()[1].isTrigger = false;
-                gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(0f, 1.19f);
+                gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(0f, gameObject.GetComponents<BoxCollider2D>()[1].offset.y);
                 if (m_Character.m_Rigidbody2D.velocity.y > -21f && !m_Character.m_Grounded && ((distanceToLeft > -4.57 && !m_Character.m_FacingRight) || (distanceToRight <= 10 && m_Character.m_FacingRight))) 
                         m_Character.m_Rigidbody2D.velocity = new Vector2(m_Character.m_Rigidbody2D.velocity.x, m_Character.m_Rigidbody2D.velocity.y - 0.5f);
                
@@ -104,7 +108,7 @@ namespace UnityStandardAssets._2D
             else {
                 m_Character.nearWall = false;
                 // gameObject.GetComponents<BoxCollider2D>()[1].isTrigger = true;
-                gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(-0.1f, 1.19f);
+                gameObject.GetComponents<BoxCollider2D>()[1].offset = new Vector2(-0.1f, gameObject.GetComponents<BoxCollider2D>()[1].offset.y);
             }
 
             // if (!wait.active() && startedWait == true) {
@@ -117,10 +121,10 @@ namespace UnityStandardAssets._2D
                 anim.speed = 1f;
             }
 
-            if (!m_Jump)
-            {
-                // Read the jump input in Update so button presses aren't missed.
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump2");
+           if (!m_Jump) { 
+                if (gameObject == player1) m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+                if (gameObject == player2) m_Jump = CrossPlatformInputManager.GetButtonDown("Jump2");
+
             }
 
             if (m_Character.m_Grounded) {
@@ -163,7 +167,7 @@ namespace UnityStandardAssets._2D
                     }
                 }
             }
-            else if (Input.GetButtonDown("Vonder_Light") && !heavyActive && !mediumActive) {
+            else if ((Input.GetButtonDown("Vonder_Light") && gameObject == player1) || (Input.GetButtonDown("Vonder_Light 2") && gameObject == player2) && !heavyActive && !mediumActive) {
                 if (!lightCooldown.active()) {
 
 
@@ -183,7 +187,7 @@ namespace UnityStandardAssets._2D
                     
                 }
             }
-            else if (Input.GetButtonDown("Vonder_Medium") && !heavyActive && !lightActive) {
+            else if ((Input.GetButtonDown("Vonder_Medium") && gameObject == player1) || (Input.GetButtonDown("Vonder_Medium 2") && gameObject == player2) && !heavyActive && !lightActive) {
                 if (!mediumCooldown.active()) {
                     Medium();
                     mediumCooldown.startCooldown(0.5f);
@@ -253,15 +257,17 @@ namespace UnityStandardAssets._2D
 
             // Read the inputs.
             bool crouch = Input.GetKey(KeyCode.RightControl);
-            float h = CrossPlatformInputManager.GetAxis("Horizontal2");
+            float h = 0;
+            if (gameObject == player1) h = CrossPlatformInputManager.GetAxis("Horizontal");
+            if (gameObject == player2) h = CrossPlatformInputManager.GetAxis("Horizontal2");
             
-            if(m_Dodge) 
-            {
-                if(h > 0) 
-                    h = 5;
-                else if (h < 0) 
-                    h = (-5);
-            }
+            // if(m_Dodge) 
+            // {
+            //     if(h > 0) 
+            //         h = 5;
+            //     else if (h < 0) 
+            //         h = (-5);
+            // }
 
             // Pass all parameters to the character control script.
             if (!gameObject.GetComponent<Damage>().knockbacking && !m_Character.preventMovement)

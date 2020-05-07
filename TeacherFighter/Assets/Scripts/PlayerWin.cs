@@ -30,12 +30,16 @@ public class PlayerWin : MonoBehaviour
     
 
     private void Awake() {
-        player1Anim = player1.GetComponent<Animator>(); 
-        player2Anim = player2.GetComponent<Animator>();    
-        exitLevelCountdown = gameObject.AddComponent<Cooldown>();
+        
     }
     void Start()
     {
+        player1 = gameObject.GetComponent<PlayerLoad>().player1;
+        player2 = gameObject.GetComponent<PlayerLoad>().player2;
+        player1Anim = player1.GetComponent<Animator>(); 
+        player2Anim = player2.GetComponent<Animator>();    
+        exitLevelCountdown = gameObject.AddComponent<Cooldown>();
+
         player1Win = false;
         player2Win = false;
         

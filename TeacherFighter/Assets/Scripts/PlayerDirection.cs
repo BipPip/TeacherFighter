@@ -7,8 +7,8 @@ public class PlayerDirection : MonoBehaviour
 {
 
 
-    public GameObject player1;
-    public GameObject player2;
+    private GameObject player1;
+    private GameObject player2;
     private Vector3 player1Scale;
     private Vector3 player2Scale;
     private PlatformerCharacter2D player1Platformer;
@@ -16,6 +16,9 @@ public class PlayerDirection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        player1 = gameObject.GetComponent<PlayerLoad>().player1;
+        player2 = gameObject.GetComponent<PlayerLoad>().player2;
         
         player1Platformer = player1.GetComponent<PlatformerCharacter2D>();
         player2Platformer = player2.GetComponent<PlatformerCharacter2D>();

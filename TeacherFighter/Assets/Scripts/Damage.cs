@@ -31,6 +31,8 @@ public class Damage : MonoBehaviour
 
     private Stamina stamina;
 
+    private GameObject player1, player2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,12 +45,16 @@ public class Damage : MonoBehaviour
         this.m_Character = gameObject.GetComponent<PlatformerCharacter2D>();
         this.mover = gameObject.GetComponent<MovePlayer>();
         
+        player1 = GameObject.Find("Main Camera").GetComponent<PlayerLoad>().player1;
+        player2 = GameObject.Find("Main Camera").GetComponent<PlayerLoad>().player2;
         
         // Debug.Log(playerHealth);
         
     }
 
     void FixedUpdate() {
+
+
         if(knockbacking && knockback > 0) {
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             //anim.SetTrigger("Hit");
@@ -93,7 +99,7 @@ public class Damage : MonoBehaviour
         }
         // Debug.Log(v);
         
-
+     
         if(m_Character.m_Grounded)
             gameObject.GetComponent<PlayerJumpPush>().isColliding = false;
 
@@ -102,8 +108,8 @@ public class Damage : MonoBehaviour
         
         
 
-        if(this.m_Character.m_Grounded && this.stamina.getStamina() > 0 && (gameObject.name == "CharacterTaylor" && ((v == 1 && h < 1 && h > -1) || (h < 0 && m_Character.m_FacingRight) || (h > 0 && !m_Character.m_FacingRight) || ((Input.GetKey(KeyCode.A) && m_Character.m_FacingRight) || (Input.GetKey(KeyCode.D) && !m_Character.m_FacingRight) || Input.GetKey(KeyCode.S)))
-        || gameObject.name == "CharacterVonDerEhe" &&
+        if(this.m_Character.m_Grounded && this.stamina.getStamina() > 0 && (gameObject == player1 && ((v == 1 && h < 1 && h > -1) || (h < 0 && m_Character.m_FacingRight) || (h > 0 && !m_Character.m_FacingRight) || ((Input.GetKey(KeyCode.A) && m_Character.m_FacingRight) || (Input.GetKey(KeyCode.D) && !m_Character.m_FacingRight) || Input.GetKey(KeyCode.S)))
+        || gameObject == player2 &&
          /*(h2 > 0 || v2 < 0))*/ (Input.GetKey(KeyCode.DownArrow) || (Input.GetKey(KeyCode.RightArrow) && !m_Character.m_FacingRight) || (Input.GetKey(KeyCode.LeftArrow) && m_Character.m_FacingRight))) 
          && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
              
@@ -136,9 +142,9 @@ public class Damage : MonoBehaviour
             anim.ResetTrigger("Block");
         }
 
-         if (m_Character.m_Grounded && (this.stamina.getStamina() >= 5 && ((gameObject.name == "CharacterTaylor" 
+         if (m_Character.m_Grounded && (this.stamina.getStamina() >= 5 && ((gameObject == player1 
          && ((v == 1 && h < 1 && h > -1) || Input.GetKey(KeyCode.S))) 
-         || gameObject.name == "CharacterVonDerEhe" && v2 < 0 && CrossPlatformInputManager.GetButton("Vertical2"))) 
+         || gameObject == player2 && v2 < 0 && CrossPlatformInputManager.GetButton("Vertical2"))) 
         && !this.anim.GetCurrentAnimatorStateInfo(0).IsName("Stun")) {
             
             if (blocking) {
