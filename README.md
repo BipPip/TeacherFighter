@@ -4,6 +4,13 @@ From the creative minds of former seniors CALEB HARDY, TIA FLORES, AND COLTON BE
 
 Get your pencils ready in the all new **SUPER SMASH STAFF**
 
+Next to be added: 
+
+Erickson
+Mrs. Biggs (math based attacks, ex. parabola projectile, etc.)
+New stages
+
+
 
 
 
