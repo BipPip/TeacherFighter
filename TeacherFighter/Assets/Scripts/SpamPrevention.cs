@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+    @author Caleb Hardy
+
+    Can be used to prevent moves from being spammed (used for triple light jab)
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

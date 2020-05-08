@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+    @author Caleb Hardy
+
+    Controls the game time
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets._2D;

@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+    @author Caleb Hardy
+
+    Handles player score and winning
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets._2D;

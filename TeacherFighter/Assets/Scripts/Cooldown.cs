@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+    @author Caleb Hardy
+
+    Cooldown class, used in other scripts to create cooldowns, countdowns, and timers
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
