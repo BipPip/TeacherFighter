@@ -1,4 +1,14 @@
-﻿using System.Collections;
+﻿/*
+    @author Tia Flores-Carr
+
+    Stores all information for the prefabs
+    and players. This is also used to spawn
+    players in the level selected. This should
+    always be in player levels as a transform 
+    or event system
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

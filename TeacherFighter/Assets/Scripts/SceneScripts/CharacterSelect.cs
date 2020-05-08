@@ -1,4 +1,29 @@
-﻿using System.Collections;
+﻿/*
+    @author Tia Flores-Carr
+
+    This is a lot but it basically handles
+    the character selection menu for an amount
+    of players which rn is set to always be 2 because
+    thats how many controllers there are for the 
+    arcade. It also has all the information for the
+    portraits and player prefabs. Good luck getting this
+    cause it doesnt really make sense to me even though I 
+    wrote the whole thing but uhhh its not that hard so 
+    good luck.
+
+    Important: The array is weird when there is an uneven
+    number of portraits example
+    [x][x]
+    [x][o]
+
+    It'll break so its better to just have odd numbered portraits
+    like
+    [x][x][x]
+
+    It'll be less likely to break.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;

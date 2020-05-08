@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+    @author Tia Flores-Carr
+
+    I dont think this was used or even finished
+    its better off deleted but Im not sure if
+    it was used or not so
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

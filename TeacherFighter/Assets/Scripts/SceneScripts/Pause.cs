@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+    @author Tia Flores-Carr
+
+    This file controls the pause menu
+    and thats it
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;

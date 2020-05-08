@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+    @author Tia Flores-Carr
+
+    Simple parent class for all the 
+    portraits in the character select
+    menu.
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

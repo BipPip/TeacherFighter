@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/*
+    @author Tia Flores-Carr
+
+    Not sure if this file is currently used
+    however, its for particles for the projectiles
+    so that they'll be deleted once the life time has
+    been reached.  
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

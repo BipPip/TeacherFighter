@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+    @author Tia Flores-Carr
+
+    This file controls the keyboard navigation for the 
+    level selection screen. This does not accomodate for 
+    selecting the level with the keyboard because I never
+    did that lol
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +21,7 @@ public class SwipeLock : MonoBehaviour
     {
         pos = new float[transform.childCount];
         float distance = 1f / (pos.Length -1f);
+        
         for(int i = 0; i < pos.Length; i++)
         {
             pos[i] = distance * i;

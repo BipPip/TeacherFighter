@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/*
+    @author Tia Flores-Carr
+
+    Controls the start menu.
+*/
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
  

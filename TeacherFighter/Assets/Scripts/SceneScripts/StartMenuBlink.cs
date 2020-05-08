@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/*
+    @author Tia Flores-Carr
+
+    This makes an object blink its lit
+    rally only used for the blinking
+    "press any key" thing in the main
+    menu 
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
@@ -6,7 +15,7 @@ using UnityEngine;
 public class StartMenuBlink : MonoBehaviour
 {
 
-    // this is the UI.Text or other UI element you want to toggle
+  
     public MaskableGraphic imageToToggle;
 
     public float interval = 1f;
@@ -24,7 +33,7 @@ public class StartMenuBlink : MonoBehaviour
 
     public void StartBlink()
     {
-        // do not invoke the blink twice - needed if you need to start the blink from an external object
+        
         if (isBlinking)
             return;
 
