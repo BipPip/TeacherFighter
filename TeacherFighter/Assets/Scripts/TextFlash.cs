@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+    @author Caleb Hardy
+
+    Added to text object to make it flash
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
