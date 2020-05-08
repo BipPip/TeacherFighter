@@ -73,16 +73,12 @@
      <Compile Include="Assets\Scripts\PlayerJumpPush.cs" />
      <Compile Include="Assets\Scripts\PlayerLoad.cs" />
      <Compile Include="Assets\Scripts\PlayerWin.cs" />
-     <Compile Include="Assets\Scripts\PortraitInfo.cs" />
-     <Compile Include="Assets\Scripts\Respawn.cs" />
-     <Compile Include="Assets\Scripts\SceneScripts\ButtonHover.cs" />
      <Compile Include="Assets\Scripts\SceneScripts\ButtonNavigation.cs" />
-     <Compile Include="Assets\Scripts\SceneScripts\CanvasScript.cs" />
      <Compile Include="Assets\Scripts\SceneScripts\CharacterSelect.cs" />
      <Compile Include="Assets\Scripts\SceneScripts\LoadOnClick.cs" />
      <Compile Include="Assets\Scripts\SceneScripts\MenuScript.cs" />
      <Compile Include="Assets\Scripts\SceneScripts\Pause.cs" />
-     <Compile Include="Assets\Scripts\SceneScripts\RunTimeSpawn.cs" />
+     <Compile Include="Assets\Scripts\SceneScripts\PortraitInfo.cs" />
      <Compile Include="Assets\Scripts\SceneScripts\StartMenuBlink.cs" />
      <Compile Include="Assets\Scripts\SceneScripts\SwipeLock.cs" />
      <Compile Include="Assets\Scripts\SpamPrevention.cs" />

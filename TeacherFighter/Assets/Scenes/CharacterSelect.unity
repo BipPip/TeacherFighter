@@ -386,8 +386,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0074987, y: -0.00059441}
-  m_SizeDelta: {x: 800.01, y: 403.7}
+  m_AnchoredPosition: {x: -0.0074987, y: -0.0005607605}
+  m_SizeDelta: {x: 800, y: 449.84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &917560058
 MonoBehaviour:
@@ -854,11 +854,6 @@ MonoBehaviour:
       type: 3}
   - CharID: CharTaylor
     prefab: {fileID: 4936401797913854266, guid: de6d3833226b63343a90b3d198fa39b0,
-      type: 3}
-    displayIcon: {fileID: 3498089304221896039, guid: 159866239c5a50a41be3d37958ee619a,
-      type: 3}
-  - CharID: CharErickson
-    prefab: {fileID: 4936401797913854266, guid: b23fafd220a9e5d4b9c99d94456c5a99,
       type: 3}
     displayIcon: {fileID: 3498089304221896039, guid: 159866239c5a50a41be3d37958ee619a,
       type: 3}
