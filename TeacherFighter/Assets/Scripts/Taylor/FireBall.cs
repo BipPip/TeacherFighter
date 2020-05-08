@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+    @author Tia Flores-Carr & Caleb Hardy
+
+    Fireball object colliders and effects.
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets._2D;

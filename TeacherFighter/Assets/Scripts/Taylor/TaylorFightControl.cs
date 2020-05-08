@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+    @author Caleb Hardy & Tia Flores-Carr
+
+    Taylors player class. Controls all movements
+    and fighting controls. 
+*/
+using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 

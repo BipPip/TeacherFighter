@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+    @author Caleb Hardy & Tia Flores-Carr
+
+    All of von der ehes fight controls, health,
+    and fighiting mechanics.
+*/
+using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
